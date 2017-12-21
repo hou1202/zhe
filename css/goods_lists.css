@@ -1,0 +1,136 @@
+/*个人中心，顶部LOGO与_BACK*/
+.top .back {
+    padding:1.7rem 0 0 2rem;
+}
+.top .back img {
+    width:2rem;
+    height:2rem;
+}
+/*screen--筛选*/
+.screen {
+    width:100%;
+    height:4.5rem;
+    border-bottom:1px solid #dcdcdc;
+    margin-bottom:1rem;
+
+}
+.screen ul {
+    width:100%;
+    height:4.5rem;
+    margin-bottom:0;
+    padding-left:0;
+}
+.screen li {
+    width:25%;
+    height:4.5rem;
+    line-height:4.5rem;
+    text-align:center;
+    float:left;
+    font-size:1.7rem;
+}
+.screen li a {
+    display:block;
+    color:#4b4b4b;
+}
+.screen .active a {
+    color:#960202;
+}
+
+/*block_goods_lists---块状产品列表*/
+.block_goods_lists {
+    width:100%;
+    overflow:hidden;
+    padding-bottom:6rem;
+}
+
+/*strip-goods--条状产品列表*/
+
+.strip_goods_lists {
+    width:100%;
+    /*height:10.5rem;*/
+    margin-bottom:5.6rem;
+    overflow:hidden;
+}
+
+/*产品信息*/
+.strip-goods{
+    width:96%;
+    border:1px solid #dcdcdc;
+    border-radius:5px;
+    padding:0.5rem;
+    margin-bottom:0.7rem;
+    margin-left:2%;
+    overflow:hidden;
+}
+/*产品图*/
+.strip-goods .strip-thumbnail {
+    width:30%;
+    float:left;
+}
+.strip-goods .strip-thumbnail a {
+    display:block;
+}
+.strip-goods .strip-thumbnail img {
+    /*width:100%;*/
+    width:9.585rem;
+    height:9.585rem;
+}
+/*产品名称*/
+.strip-goods .strip-title {
+    width:54%;
+    float:left;
+    height:9.585rem;
+    padding:0 1rem;
+    border-right:1px dashed #dcdcdc;
+    margin-right:1%;
+
+}
+.strip-goods .strip-title img{
+    width:1.3rem;
+    height:1.3rem;
+}
+.strip-goods .strip-title a {
+    font-size:1.4rem;
+    color:#4b4b4b;
+}
+.strip-goods .strip-title span {
+    font-family:'myGongFang';
+    letter-spacing:0.15rem;
+}
+.strip-goods .strip-title p {
+    font-size:1rem;
+
+    height:2rem;
+    line-height:2rem;
+    margin:0;
+}
+.strip-goods .strip-title .strip-goods-after {
+    font-size:1.2rem;
+    color:#960202;
+}
+.strip-goods .strip-title .strip-goods-before {
+    text-decoration:line-through;
+}
+/*优惠券*/
+.strip-goods .strip-vou {
+    width:15%;
+    height:9.585rem;
+    color:#fff;
+    /*padding:1rem 0.1rem;*/
+    background:url(../images/vou_back.png) no-repeat;
+    background-size:100% 100%;
+    float:left;
+}
+.strip-goods .strip-vou p {
+    width:100%;
+    height:4.7925rem;
+    line-height:4.7925rem;
+    font-size:1.5rem;
+    text-align:center;
+    margin:0;
+    font-family:myGongFang;
+}
+.strip-goods .strip-vou span {
+    font-size:2rem;
+    font-family:myAxureHand;
+}
