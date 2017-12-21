@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>jQuery的一些用法</title>
+    <script type="text/javascript" src="jquery1.3.2.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#faq').find('dd').hide();
+            //.隐藏显示的元素。
+            $('#faq').find('dt').click(function() {
+                var answer = $(this).next(); //当前节点的下一个节点
+                // alert(answer.is(':visible')); 返回true / false
+                if (answer.is(':visible')) {
+                    //Boolean布尔值is( String expr )用一个表达式来检查当前选择的元素集合，
+                    // 如果其中至少有一个元素符合这个给定的表达式就返回true。
+                    //answer.is(':visible')是指可见的answer元素.
+                    //如果可见就调用answer.slideUp();使之隐藏.
+                    //else则是不可见的元素 调用answer.slideDown();使之显示.
+                    //类似的写法还有answer.is(':first')answer.is(':last')之类的,类似于CSS的伪类a:hover
+                    answer.slideUp();
+                } else {
+                    answer.slideDown();
+                }
+            });
+        });
+    </script>
+    <style>
+        body{font-size:10.5pt;}
+        dt{background:#00ffcc;}
+    </style>
+</head>
+<body>
+
+    <dl id="faq">
+        <dt>脚本之家简介</dt>
+        <dd>脚本之家是国内专业的网站建设资源、脚本编程学习类网站</dd>
+        <dt>你知道AJAX吗？</dt>
+        <dd>它是目前很流行的交互式WEB前端应用。</dd>
+        <dt>今晚，月亮很圆</dt>
+        <dd>老婆，抬头望明月，低头想老婆！</dd>
+    </dl>
+</body>
+</html>

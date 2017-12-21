@@ -20,6 +20,8 @@
     --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
     -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" type="image/x-icon"  href="images/favicon.ico">
+
 
     <link rel="stylesheet" href="css/bootstrap.min.css"  />
     <link rel="stylesheet" href="css/style.css"  />
@@ -398,7 +400,6 @@
 
             <div class="lists-vou">
                 <p><span>券</span></p>
-              <!--  <hr />-->
                 <P>￥ 500</P>
             </div>
 
@@ -454,7 +455,7 @@
     </div>
 
     <!--footer--底部导航-->
-    <div class="footer">
+    <!--<div class="footer">
         <div class="footer-comm home">
             <a href="index.html" class="active">首页</a>
         </div>
@@ -467,6 +468,15 @@
         <div class="footer-comm personal">
             <a href="index.html">个人</a>
         </div>
+    </div>-->
+
+    <div class="footer">
+        <ul>
+            <li class="active"><a href=""><img src="images/home-active.png"/><p>首页</p></a></li>
+            <li><a href=""><img src="images/convert.png"/><p>兑换</p></a></li>
+            <li><a href=""><img src="images/classify.png"/><p>分类</p></a></li>
+            <li><a href="personal.html"><img src="images/personal.png"/><p>个人</p></a></li>
+        </ul>
     </div>
 
 
@@ -498,14 +508,14 @@
         });
     </script>
 
-    <script>
+    <!--<script>
         $(function() {
-            $(".footer-comm").on("click",function() {
+            $(".footer li").on("click",function() {
                 $(this).addClass("active").siblings().removeClass("active");
                 //$(this).removeClass("active");
             });
         });
-    </script>
+    </script>-->
 
 
 </body>
