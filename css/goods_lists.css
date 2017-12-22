@@ -1,11 +1,4 @@
-/*个人中心，顶部LOGO与_BACK*/
-.top .back {
-    padding:1.7rem 0 0 2rem;
-}
-.top .back img {
-    width:2rem;
-    height:2rem;
-}
+
 /*screen--筛选*/
 .screen {
     width:100%;
@@ -65,6 +58,8 @@
 /*产品图*/
 .strip-goods .strip-thumbnail {
     width:30%;
+    height:9.585rem;
+    line-height:9.585rem;
     float:left;
 }
 .strip-goods .strip-thumbnail a {

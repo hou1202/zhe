@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折金券</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--
+    --apple-mobile-web-app-capable
+    --safari私有meta标签
+    --允许全屏模式浏览，隐藏浏览器导航栏
+    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--
+    --apple-mobile-web-app-status-bar-style
+    --iphone的私有标签
+    --指定的iphone中safari顶端的状态条的样式
+    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" type="image/x-icon"  href="images/favicon.ico">
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css"  />
+    <link rel="stylesheet" href="css/style.css"  />
+    <link rel="stylesheet" href="css/personal.css"  />
+
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <!--top--顶部内容-->
+    <div class="top">
+        <div class="logo back">
+            <a href="personal.html"><img src="images/_black.png" alt=""></a>
+        </div>
+
+        <div class="search">
+            <form method="post" action="">
+                <label for="keyword" class="search_input">
+                    <input type="text" name="keyword" class="search_text" id="keyword" placeholder="请输入要搜索的产品名称"/>
+                </label>
+                <label for="search_submit">
+                    <input type="submit" value=" " class="search_submit" id="search_submit">
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <!--carry--提现-->
+    <div class="carry">
+        <div class="carry_title">
+            <div class="carry_title_left">
+                <span>拥有淘币</span>
+            </div>
+            <div class="carry_title_right">
+                <span>200</span>
+                <img src="images/carry_explain.png" alt="" class="carry_show">
+            </div>
+        </div>
+        <div class="carry_explain">
+            <p> 淘币与人民币的兑换比例为1：1，即一淘币可以兑换一元人民币。</p>
+            <p> 兑换淘币时需求获取短信验证码（手机号码为注册时该帐号所认证括手机号码），以此来保证操作用户的帐户资金安全。</p>
+        </div>
+        <div class="carry_form">
+            <form method="post" action="">
+                <label for="carry_num" class="carry_input">
+                    <span>兑换数</span>
+                    <input type="text" name="number" id="carry_num" />
+                </label>
+                <label for="carry_num" class="carry_input">
+                    <span>支付宝</span>
+                    <input type="text" name="alipay" id="carry_alipay" />
+                </label>
+                <label for="carry_num" class="carry_input carry_input_phone">
+                    <span>手机号</span>
+                    <input type="text" name="phone" id="carry_phone" value="13800000001" readonly/>
+                </label>
+                <span class="carry_input_obtain">获取验证码</span>
+                <label for="carry_num" class="carry_input">
+                    <span>验证码</span>
+                    <input type="text" name="code" id="carry_code" />
+                </label>
+                <label for="carry_num" class="carry_input carry_input_submit">
+                    <input type="submit" value="开始兑换" id="carry_submit" />
+                </label>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!--footer--底部导航-->
+    <div class="footer">
+        <ul>
+            <li><a href="index.html"><img src="images/home.png"/><p>首页</p></a></li>
+            <li><a href=""><img src="images/convert.png"/><p>兑换</p></a></li>
+            <li><a href="attestation.html"><img src="images/classify.png"/><p>分类</p></a></li>
+            <li class="active"><a href="personal.html"><img src="images/personal_active.png"/><p>个人</p></a></li>
+        </ul>
+    </div>
+
+    <script>
+        var myCarry = $(".carry_explain");
+        $(function() {
+            $(".carry_show").click(function(event) {
+                // showDiv();//调用显示DIV方法
+                $(myCarry).toggle();
+                $(document).one("click",
+                    function() { //对document绑定一个影藏Div方法
+                        $(myCarry).hide();
+                    });
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+            $(myCarry).click(function(event) {
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+        });
+        function showDiv() {
+            $(myCarry).fadeIn();
+        }
+    </script>
+
+
+
+
+</body>
+</html>

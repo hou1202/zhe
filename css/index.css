@@ -151,17 +151,22 @@
 }
 .floor-title img {
     position: relative;
-    top:-0.4rem;
+    top:1rem;
+    float:left;
 }
 .title-main {
     font-size:1.7rem;
     color:#da5514;
     padding-left:1rem;
+    float:left;
 }
 .title-vice {
+    width:57%;
     font-size:1rem;
     color:#4b4b4b;
-    padding:0 4.2rem;
+    text-align:center;
+    /*padding:0 4.2rem;*/
+    float:left;
 }
 .title-more {
     font-size:1.5rem;
@@ -316,6 +321,8 @@
     /*产品图*/
 .lists .lists-goods .lists-thumbnail {
     width:30%;
+    height:9.585rem;
+    line-height:9.585rem;
     float:left;
 }
 .lists .lists-goods .lists-thumbnail a {
