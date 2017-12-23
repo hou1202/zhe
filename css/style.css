@@ -382,16 +382,16 @@ ul,li {
 
 @media only screen and (min-width: 768px) {
     .block-goods{
-        width:10%;
+        width:20%;
     }
 }
 @media only screen and (min-width: 992px) {
     .block-goods{
-        width:10%;
+        width:15%;
     }
 }
 @media only screen and (min-width: 1200px) {
     .block-goods{
-        width:10%;
+        width:15%;
     }
 }
