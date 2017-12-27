@@ -1,0 +1,59 @@
+[
+  {
+    "t": "AOZOM",
+    "url": "/main/desktop"
+  },
+  {
+    "t": "新闻管理",
+    "url": "",
+    "child": [
+      {
+        "t": "新闻列表",
+        "url": "/news/newsList"
+      }
+    ]
+  },
+  {
+    "t": "项目管理",
+    "url": "",
+    "child": [
+      {
+        "t": "项目列表",
+        "url": "/Program/programList"
+      }
+    ]
+  },
+  {
+    "t": "Banner管理",
+    "url": "",
+    "child": [
+      {
+        "t": "Banner列表",
+        "url": "/Video/videoList"
+      }
+    ]
+  },
+  {
+    "t": "背景图管理",
+    "url": "",
+    "child": [
+      {
+        "t": "背景图列表",
+        "url": "/Background/backgroundList"
+      }
+    ]
+  },
+  {
+    "t": "需求管理",
+    "url": "",
+    "child": [
+      {
+        "t": "需求列表",
+        "url": "/need/needList"
+      }
+    ]
+  }
+
+
+
+]

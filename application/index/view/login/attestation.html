@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折金券</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--
+    --apple-mobile-web-app-capable
+    --safari私有meta标签
+    --允许全屏模式浏览，隐藏浏览器导航栏
+    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--
+    --apple-mobile-web-app-status-bar-style
+    --iphone的私有标签
+    --指定的iphone中safari顶端的状态条的样式
+    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" type="image/x-icon"  href="/static/index/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="/static/index/css/bootstrap.min.css"  />
+    <link rel="stylesheet" href="/static/index/css/style.css"  />
+    <link href="/static/swiper/css/swiper.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/swiper/js/swiper.min.js"></script>
+
+
+</head>
+<body>
+
+    <!--attestation--认证-->
+
+    <div class="attestation">
+        <div class="attestation_nav">
+            <div class="contentIndex active attestation_nav_com attestation_nav_left" data-index="0">登录</div>
+            <div class="contentIndex attestation_nav_com attestation_nav_right" data-index="1">注册</div>
+        </div>
+
+        <div class="swiper-container" id="attestationSwiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="attestation_form">
+                        <form method="post" action="">
+                            <label for="login_num" class="attestation_input">
+                                <span>帐号</span>
+                                <input type="text" name="phone" id="login_num" />
+                            </label>
+                            <label for="login_password" class="attestation_input  attestation_input_code">
+                                <span>密码</span>
+                                <input type="text" name="password" id="login_password" />
+                            </label>
+
+                            <label for="login_submit" class="attestation_input attestation_input_submit">
+                                <input type="submit" value="登录" id="login_submit" />
+                            </label>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="spec">
+                        <div class="attestation_form">
+                            <form method="post" action="">
+                                <label for="register_phone" class="attestation_input">
+                                    <span>手机号码</span>
+                                    <input type="text" name="phone" id="register_phone" />
+                                </label>
+                                <label for="register_password" class="attestation_input">
+                                    <span>登录密码</span>
+                                    <input type="text" name="password" id="register_password" />
+                                </label>
+                                <label for="register_code" class="attestation_input  attestation_input_code">
+                                    <span>验证码</span>
+                                    <input type="text" name="code" id="register_code" />
+                                </label>
+                                <span class="attestation_input_obtain">获取验证码</span>
+                                <label for="register_submit" class="attestation_input attestation_input_submit">
+                                    <input type="submit" value="注册" id="register_submit" />
+                                </label>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        var mySwiper = new Swiper ('#attestationSwiper', {
+            initialSlide :0,	//设定初始化时slide的索引
+            effect:'slide',		//切换效果，"slide"（位移切换）（默认），"fade"（淡入），"cube"（方块），"coverflow"（3d流），"flip"（3d翻转）
+            autoHeight: true,
+            iOSEdgeSwipeDetection : true,
+            iOSEdgeSwipeThreshold:50,
+            on: {
+                slideChange: function () {
+                    console.log(mySwiper.activeIndex);
+                    if (mySwiper.activeIndex == 0) {
+                        $('.contentIndex:eq(0)').addClass('active');
+                        $('.contentIndex:eq(1)').removeClass('active');
+                    } else {
+                        $('.contentIndex:eq(1)').addClass('active');
+                        $('.contentIndex:eq(0)').removeClass('active');
+                    }
+                }
+            }
+        });
+
+        $("#swiper-wrapper").css("height","100%");
+
+        $('.contentIndex').click(function () {
+            mySwiper.slideTo($(this).attr('data-index'));
+        });
+    </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+@font-face {
+    font-family: myXingYu;
+    src:url('../fonts/汉仪星宇体简.ttf');
+}
+/*信息*/
+.message {
+    width:100%;
+    height:16rem;
+    background:#960202;
+    padding-top:3rem;
+    box-shadow: 0 3px 5px #c0c0c0;
+}
+.message .message-top {
+    width:100%;
+    height:10rem;
+}
+.message .portrait {
+    width:50%;
+    float:left;
+    text-align:right;
+    padding-right:1rem;
+}
+.message .portrait img {
+    width:8rem;
+    height:8rem;
+    border-radius:50px;
+}
+.message .name {
+    width:50%;
+    float:left;
+    padding:0.6rem 0 0 1rem;
+}
+.message .name p {
+    font-size:1.1rem;
+    color:#fff;
+    margin:0 0 0.2rem;
+}
+.message .name span {
+    font-size:2rem;
+    font-weight:600;
+}
+.message .set {
+    width:100%;
+    height:3rem;
+    position: relative;
+    bottom:0;
+    padding:0.5rem 1.5rem 0 1.5rem;
+}
+.message .set a {
+    display:block;
+}
+.message .set img {
+    width:2rem;
+    height:2rem;
+}
+.message .set .set-left {
+    float:left;
+}
+.message .set .set-right {
+    float:right;
+}
+
+/*money--金额*/
+.money {
+    width:80%;
+    height:11rem;
+    margin:0 10%;
+    border-bottom:0.5rem solid #960202;
+}
+.money .gold {
+    width:100%;
+    height:5rem;
+    font-size:2.3rem;
+    color:#960202;
+    font-family:myGongFang;
+    padding-top:1.5rem;
+}
+.money .gold .gold-title{
+    width:50%;
+    text-align:right;
+    float:left;
+    border-right:1px solid #960202;
+    padding-right:2rem;
+ }
+.money .gold .gold-num{
+    width:50%;
+    text-align:left;
+    float:left;
+    padding-left:2rem;
+}
+.money .rule {
+    width:100%;
+    height:5rem;
+    font-size:2rem;
+    text-align:center;
+    font-family:myGongFang;
+    padding-top:1rem;
+}
+.money .rule a{
+    color:#960202;
+    border:1px solid #960202;
+    padding:0.4rem 2.5rem;
+    border-radius:7px;
+    letter-spacing: 0.2rem;
+}
+.money .rule .rule-comm{
+    width:50%;
+    float:left;
+}
+/*order--订单信息*/
+.order {
+    width:100%;
+}
+.order h2{
+    font-size:3rem;
+    color:#960202;
+    font-family:myGongFang;
+    letter-spacing: 0.5rem;
+    text-align:center;
+    margin:1rem 0;
+}
+.order .order-state {
+    padding:0 10%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack:justify ;
+    justify-content: space-between;
+}
+.order .order-state img {
+    width:7rem;
+    display: block;
+}
+
+/*fun--功能版块*/
+.fun{
+    width:100%;
+    padding:0 5%;
+    overflow:hidden;
+    margin-bottom:6.5rem;
+}
+.fun .fun-sect {
+    width:40%;
+    height:5rem;
+    line-height:5rem;
+    font-size:2.3rem;
+    text-align:center;
+    font-family:myGongFang;
+    background:#da5514;
+    border-radius:5px;
+    margin:2% 5%;
+    float:left;
+    box-shadow: 0 3px 5px #c0c0c0;
+}
+.fun .fun-sect a {
+    color:#fff;
+    letter-spacing: 0.3rem;
+    display:block;
+}
+
+
+/*collection--我的收藏*/
+.collect{
+    width:100%;
+    padding-top:1rem;
+    overflow: hidden;
+    padding-bottom:6rem;
+}
+.collect .del {
+    width:94%;
+    height:3rem;
+    line-height:3rem;
+    text-align:center;
+    background:rgba(0,0,0,0.5);
+    border-radius:5px;
+    margin-top:0.5rem;
+    position: absolute;
+    top:0;
+}
+.collect .del a {
+    display:block;
+}
+.collect .del img{
+    width:2.5rem;
+    height:2.5rem;
+}
+
+/*invite--邀请好友*/
+.invite {
+    width:100%;
+}
+.invite .invite_id {
+    height:25rem;
+    text-align:center;
+    border-bottom:1px solid #dcdcdc;
+    padding:3.75rem 0;
+    position: relative;
+}
+.invite .invite_id img {
+    width:13rem;
+    height:17.5rem;
+}
+.invite .invite_id span {
+    font-size:2.5rem;
+    font-family:myGongFang;
+}
+.invite .invite_id .invite_num {
+    width:100%;
+    color:#fff;
+    text-align:center;
+    position:absolute;
+    top:6rem;
+}
+.invite .invite_id .invite_sub {
+    width:100%;
+    text-align:center;
+    position:absolute;
+    bottom:4.5rem;
+}
+.invite .invite_id .invite_sub a {
+    color:#960202;
+    display:inline-block
+}
+.invite .invite_id .invite_sub span {
+    padding:0.15rem 0.3rem;
+    border:1px solid #960202;
+    border-radius:5px;
+}
+.invite .invite_rule {
+    width:100%;
+    padding:0.6rem 3rem 6rem 3rem;
+}
+.invite .invite_rule h2 {
+    font-size:2.5rem;
+    font-family:myGongFang;
+    color:#960202;
+    text-align:center;
+}
+.invite .invite_rule .rule_info {
+
+}
+.invite .invite_rule .rule_info p{
+    font-size:1.3rem;
+    color:#4b4b4b;
+}
+.invite .invite_rule .rule_info p i {
+    color:#960202;
+}
+
+/*friends--我的好友*/
+.friends {
+    width:100%;
+    padding-bottom:6rem;
+}
+.friends .friends_list {
+    width:100%;
+}
+.friends .friends_list .friends_message {
+    width:90%;
+    height:8rem;
+    line-height:8rem;
+    padding:1rem;
+    border-bottom:2px solid #960202;
+    margin:0 5%;
+
+}
+.friends .friends_list .friends_message .head {
+    width:6rem;
+    height:6rem;
+    border-radius:50px;
+    float:left;
+}
+.friends .friends_list .friends_message .friends_info {
+    width:50%;
+    height:6rem;
+    line-height:1.2rem;
+    padding-left:1.5rem;
+    float:left;
+}
+.friends .friends_list .friends_message .friends_info h2{
+    font-size:2rem;
+    font-family:myGongFang;
+    color:#960202;
+    letter-spacing:2px;
+    margin:0.5rem 0;
+}
+.friends .friends_list .friends_message .friends_info p {
+    font-size:1rem;
+    margin-bottom:0.2rem;
+    padding-left:1rem;
+}
+.friends .friends_list .friends_message .open {
+    width:2rem;
+    height:1rem;
+    float:right;
+    margin:3rem 2rem 0 0 ;
+    display:block;
+}
+.friends .friends_list .friends_bonus {
+    display:none;
+    width:100%;
+    height:3rem;
+    line-height:3rem;
+    font-size:1.5rem;
+}
+.friends .friends_list .friends_bonus span {
+    width:60%;
+    color:#da5514;
+    text-align:right;
+    padding-right:2rem;
+    margin-right:10%;
+    border-bottom:1px solid #da5514;
+    float:right;
+
+}
+
+/*--carry--提现*/
+.carry {
+    width:100%;
+    padding:4rem 2rem 8rem 2rem;
+    position:relative;
+}
+.carry .carry_title {
+    width:100%;
+    height:4rem;
+    /*line-height:3rem;*/
+    font-size:2rem;
+    color:#960202;
+
+}
+.carry .carry_title .carry_title_left {
+    width:50%;
+    float:left;
+    text-align:right;
+    padding-right:2rem;
+    border-right:1px solid #960202;
+
+}
+.carry .carry_title .carry_title_right {
+    width:50%;
+    float:left;
+    padding-left:2rem;
+}
+.carry .carry_title .carry_title_right img {
+    width:1rem;
+    height:1.5rem;
+    float:right;
+    margin-top:1.25rem;
+}
+.carry .carry_explain {
+    display:none;
+    /*width:100%;*/
+    border:1px solid #da5514;
+    border-radius:5px;
+    color:#da5514;
+    font-size:1.5rem;
+    padding:1rem 1.5rem;
+    text-indent:2.5rem;
+    margin-right:2rem;
+    position: absolute;
+    top:7rem;
+    background:#fff;
+}
+.carry .carry_explain p {
+    margin:0.2rem 0 ;
+}
+.carry .carry_form {
+    width:100%;
+}
+.carry .carry_form .carry_input {
+    width:100%;
+    height:5rem;
+    /*line-height:3rem;*/
+}
+.carry .carry_form .carry_input span {
+    width:35%;
+    height:4.5rem;
+    line-height:4.5rem;
+    font-size:1.5rem;
+    color:#960202;
+}
+.carry .carry_form .carry_input input {
+    width:70%;
+    height:3.5rem;
+    color:#da5514;
+    line-height:3.5rem;
+    border:none;
+    font-size:1.5rem;
+    border-radius:0;
+    border-left:1px solid #960202;
+    padding-left:2rem;
+    margin-left:2rem;
+    user-select:none;
+    outline:none;  /*去除聚集后外边框颜色*/
+}
+.carry .carry_form .carry_input_phone{
+    width:75%;
+}
+.carry .carry_form .carry_input_phone input{
+    width:70%;
+}
+.carry .carry_form .carry_input_obtain {
+    font-size:1.2rem;
+    border:1px solid #da5514;
+    border-radius:5px;
+    color:#da5514;
+    padding:0.8rem 0.8rem;
+    float:right;
+    margin-top:0.5rem;
+}
+.carry .carry_form .carry_input_submit {
+    width:100%;
+    text-align:center;
+}
+.carry .carry_form .carry_input_submit input{
+    width:50%;
+    border:none;
+    border-bottom:1px solid #960202;
+    background:none;
+    letter-spacing:0.4rem;
+    margin:2rem 0 0 0;
+    padding:0;
+}
+
+/*order--订单*/
+/*order-push****提交订单*/
+.order_push {
+    width:100%;
+    padding:3rem 0 6rem 0;
+}
+.order_push .order_push_form {
+    width:100%;
+    height:15rem;
+    text-align:center;
+    border-bottom:1px solid #ccc;
+}
+.order_push .order_push_form .order_push_input {
+    width:100%;
+    height:5rem;
+}
+.order_push .order_push_form .order_push_input input {
+    width:72%;
+    height:4rem;
+    line-height:4rem;
+    color:#da5514;
+    font-size:1.2rem;
+    border:none;
+    border-radius:0;
+    border-bottom:1px solid #960202;
+    padding:0 1.8rem;
+    user-select:none;
+    outline:none;  /*去除聚集后外边框颜色*/
+}
+.order_push .order_push_form .order_push_input_submit input{
+    width:40%;
+    font-size:1.5rem;
+    background:none;
+    letter-spacing:0.7rem;
+    margin:2rem 0 0 0;
+    padding:0;
+}
+.order_push .order_push_info {
+    padding:2rem;
+    font-size:1.4rem;
+    color:#960202;
+}
+.order_push .order_push_info p {
+
+    margin-bottom:1.5rem;
+}
+.order_push .order_push_info .info_bottom {
+    color:#da5514;
+    height:3rem;
+    line-height:3rem;
+    margin-bottom:0;
+    text-decoration:underline;
+}
+.order_push .cat_comm {
+    display:none;
+    width:90%;
+    font-size:1.4rem;
+    text-indent:2.5rem;
+    color:#da5514;
+    background:#fff;
+    border:1px solid #da5514;
+    border-radius:5px;
+    margin:0 5% 10% 5%;
+
+    padding:2.5rem 1.5rem;
+    position:absolute;
+    top:10rem;
+}
+.order_push .cat_comm img {
+    width:100%;
+}
+
+/*order_verify--订单审核*/
+.order_verify {
+    width:100%;
+    padding:1rem 1rem 6rem 1rem;
+}
+.order_verify .verify_block {
+    width:100%;
+    height:13.2rem;
+    border-bottom:1px solid #dcdcdc;
+    padding-top:1rem;
+}
+.order_verify .verify_block .verify_title {
+    font-size:1.4rem;
+    height:2rem;
+    line-height:2rem;
+    /*color:#8e8e8e; */
+    color:#da5514;;
+}
+.order_verify .verify_block .verify_message {
+    width:100%;
+    height:7.5rem;
+    padding-top:0.5rem;
+}
+.order_verify .verify_block .verify_message .verify_img {
+    width:7rem;
+    height:7rem;
+    text-align:center;
+    border:1px solid #da5514;
+    border-radius:5px;
+    padding:0.25rem;
+    float:left;
+}
+.order_verify .verify_block .verify_message .verify_img img{
+    width:6.3rem;
+    height:6.3rem;
+}
+.order_verify .verify_block .verify_message .verify_message_info {
+    width:58%;
+    height:7rem;
+    padding:0 0.5rem;
+    float:left;
+    text-indent:2rem;
+}
+.order_verify .verify_block .verify_message .verify_message_info span {
+    font-size:1.2rem;
+
+}
+.order_verify .verify_block .verify_message .verify_message_info p{
+    text-indent:1rem;
+    font-size:1rem;
+    margin:0.2rem;
+    color:#8e8e8e;
+}
+.order_verify .verify_block .verify_time {
+    width:100%;
+    height:2rem;
+    line-height:2rem;
+}
+.order_verify .verify_block .verify_time p {
+    margin-bottom:0;
+    text-align:right;
+    font-size:1.2rem;
+    padding-right:1rem;
+    color: #8e8e8e;
+}
+.order_verify .verify_block .verify_message .state_com{
+    width:5rem;
+    height:7rem;
+    float:left;
+    overflow:hidden;
+}
+.order_verify .verify_block .verify_message .state_com p {
+    text-align:center;
+    height:2.5rem;
+    font-size:1.2rem;
+    line-height:2.5rem;
+    color:#fff;
+    border-radius:5px;
+    margin-top:2.25rem;
+}
+.order_verify .verify_block .verify_message .verify_state p {
+    background:#da5514;
+}
+.order_verify .verify_block .verify_message .finish_state p {
+    background: rgba(60, 136, 33, 0.87);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+    .order_verify .verify_block .verify_message .verify_img {
+        width:10%;
+    }
+    .order_verify .verify_block .verify_message .verify_message_info {
+        width:80%;
+    }
+}
+@media only screen and (min-width: 992px) {
+
+}
+@media only screen and (min-width: 1200px) {
+
+}
+
+

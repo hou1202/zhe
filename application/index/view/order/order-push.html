@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折金券</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--
+    --apple-mobile-web-app-capable
+    --safari私有meta标签
+    --允许全屏模式浏览，隐藏浏览器导航栏
+    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--
+    --apple-mobile-web-app-status-bar-style
+    --iphone的私有标签
+    --指定的iphone中safari顶端的状态条的样式
+    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" type="image/x-icon"  href="/static/index/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="/static/index/css/bootstrap.min.css"  />
+    <link rel="stylesheet" href="/static/index/css/style.css"  />
+    <link rel="stylesheet" href="/static/index/css/personal.css"  />
+
+    <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+<!--top--顶部内容-->
+<div class="top">
+    <div class="logo back">
+        <a href="personal.html"><img src="/static/index/images/_black.png" alt=""></a>
+    </div>
+
+    <div class="search">
+        <form method="post" action="">
+            <label for="keyword" class="search_input">
+                <input type="text" name="keyword" class="search_text" id="keyword" placeholder="请输入要搜索的产品名称"/>
+            </label>
+            <label for="search_submit">
+                <input type="submit" value=" " class="search_submit" id="search_submit">
+            </label>
+        </form>
+    </div>
+</div>
+
+<!--order-push--订单提交-->
+<div class="order_push">
+    <div class="order_push_form">
+        <form method="post" action="">
+            <label for="order_push_num" class="order_push_input">
+                <input type="text" name="number" id="order_push_num"  placeholder="请将淘宝购物订单编号复制到这里进行提交"/>
+            </label>
+            <label for="order_push_submit" class="order_push_input order_push_input_submit">
+                <input type="submit" value="提交订单" id="order_push_submit" />
+            </label>
+        </form>
+    </div>
+
+    <div class="order_push_info">
+        <p><i class="glyphicon glyphicon-off"></i> 奖励规则：提交您通过本平台复制淘口令下单购买的商品订单号，您将可以拿到由平台发放的平台使用奖励金。</p>
+        <p class="info_bottom cat_bonus"><i class="glyphicon glyphicon-fire"></i> 如何查看平台奖励金？</p>
+        <p class="info_bottom cat_order"><i class="glyphicon glyphicon-fire"></i> 如何获取淘宝订单号？</p>
+    </div>
+
+    <div class="cat_bonus_hidden cat_comm">
+        <p>打开折金券平台任意或指定产品详情页面，即可以页面中查看到在平台领取优惠券，并使用优惠券购物后所得到的平台奖励金金额</p>
+        <img src="/static/index/images/push-bonus.jpg" alt="">
+    </div>
+
+    <div class="cat_order_hidden cat_comm">
+        <p>打开淘宝购物软件，在“我的订单”中找到您所需查看订单号的订单，并查看订单详情，在详情页面的下半部分，即可查看到该订单的订单编号</p>
+        <img src="/static/index/images/push-tao.jpg" alt="">
+    </div>
+
+</div>
+
+<!--footer--底部导航-->
+<div class="footer">
+    <ul>
+        <li><a href="index.html"><img src="/static/index/images/home.png"/><p>首页</p></a></li>
+        <li><a href=""><img src="/static/index/images/convert.png"/><p>兑换</p></a></li>
+        <li><a href="attestation.html"><img src="/static/index/images/classify.png"/><p>分类</p></a></li>
+        <li class="active"><a href="personal.html"><img src="/static/index/images/personal_active.png"/><p>个人</p></a></li>
+    </ul>
+</div>
+
+<script>
+    var myBonus = $(".cat_bonus_hidden");
+    $(function() {
+        $(".cat_bonus").click(function(event) {
+            // showDiv();//调用显示DIV方法
+            $(myBonus).toggle();
+            $(document).one("click",
+                function() { //对document绑定一个影藏Div方法
+                    $(myBonus).hide();
+                });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+        $(myBonus).click(function(event) {
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+    });
+    function showDiv() {
+        $(myBonus).fadeIn();
+    }
+</script>
+
+<script>
+    var myOrder = $(".cat_order_hidden");
+    $(function() {
+        $(".cat_order").click(function(event) {
+            // showDiv();//调用显示DIV方法
+            $(myOrder).toggle();
+            $(myOrder).one("click",
+                function() { //对document绑定一个影藏Div方法
+                    $(myOrder).hide();
+                });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+        $(myOrder).click(function(event) {
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+    });
+    function showDiv() {
+        $(myOrder).fadeIn();
+    }
+</script>
+
+
+
+
+</body>
+</html>
