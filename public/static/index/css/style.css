@@ -361,6 +361,10 @@ ul,li {
     float:right;
     margin-top:0.5rem;
 }
+.attestation .attestation_form .send_obtain {
+    background:#da5514;
+    color:#fff;
+}
 .attestation .attestation_form .attestation_input_submit {
     width:100%;
     text-align:center;
@@ -374,6 +378,29 @@ ul,li {
     letter-spacing:1rem;
     margin:2rem 0 0 0;
     padding:0 0 0 1rem;
+}
+
+.bomb {
+    display:none;
+    width:90%;
+    font-size:1.5rem;
+    color:#da5514;
+    text-align:center;
+    margin:0 5%;
+    background:#fff;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    box-shadow: 0 5px 5px #c0c0c0;
+    padding:3rem 1.5rem;
+    border:1px solid #e1e1e1;
+    position: absolute;
+    top:15%;
+    z-index: 777;
+}
+.bomb p {
+    line-height:2.5rem;
+    margin-bottom:0;
 }
 
 

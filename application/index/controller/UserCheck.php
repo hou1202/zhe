@@ -9,15 +9,16 @@
 namespace app\index\controller;
 
 use think\Controller;
+use think\Cookie;
 
 class UserCheck extends Controller
 {
     //类里面引入jump类
     //use \traits\controller\Jump;
 
-    //绑定到CheckAuth标签，可以用于检测Session以用来判断用户是否登录
+    //绑定到CheckAuth标签，可以用于检测Session/Cookie以用来判断用户是否登录
     public function run(&$params){
-        $uid = session('user');
+        $uid = Cookie::get('user');
         if(!isset($uid)){
             $uid = "";
         }

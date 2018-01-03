@@ -411,6 +411,10 @@
     float:right;
     margin-top:0.5rem;
 }
+.carry .carry_form .send_obtain {
+    background:#da5514;
+    color:#fff;
+}
 .carry .carry_form .carry_input_submit {
     width:100%;
     text-align:center;

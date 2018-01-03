@@ -238,4 +238,8 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //短信配置
+    'sms_account' => 'AA00344',
+    'sms_password' => 'AA0034452',
 ];

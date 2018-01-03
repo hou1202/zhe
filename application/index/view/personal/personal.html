@@ -11,12 +11,12 @@
     <div class="message">
         <div class="message-top">
             <div class="portrait">
-                <img src="/static/index/images/goods.jpg" alt="">
+                <img src="{$User.portrait}" alt="">
             </div>
             <div class="name">
-                <p><span>三百零一</span></p>
-                <p>ID：Y4T8U</p>
-                <P>勋：王者荣耀</P>
+                <p><span>{$User.user_name}</span></p>
+                <p>ID：{$User.invite}</p>
+                <P>勋：{$User.grade}</P>
             </div>
         </div>
         <div class="set">
@@ -32,16 +32,16 @@
                 <span>淘币</span>
             </div>
             <div class="gold-num">
-                <span>200</span>
+                <span>{$User.balance}</span>
             </div>
         </div>
 
         <div class="rule">
             <div class="rule-comm">
-                <a href="message.html">淘规则</a>
+                <a href="/index/message/index?type=1">淘规则</a>
             </div>
             <div class="rule-comm">
-                <a href="carry.html">提淘币</a>
+                <a href="/index/carry/index">提淘币</a>
             </div>
         </div>
     </div>

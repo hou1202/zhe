@@ -1,55 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>折金券</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="format-detection" content="telephone=no" />
-    <!--
-    --apple-mobile-web-app-capable
-    --safari私有meta标签
-    --允许全屏模式浏览，隐藏浏览器导航栏
-    -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <!--
-    --apple-mobile-web-app-status-bar-style
-    --iphone的私有标签
-    --指定的iphone中safari顶端的状态条的样式
-    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
-    -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="icon" type="image/x-icon"  href="/static/index/images/favicon.ico">
+    <!--header--引入-->
+    {include file="default/header_back" /}
+    <!--header--END-->
 
-
-    <link rel="stylesheet" href="/static/index/css/bootstrap.min.css"  />
-    <link rel="stylesheet" href="/static/index/css/style.css"  />
     <link rel="stylesheet" href="/static/index/css/personal.css"  />
 
-    <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
 
-
-</head>
-<body>
-    <!--top--顶部内容-->
-    <div class="top">
-        <div class="logo back">
-            <a href="personal.html"><img src="/static/index/images/_black.png" alt=""></a>
-        </div>
-
-        <div class="search">
-            <form method="post" action="">
-                <label for="keyword" class="search_input">
-                    <input type="text" name="keyword" class="search_text" id="keyword" placeholder="请输入要搜索的产品名称"/>
-                </label>
-                <label for="search_submit">
-                    <input type="submit" value=" " class="search_submit" id="search_submit">
-                </label>
-            </form>
-        </div>
-    </div>
 
     <!--carry--提现-->
     <div class="carry">
@@ -58,7 +13,7 @@
                 <span>拥有淘币</span>
             </div>
             <div class="carry_title_right">
-                <span>200</span>
+                <span>{$Carry.balance}</span>
                 <img src="/static/index/images/carry_explain.png" alt="" class="carry_show">
             </div>
         </div>
@@ -67,10 +22,11 @@
             <p> 兑换淘币时需求获取短信验证码（手机号码为注册时该帐号所认证括手机号码），以此来保证操作用户的帐户资金安全。</p>
         </div>
         <div class="carry_form">
-            <form method="post" action="">
+            <form method="post" action="/index/carry/carryApply" id="carry_form">
+                <input type="hidden" name="uid" value="{$Carry.id}" id="carry_uid" />
                 <label for="carry_num" class="carry_input">
                     <span>兑换数</span>
-                    <input type="text" name="number" id="carry_num" />
+                    <input type="number" name="money" id="carry_num" min="1"/>
                 </label>
                 <label for="carry_alipay" class="carry_input">
                     <span>支付宝</span>
@@ -78,15 +34,15 @@
                 </label>
                 <label for="carry_phone" class="carry_input carry_input_phone">
                     <span>手机号</span>
-                    <input type="text" name="phone" id="carry_phone" value="13800000001" readonly/>
+                    <input type="number" name="phone" id="carry_phone" value="{$Carry.phone}" readonly/>
                 </label>
                 <span class="carry_input_obtain">获取验证码</span>
                 <label for="carry_code" class="carry_input">
                     <span>验证码</span>
-                    <input type="text" name="code" id="carry_code" />
+                    <input type="number" name="code" id="carry_code" />
                 </label>
                 <label for="carry_submit" class="carry_input carry_input_submit">
-                    <input type="submit" value="开始兑换" id="carry_submit" />
+                    <input type="button" value="开始兑换" id="carry_submit" />
                 </label>
 
             </form>
@@ -94,16 +50,11 @@
 
     </div>
 
-    <!--footer--底部导航-->
-    <div class="footer">
-        <ul>
-            <li><a href="index.html"><img src="/static/index/images/home.png"/><p>首页</p></a></li>
-            <li><a href=""><img src="/static/index/images/convert.png"/><p>兑换</p></a></li>
-            <li><a href="attestation.html"><img src="/static/index/images/classify.png"/><p>分类</p></a></li>
-            <li class="active"><a href="personal.html"><img src="/static/index/images/personal_active.png"/><p>个人</p></a></li>
-        </ul>
+    <div class="bomb">
+        <p></p>
     </div>
 
+    <!--显示隐藏提示信息-->
     <script>
         var myCarry = $(".carry_explain");
         $(function() {
@@ -127,8 +78,100 @@
         }
     </script>
 
+    <!--短信验证-->
+    <script>
+        //短信验证
+        $(function(){
+            //获取短信验证码
+            var validCode=true;
+            $(".carry_input_obtain").click (function () {
+                var phone = $('#carry_phone').val();
+                if(!/^1[34578]\d{9}$/.test(phone)){
+                    $(".bomb p").html("请输入正确手机号");
+                    $(".bomb").show(300).delay(1500).hide(100);
+                    /*layer.msg('请输入正确的手机号', {
+                     icon: 2,
+                     time: 2000
+                     });*/
+                    return false;
+                }
+                var time=120;
+                var code=$(this);
+                if (validCode) {
+                    $.post('/index/verify/get', {type:2, phone:phone}, function(){
+                        validCode=false;
+                        code.addClass("send_obtain");
+                        var t=setInterval(function () {
+                            time--;
+                            code.html(time+"秒");
+                            if (time==0) {
+                                clearInterval(t);
+                                code.html("重新获取");
+                                validCode=true;
+                                code.removeClass("send_obtain");
+                            } },1000);
+                    });
+                }
+            })
+        });
+    </script>
+
+    <!--用户提现数据验证-->
+    <script>
+        $("#carry_submit").on('click',function(){
+            var uid = $('#carry_uid').val();
+            var money = $('#carry_num').val();
+            var alipay = $("#carry_alipay").val();
+            var phone = $("#carry_phone").val();
+            var code = $("#carry_code").val();
+
+            if(uid == null){
+                $(".bomb p").html("数据信息错误，请重新操作");
+                $(".bomb").show(300).delay(1500).hide(100);
+                return false;
+            }
+            if(!(/^(\+|-)?\d+$/.test( money )) || money<=0) {
+                $(".bomb p").html("兑换淘币需为大于0的正整数");
+                $(".bomb").show(300).delay(1500).hide(100);
+                return false;
+            }
+            if(alipay.length < 3){
+                $(".bomb p").html("请输入正确的支付宝账户");
+                $(".bomb").show(300).delay(1500).hide(100);
+                return false;
+            }
+            if(!/^1[3456789]\d{9}$/.test(phone)){
+                $(".bomb p").html("请输入正确手机号");
+                $(".bomb").show(300).delay(1500).hide(100);
+                return false;
+            }
+            if(code.length != 6) {
+                $(".bomb p").html("验证码有误，有确认");
+                $(".bomb").show(300).delay(1500).hide(100);
+                return false;
+            }
+
+            $.ajax({
+                url:"/index/carry/carryApply",
+                type:"POST",
+                dataType: "html",
+                //data:'phone:phone,password:password,invitation:invitation,code:code',
+                data:$('#carry_form').serialize(),
+                success:function(data){
+                    //var data = data;
+                    $(".bomb p").html(data);
+                    $(".bomb").show(300).delay(1500).hide(100);
+                },
+                error:function (data) {
+                    $(".bomb p").html(data);
+                    $(".bomb").show(300).delay(1500).hide(100);
+                }
+            });
+        });
+    </script>
 
 
 
-</body>
-</html>
+    <!--footer--引入-->
+    {include file="default/footer" /}
+    <!--footer--END-->
