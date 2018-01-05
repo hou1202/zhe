@@ -30,6 +30,8 @@
     <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/swiper/js/swiper.min.js"></script>
+    <!--弹框提示JS-->
+    <script type="text/javascript" src="/static/index/js/alertInfo.js"></script>
 
 
 </head>
@@ -47,7 +49,7 @@
             <div class="swiper-wrapper" id="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="attestation_form">
-                        <form method="post" action="/index/login/login">
+                        <form method="post" action="/index/login/login" id="login_form">
                             <label for="login_phone" class="attestation_input">
                                 <span>帐号</span>
                                 <input type="number" name="phone" id="login_phone" />
@@ -58,7 +60,7 @@
                             </label>
 
                             <label for="login_submit" class="attestation_input attestation_input_submit">
-                                <input type="submit" value="登录" id="login_submit" />
+                                <input type="button" value="登录" id="login_submit" />
                             </label>
 
                         </form>
@@ -68,7 +70,7 @@
                 <div class="swiper-slide">
                     <div class="spec">
                         <div class="attestation_form">
-                            <form method="post" action="/index/login/register" id="register_form">
+                            <form method="post" action="" id="register_form">
                                 <label for="register_phone" class="attestation_input">
                                     <span>手机号码</span>
                                     <input type="number" name="phone" id="register_phone" />
@@ -79,7 +81,7 @@
                                 </label>
                                 <label for="register_invitation" class="attestation_input">
                                     <span>邀请码</span>
-                                    <input type="text" name="invite" value="{$invitation}" id="register_invitation" />
+                                    <input type="text" name="p_invite" value="{$invitation}" id="register_invitation" />
                                 </label>
                                 <label for="register_code" class="attestation_input  attestation_input_code">
                                     <span>验证码</span>
@@ -87,7 +89,7 @@
                                 </label>
                                 <span class="attestation_input_obtain">获取验证码</span>
                                 <label for="register_submit" class="attestation_input attestation_input_submit">
-                                    <input type="submit" value="注册" id="register_submit" />
+                                    <input type="button" value="注册" id="register_submit" />
                                 </label>
 
                             </form>
@@ -135,28 +137,6 @@
 
     <script type="text/javascript">
 
-        //验证手机号码是否正确
-        /*$("#register_phone").bind('click',function() {
-            var shouji = $("#register_phone").val();
-            if (shouji.length == 0) {
-                //$("#mobile").html("<font color='#7699C6'>输入规范手机号</font>");
-                jAlert('输入规范手机号', '提示');
-
-            }
-        });
-        $("#register_phone").blur(function(){
-            var shouji =$("#register_phone").val();
-            var bo=/^1[3458]\d{9}$/.test(shouji);
-            if(bo==false){
-                //$("#mobile").html('<font color="#B94A48">请输入正确手机号</font>')
-                jAlert('请输入正确手机号', '提示');
-                //$("#shouji").val('');
-                return false;
-            }/!*else{
-                $("#mobile").html('<span style="display:inline-block; width:18px; height:15px; background:url(/static/index/images/ok.png) 0; "></span>')
-            }*!/
-        });*/
-
         //短信验证
         $(function(){
             //获取短信验证码
@@ -164,30 +144,29 @@
             $(".attestation_input_obtain").click (function () {
                 var phone = $('#register_phone').val();
                 if(!/^1[34578]\d{9}$/.test(phone)){
-                    //alert('请输入正确手机号!!!');
-                    $(".bomb p").html("请输入正确手机号");
-                    $(".bomb").show(300).delay(1500).hide(100);
-                    /*layer.msg('请输入正确的手机号', {
-                        icon: 2,
-                        time: 2000
-                    });*/
+                    showAlertAutoClose("请输入正确手机号");
                     return false;
                 }
                 var time=120;
                 var code=$(this);
                 if (validCode) {
-                    $.post('/index/verify/get', {type:0, phone:phone}, function(){
-                        validCode=false;
-                        code.addClass("send_obtain");
-                        var t=setInterval(function () {
-                            time--;
-                            code.html(time+"秒");
-                            if (time==0) {
-                                clearInterval(t);
-                                code.html("重新获取");
-                                validCode=true;
-                                code.removeClass("send_obtain");
-                            } },1000);
+                    $.post('/index/verify/get', {type:0, phone:phone}, function(data){
+                        if(data.code == 1){
+                            jsonAlertAutoClose(data);
+                            validCode=false;
+                            code.addClass("send_obtain");
+                            var t=setInterval(function () {
+                                time--;
+                                code.html(time+"秒");
+                                if (time==0) {
+                                    clearInterval(t);
+                                    code.html("重新获取");
+                                    validCode=true;
+                                    code.removeClass("send_obtain");
+                                } },1000);
+                        }else{
+                            jsonAlertAutoClose(data);
+                        }
                     });
                 }
             })
@@ -195,20 +174,31 @@
 
 
         /*用户登录数据验证*/
-        $("#login_submit").on('click',function(){
+        $("#login_submit").on('click',function() {
             var l_phone = $('#login_phone').val();
             var l_pw = $("#login_password").val();
 
-            if(!/^1[3456789]\d{9}$/.test(l_phone)){
-                $(".bomb p").html("请输入正确手机号");
-                $(".bomb").show(300).delay(1500).hide(100);
+            if (!/^1[3456789]\d{9}$/.test(l_phone)) {
+                showAlertAutoClose("请输入正确手机号");
                 return false;
             }
-            if(l_pw.length < 6 ) {
-                $(".bomb p").html("密码长度不得小于6位");
-                $(".bomb").show(300).delay(1500).hide(100);
+            if (l_pw.length < 6) {
+                showAlertAutoClose("密码错误");
                 return false;
             }
+
+            $.ajax({
+                url:"/index/login/login",
+                type:"POST",
+                dataType: "json",
+                data:$('#login_form').serialize(),
+                success:function(data){
+                    jsonAlertAutoClose(data);
+                },
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
+                }
+            });
         });
 
         //用户注册数据验证
@@ -219,45 +209,38 @@
             var code = $("#register_code").val();
 
             if(!/^1[3456789]\d{9}$/.test(phone)){
-                $(".bomb p").html("请输入正确手机号");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("请输入正确手机号");
                 return false;
             }
             if(password.length < 6 ) {
-                $(".bomb p").html("密码长度不得小于6位");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("密码长度不得小于6位");
                 return false;
             }
             if(invitation.length != 0 && invitation.length != 6) {
-                $(".bomb p").html("请与您的好友确认正确的邀请码，若无，则留空不填写");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("请与您的好友确认正确的邀请码，若无，则留空不填写");
                 return false;
             }
             if(code.length != 6) {
-                $(".bomb p").html("验证码有误，有确认");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("验证码有误，有确认");
                 return false;
             }
 
-
-           /* $.ajax({
+            $.ajax({
                 url:"/index/login/register",
                 type:"POST",
-                dataType: "html",
-                //data:'phone:phone,password:password,invitation:invitation,code:code',
+                dataType: "json",
                 data:$('#register_form').serialize(),
                 success:function(data){
-                    //var data = data;
-                    $(".bomb p").html(data);
-                    $(".bomb").show(300).delay(1500).hide(100);
+                    jsonAlertAutoClose(data);
                 },
-                error:function (data) {
-                    $(".bomb p").html(data);
-                    $(".bomb").show(300).delay(1500).hide(100);
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
                 }
-            });*/
+            });
 
         });
+
+
 
     </script>
 

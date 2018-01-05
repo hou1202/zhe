@@ -13,7 +13,7 @@ use think\Controller;
 class ReturnAlert extends Controller
 {
     static function NoConfirmCueReturn($message){
-        echo "<script type='text/javascript'>$('.bomb p').html('$message'); $('.bomb').show(300).delay(1500).hide(100);</script>";
+        echo "<script type='text/javascript'>$('.bomb p').html('<div class=\"bomb\"><p>'+$message+'</p></div>'); $('.bomb').show(300).delay(1500).hide(100);</script>";
         exit;
     }
 }

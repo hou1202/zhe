@@ -22,11 +22,11 @@
             <p> 兑换淘币时需求获取短信验证码（手机号码为注册时该帐号所认证括手机号码），以此来保证操作用户的帐户资金安全。</p>
         </div>
         <div class="carry_form">
-            <form method="post" action="/index/carry/carryApply" id="carry_form">
+            <form method="post" action="" id="carry_form">
                 <input type="hidden" name="uid" value="{$Carry.id}" id="carry_uid" />
                 <label for="carry_num" class="carry_input">
                     <span>兑换数</span>
-                    <input type="number" name="money" id="carry_num" min="1"/>
+                    <input type="text" name="money" id="carry_num" min="1"/>
                 </label>
                 <label for="carry_alipay" class="carry_input">
                     <span>支付宝</span>
@@ -34,12 +34,12 @@
                 </label>
                 <label for="carry_phone" class="carry_input carry_input_phone">
                     <span>手机号</span>
-                    <input type="number" name="phone" id="carry_phone" value="{$Carry.phone}" readonly/>
+                    <input type="text" name="phone" id="carry_phone" value="{$Carry.phone}" readonly/>
                 </label>
                 <span class="carry_input_obtain">获取验证码</span>
                 <label for="carry_code" class="carry_input">
                     <span>验证码</span>
-                    <input type="number" name="code" id="carry_code" />
+                    <input type="text" name="code" id="carry_code" />
                 </label>
                 <label for="carry_submit" class="carry_input carry_input_submit">
                     <input type="button" value="开始兑换" id="carry_submit" />
@@ -50,9 +50,6 @@
 
     </div>
 
-    <div class="bomb">
-        <p></p>
-    </div>
 
     <!--显示隐藏提示信息-->
     <script>
@@ -87,8 +84,7 @@
             $(".carry_input_obtain").click (function () {
                 var phone = $('#carry_phone').val();
                 if(!/^1[34578]\d{9}$/.test(phone)){
-                    $(".bomb p").html("请输入正确手机号");
-                    $(".bomb").show(300).delay(1500).hide(100);
+                    showAlertAutoClose("请输入正确手机号");
                     /*layer.msg('请输入正确的手机号', {
                      icon: 2,
                      time: 2000
@@ -126,47 +122,40 @@
             var code = $("#carry_code").val();
 
             if(uid == null){
-                $(".bomb p").html("数据信息错误，请重新操作");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("数据信息错误，请重新操作");
                 return false;
             }
             if(!(/^(\+|-)?\d+$/.test( money )) || money<=0) {
-                $(".bomb p").html("兑换淘币需为大于0的正整数");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("兑换淘币需为大于0的正整数");
                 return false;
             }
             if(alipay.length < 3){
-                $(".bomb p").html("请输入正确的支付宝账户");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("请输入正确的支付宝账户");
                 return false;
             }
             if(!/^1[3456789]\d{9}$/.test(phone)){
-                $(".bomb p").html("请输入正确手机号");
-                $(".bomb").show(300).delay(1500).hide(100);
+                showAlertAutoClose("请输入正确手机号");
                 return false;
             }
-            if(code.length != 6) {
-                $(".bomb p").html("验证码有误，有确认");
-                $(".bomb").show(300).delay(1500).hide(100);
+            if(!(/^(\+|-)?\d+$/.test( code )) || code.length != 6) {
+                showAlertAutoClose("验证码有误，有确认");
                 return false;
             }
 
             $.ajax({
                 url:"/index/carry/carryApply",
                 type:"POST",
-                dataType: "html",
+                dataType: "json",
                 //data:'phone:phone,password:password,invitation:invitation,code:code',
                 data:$('#carry_form').serialize(),
                 success:function(data){
-                    //var data = data;
-                    $(".bomb p").html(data);
-                    $(".bomb").show(300).delay(1500).hide(100);
+                    jsonAlertAutoClose(data)
                 },
-                error:function (data) {
-                    $(".bomb p").html(data);
-                    $(".bomb").show(300).delay(1500).hide(100);
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
                 }
             });
+
         });
     </script>
 

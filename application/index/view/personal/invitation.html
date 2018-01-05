@@ -1,61 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>折金券</title>
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="format-detection" content="telephone=no" />
-    <!--
-    --apple-mobile-web-app-capable
-    --safari私有meta标签
-    --允许全屏模式浏览，隐藏浏览器导航栏
-    -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <!--
-    --apple-mobile-web-app-status-bar-style
-    --iphone的私有标签
-    --指定的iphone中safari顶端的状态条的样式
-    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
-    -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="icon" type="image/x-icon"  href="/static/index/images/favicon.ico">
+    <!--header--引入-->
+    {include file="default/header_back" /}
+    <!--header--END-->
 
-
-    <link rel="stylesheet" href="/static/index/css/bootstrap.min.css"  />
-    <link rel="stylesheet" href="/static/index/css/style.css"  />
     <link rel="stylesheet" href="/static/index/css/personal.css"  />
-
-    <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
-
-
-</head>
-<body>
-    <!--top--顶部内容-->
-    <div class="top">
-        <div class="logo back">
-            <a href="personal.html"><img src="/static/index/images/_black.png" alt=""></a>
-        </div>
-
-        <div class="search">
-            <form method="post" action="">
-                <label for="keyword" class="search_input">
-                    <input type="text" name="keyword" class="search_text" id="keyword" placeholder="请输入要搜索的产品名称"/>
-                </label>
-                <label for="search_submit">
-                    <input type="submit" value=" " class="search_submit" id="search_submit">
-                </label>
-            </form>
-        </div>
-    </div>
 
     <!--collect--邀请好友-->
     <div class="invite">
         <div class="invite_id">
             <img src="/static/index/images/invite_bg.png" alt="">
-            <p class="invite_num"><span >T6Y7U8</span></p>
+            <p class="invite_num"><span >{$invitation.invite}</span></p>
             <p class="invite_sub"><a href=""><span >马上邀请</span></a></p>
         </div>
         <div class="invite_rule">
@@ -71,16 +24,6 @@
 
 
 
-    <!--footer--底部导航-->
-    <div class="footer">
-        <ul>
-            <li><a href="index.html"><img src="/static/index/images/home.png"/><p>首页</p></a></li>
-            <li><a href=""><img src="/static/index/images/convert.png"/><p>兑换</p></a></li>
-            <li><a href=""><img src="/static/index/images/classify.png"/><p>分类</p></a></li>
-            <li class="active"><a href="personal.html"><img src="/static/index/images/personal_active.png"/><p>个人</p></a></li>
-        </ul>
-    </div>
-
-
-</body>
-</html>
+    <!--footer--引入-->
+    {include file="default/footer" /}
+    <!--footer--END-->

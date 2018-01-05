@@ -37,8 +37,8 @@ class CommController extends Controller
      * @return Response|\think\response\Json|\think\response\Jsonp|\think\response\Redirect|\think\response\View|\think\response\Xml
      */
     public function jsonSuccess($msg, $data=[]){
-        //$result = empty($data) ? ['code'=>self::SUCCESS_CODE, 'msg'=>$msg] : ['code'=>self::SUCCESS_CODE, 'msg'=>$msg, 'data'=>$data];
-        $result = ['code'=>self::SUCCESS_CODE, 'msg'=>$msg, 'data'=>$data];
+        $result = empty($data) ? ['code'=>self::SUCCESS_CODE, 'msg'=>$msg] : ['code'=>self::SUCCESS_CODE, 'msg'=>$msg, 'data'=>$data];
+        //$result = ['code'=>self::SUCCESS_CODE, 'msg'=>$msg, 'data'=>$data];
         return $this->json($result);
     }
 

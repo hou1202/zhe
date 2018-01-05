@@ -23,7 +23,7 @@ class UserCheck extends Controller
             $uid = "";
         }
         if($uid == null || $uid == "" || $uid == "null" || $uid == 0){
-            return $this -> redirect('login/attestation');
+            $this -> redirect('login/attestation');
         }
     }
 }
