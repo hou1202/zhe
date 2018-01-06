@@ -23,6 +23,15 @@ class Friends extends CommController
         if (!$result) {
             return ReturnJson::ReturnA("未查找到你们账户信息，请重新确认账户，或注册...");
         }
-        return $this -> fetch('personal/friends');
+        $friendsInfo = $user ->getInviteUserByPId($result['id']);
+        //var_dump($friendsInfo);die;
+        return $this -> fetch('personal/friends',['FriendsInfo'=>$friendsInfo,'UsrId'=>$result['id']]);
+    }
+
+    public function friendsCapitalTotal(){
+        if($this -> request -> isPost()){
+            $data = $this -> request -> post();
+            var_dump($data);die;
+        }
     }
 }

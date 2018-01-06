@@ -20,6 +20,11 @@ class User extends Model
         return md5($value);
     }
 
+    //取值时间显示
+    protected function getCreateTimeAttr($value){
+        return date('Y-m-d',$value);
+    }
+
     protected function getGradeAttr($value){
         $grade = [0 => '青铜小兵' , 1 => '白银连长', 2 => '黄金将军', 3 => '铂金元帅', 4 => '王者大帝'];
         return $grade[$value];
@@ -54,6 +59,20 @@ class User extends Model
                      -> where('phone',$phone)
                      -> where('password',md5($password))
                      -> find();
+    }
+
+    /*
+     * @ getInviteUserByPId 通过PId，查找该用户下的当有邀请用户
+     * $pid     用户的ID，即父即用户的PID
+     * @return  id,portrait,phone,user_name,invite,grade,create_time
+     * */
+    public function getInviteUserByPId($pid){
+        return  $this ->alias('u')
+            -> field('sum(r.money) as t_money,u.id,u.portrait,u.phone,u.user_name,u.invite,u.grade,u.create_time')
+            ->join('think_capital_record r','u.id = r.sid','inner')
+            -> where('u.p_id',$pid)
+            ->group('r.sid')
+            -> select();
     }
 
 

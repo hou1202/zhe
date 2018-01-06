@@ -6,35 +6,22 @@
 
     <!--friends--好友-->
     <div class="friends">
-        <div class="friends_list">
-            <div class="friends_message">
-                <img src="/static/index/images/goods.jpg" class="head" alt="">
-                <div class="friends_info">
-                    <h2>言不由忠</h2>
-                    <p>ID：T6Y7U8</p>
-                    <p>勋：王者荣耀</p>
+        {foreach name="FriendsInfo" item="F"}
+            <div class="friends_list">
+                <div class="friends_message">
+                    <img src="{$F.portrait}" class="head" alt="">
+                    <div class="friends_info">
+                        <h2>{$F.user_name}</h2>
+                        <p>ID：{$F.invite}</p>
+                        <p>勋：{$F.grade}</p>
+                    </div>
+                    <img src="/static/index/images/open.png" class="open" alt="">
                 </div>
-                <img src="/static/index/images/open.png" class="open" alt="">
-            </div>
-            <div class="friends_bonus">
-                <span>奖金：￥200.00</span>
-            </div>
-        </div>
-
-        <div class="friends_list">
-            <div class="friends_message">
-                <img src="/static/index/images/goods.jpg" class="head" alt="">
-                <div class="friends_info">
-                    <h2>言不由忠</h2>
-                    <p>ID：T6Y7U8</p>
-                    <p>勋：王者荣耀</p>
+                <div class="friends_bonus">
+                    <span>奖金：￥{$F.t_money|round=###,2}</span>
                 </div>
-                <img src="/static/index/images/open.png" class="open" alt="">
             </div>
-            <div class="friends_bonus">
-                <span>奖金：￥200.00</span>
-            </div>
-        </div>
+        {/foreach}
     </div>
 
 
@@ -42,10 +29,10 @@
     <script type="text/javascript">
         var message = $(".friends .friends_message");
         var bonus = $(".friends .friends_bonus");
-        /*bonus.eq(0).show();*/
         message.click(function () {
             bonus.hide();
             $(this).next().show();
+
         });
     </script>
 
