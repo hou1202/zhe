@@ -15,6 +15,7 @@ use think\Cookie;
 use think\Session;
 use app\index\model\User;
 use app\index\model\Carry as CarryModel;
+use app\index\model\Notice;
 use app\common\controller\ReturnJson;
 use app\common\controller\NoticeInfo;
 use app\index\validate\CarryValidate;
@@ -64,7 +65,8 @@ class Carry extends CommController
                     //更新用户数据
                     $user->where('id', $data['uid'])->where('phone', $data['phone'])->setDec('balance', $data['money']);
                     //创建通知信息
-                    NoticeInfo::CarryNoticeInfo($data['uid'], $data['money']);
+                    $notice = new Notice();
+                    $notice -> CarryNoticeInfo($data['uid'], $data['money']);
                     return $this->jsonSuccess('您已成功提交淘币兑换申请...','/index/personal/personal');
                     //$this->redirect('personal/personal');
                 } else {

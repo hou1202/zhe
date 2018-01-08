@@ -588,6 +588,45 @@
     background: rgba(60, 136, 33, 0.87);
 }
 
+/*notice--通知信息*/
+.notice {
+    width:100%;
+    padding-bottom:6rem;
+}
+.notice .notice_block {
+    width:100%;
+    /*padding:1rem 2rem 0.5rem 3rem;
+    background:url('/static/index/images/notice-bg.png') no-repeat;
+    background-size:auto 100%;
+    background-position:2rem;*/
+    border-bottom:1px solid #c7c7c7;
+
+}
+.notice .notice_block .notice_info {
+    width:95%;
+    border-left:1px solid #960202;
+    padding:1rem 1rem 0.5rem 1rem;
+    margin-left:1rem;
+    background:url('/static/index/images/notice-bg2.png') no-repeat;
+    background-position:-0.4rem;
+}
+.notice .notice_block .notice_info .notice_title {
+    font-size:1.5rem;
+    color:#960202;
+}
+.notice .notice_block .notice_info .notice_content {
+    text-indent: 2rem;
+    line-height:1.9rem;
+    /*letter-spacing: 0.05rem;*/
+}
+.notice .notice_block .notice_info .notice_date {
+    height:2rem;
+    line-height:2rem;
+    text-align:right;
+    color:#da5514;
+    font-family:myAxureHand;
+}
+
 
 
 
