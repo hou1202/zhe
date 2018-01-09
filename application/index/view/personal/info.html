@@ -1,0 +1,120 @@
+    <!--header--引入-->
+    {include file="default/header_back" /}
+    <!--header--END-->
+
+    <link rel="stylesheet" href="/static/index/css/personal.css"  />
+
+
+
+    <!--Info--个人信息-->
+    <div class="info">
+
+        <div class="info_portrait info_comm">
+            <div class="info_title">
+                头像
+            </div>
+            <div class="info_content info_img">
+                <img src="/static/index/images/goods.jpg" alt="">
+            </div>
+            <div class="info_edit"></div>
+        </div>
+
+        <div class="info_comm">
+            <div class="info_title">
+                昵称
+            </div>
+            <div class="info_content">
+                你看什么看
+            </div>
+            <div class="info_edit">
+                <img src="/static/index/images/edit-bg.png" alt="">
+            </div>
+        </div>
+
+        <div class="info_comm">
+            <div class="info_title">
+                邀请码
+            </div>
+            <div class="info_content">
+                YD749C
+            </div>
+            <div class="info_edit"></div>
+        </div>
+
+        <div class="info_comm">
+            <div class="info_title">
+                手机号
+            </div>
+            <div class="info_content">
+                13564078415
+            </div>
+            <div class="info_edit"></div>
+        </div>
+
+        <div class="info_comm">
+            <div class="info_title">
+                等级
+            </div>
+            <div class="info_content">
+                青铜小兵
+            </div>
+            <div class="info_edit"></div>
+
+            <div class="info_comm">
+                <div class="info_title">
+                    积分
+                </div>
+                <div class="info_content">
+                    251
+                </div>
+                <div class="info_edit"></div>
+            </div>
+
+            <div class="info_comm">
+                <div class="info_title">
+                    支付宝
+                </div>
+                <div class="info_content">
+                    13564078415
+                </div>
+                <div class="info_edit">
+                    <img src="/static/index/images/edit-bg.png" alt="">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!--显示隐藏提示信息-->
+    <script>
+        var myCarry = $(".carry_explain");
+        $(function() {
+            $(".carry_show").click(function(event) {
+                // showDiv();//调用显示DIV方法
+                $(myCarry).toggle();
+                $(document).one("click",
+                    function() { //对document绑定一个影藏Div方法
+                        $(myCarry).hide();
+                    });
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+            $(myCarry).click(function(event) {
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+        });
+        function showDiv() {
+            $(myCarry).fadeIn();
+        }
+    </script>
+
+
+
+
+
+    <!--footer--引入-->
+    {include file="default/footer" /}
+    <!--footer--END-->

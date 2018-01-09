@@ -629,6 +629,54 @@
     font-family:myAxureHand;
 }
 
+/*Info--个人信息*/
+.info {
+    width:100%;
+    padding-bottom:6rem;
+}
+.info .info_comm {
+    width:100%;
+    height:5rem;
+    line-height:5rem;
+    border-bottom:1px solid #c7c7c7;
+}
+.info .info_comm .info_title {
+    width:30%;
+    font-size:2.3rem;
+    text-align:right;
+    color:#960202;
+    font-family:myGongFang;
+    letter-spacing: 0.4rem;
+    padding-right:1.5rem;
+    float:left;
+}
+.info .info_comm .info_content {
+    width:60%;
+    text-align:right;
+    padding-right:1.5rem;
+    font-size:1.5rem;
+    color: #878787;
+    float:left;
+}
+
+.info .info_comm .info_edit {
+    width:10%;
+    text-align:center;
+    float:right;
+}
+.info .info_comm .info_edit img {
+    width:1.5rem;
+    height:1.5rem;
+}
+.info .info_portrait {
+    height:7rem;
+    line-height:7rem;
+}
+.info .info_portrait .info_content img {
+    width:5rem;
+    height:5rem;
+    border-radius:50px;
+}
 
 
 
