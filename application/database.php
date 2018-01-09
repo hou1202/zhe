@@ -21,6 +21,7 @@ return [
         // 服务器地址
         //'hostname'        => '127.0.0.1',
         // 密码
+
         //'password'        => 'root',
 
         //线上
