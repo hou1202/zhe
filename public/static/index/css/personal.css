@@ -633,12 +633,13 @@
 .info {
     width:100%;
     padding-bottom:6rem;
+    position:relative;
 }
 .info .info_comm {
     width:100%;
     height:5rem;
     line-height:5rem;
-    border-bottom:1px solid #c7c7c7;
+    border-bottom:1px solid #dfdfdf;
 }
 .info .info_comm .info_title {
     width:30%;
@@ -677,6 +678,62 @@
     height:5rem;
     border-radius:50px;
 }
+.info .info_hidden {
+    display:none;
+    width:80%;
+    height:13rem;
+    background:#fff;
+    margin:0 10%;
+    box-shadow:0 3px 5px #c0c0c0;
+    position:absolute;
+    top:20%;
+    border:1px solid #ededed;
+    padding:1.5rem 0;
+}
+.info .info_hidden .hidden_title {
+    width:100%;
+    height:2.5rem;
+    line-height:2.5rem;
+    text-align:center;
+    font-size:1.6rem;
+    color:#da5514;
+
+
+}
+.info .info_hidden .hidden_input{
+    width:100%;
+    height:4rem;
+    line-height:4rem;
+
+}
+.info .info_hidden .hidden_input input {
+    width:80%;
+    height:4rem;
+    margin:0 10%;
+    user-select:none;
+    outline:none;
+    border:none;
+    border-bottom:1px solid #960202;
+    padding-left:1rem;
+}
+.info .info_hidden .hidden_button {
+    width:49%;
+    height:3rem;
+    line-height:3rem;
+    text-align:center;
+    color:#da5514;
+}
+.info .info_hidden .hidden_button input{
+    width:8rem;
+    height:3rem;
+    margin:0 10%;
+    user-select:none;
+    outline:none;
+    border:none;
+    border-bottom:1px solid #960202;
+    background:#fff;
+}
+
 
 
 

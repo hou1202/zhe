@@ -59,55 +59,79 @@
                 青铜小兵
             </div>
             <div class="info_edit"></div>
+        </div>
 
-            <div class="info_comm">
-                <div class="info_title">
-                    积分
-                </div>
-                <div class="info_content">
-                    251
-                </div>
-                <div class="info_edit"></div>
+        <div class="info_comm">
+            <div class="info_title">
+                积分
             </div>
+            <div class="info_content">
+                251
+            </div>
+            <div class="info_edit"></div>
+        </div>
 
-            <div class="info_comm">
-                <div class="info_title">
-                    支付宝
-                </div>
-                <div class="info_content">
-                    13564078415
-                </div>
-                <div class="info_edit">
-                    <img src="/static/index/images/edit-bg.png" alt="">
-                </div>
+
+        <div class="info_comm">
+            <div class="info_title">
+                支付宝
+            </div>
+            <div class="info_content">
+                13564078415
+            </div>
+            <div class="info_edit">
+                <img src="/static/index/images/edit-bg.png" alt="" class="info_edit_show">
             </div>
         </div>
 
+        <div class="info_hidden">
+            <div class="hidden_title">
+                我的支付宝
+            </div>
+            <form method="post" action="">
+                <label for="info_input" class="hidden_input">
+                    <input type="text" name="alipay" id="info_input"/>
+                </label>
+                <label for="info_cancel" class="hidden_button">
+                    <input type="button" value="取消" id="info_cancel"/>
+                </label>
+                <label for="info_confirm" class="hidden_button">
+                    <input type="button" value="确认" id="info_confirm"/>
+                </label>
+            </form>
+
+        </div>
 
     </div>
 
 
+
     <!--显示隐藏提示信息-->
     <script>
-        var myCarry = $(".carry_explain");
+        var myInfo = $(".info_hidden");
+        var myCancel = $("#info_cancel");
         $(function() {
-            $(".carry_show").click(function(event) {
+            $(".info_edit_show").click(function(event) {
                 // showDiv();//调用显示DIV方法
-                $(myCarry).toggle();
-                $(document).one("click",
+                var hiddenTitle = $(this).siblings(".info_title");
+                //$(myInfo).append()
+                console.log(hiddenTitle);
+                $(myInfo).fadeToggle();
+                $(myCancel).one("click",
                     function() { //对document绑定一个影藏Div方法
-                        $(myCarry).hide();
+                        /*$(myInfo).hide();*/
+                        $(myInfo).fadeOut();
                     });
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
-            $(myCarry).click(function(event) {
+            $(myInfo).click(function(event) {
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
         });
         function showDiv() {
-            $(myCarry).fadeIn();
+            $(myInfo).fadeIn();
         }
     </script>
 
