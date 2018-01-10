@@ -53,7 +53,7 @@ class Goods extends Model
     *  $id     产品goods_id
     * */
     public function getGoodsDetailsById($id){
-        return $this -> field('id,goods_id,name,banner,price,coupon_money,sales,commission,coupon_url')
+        return $this -> field('id,goods_id,name,banner,price,coupon_money,sales,commission,coupon_url,coupon_extend')
                     ->where('goods_id',$id)
                     ->find();
     }
