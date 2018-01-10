@@ -709,6 +709,8 @@
 .info .info_hidden .hidden_input input {
     width:80%;
     height:4rem;
+    line-height:4rem;
+    font-size:1.4rem;
     margin:0 10%;
     user-select:none;
     outline:none;
@@ -722,6 +724,7 @@
     line-height:3rem;
     text-align:center;
     color:#da5514;
+    font-size:1.5rem;
 }
 .info .info_hidden .hidden_button input{
     width:8rem;

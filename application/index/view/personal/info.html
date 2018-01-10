@@ -79,7 +79,7 @@
             <div class="info_content">
                 13564078415
             </div>
-            <div class="info_edit">
+            <div class="info_edit info_click">
                 <img src="/static/index/images/edit-bg.png" alt="" class="info_edit_show">
             </div>
         </div>
@@ -108,17 +108,17 @@
 
     <!--显示隐藏提示信息-->
     <script>
-        var myInfo = $(".info_hidden");
-        var myCancel = $("#info_cancel");
+        var myInfo = $(".info_hidden");     //显示或隐藏的DIV
+        var myCancel = $("#info_cancel");   //隐藏/取消  事件
         $(function() {
-            $(".info_edit_show").click(function(event) {
+            $(".info_click").click(function(event) {
                 // showDiv();//调用显示DIV方法
-                var hiddenTitle = $(this).siblings(".info_title");
+                //var hiddenTitle = $(this).Class(".info_title").text();
                 //$(myInfo).append()
-                console.log(hiddenTitle);
+                //console.log(hiddenTitle);
                 $(myInfo).fadeToggle();
-                $(myCancel).one("click",
-                    function() { //对document绑定一个影藏Div方法
+                $(myCancel).one("click", function() {
+                        //对document绑定一个影藏Div方法
                         /*$(myInfo).hide();*/
                         $(myInfo).fadeOut();
                     });
