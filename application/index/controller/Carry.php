@@ -17,7 +17,6 @@ use app\index\model\User;
 use app\index\model\Carry as CarryModel;
 use app\index\model\Notice;
 use app\common\controller\ReturnJson;
-use app\common\controller\NoticeInfo;
 use app\index\validate\CarryValidate;
 
 

@@ -14,19 +14,19 @@
                 头像
             </div>
             <div class="info_content info_img">
-                <img src="/static/index/images/goods.jpg" alt="">
+                <img src="{$Info.portrait}" alt="">
             </div>
             <div class="info_edit"></div>
         </div>
 
         <div class="info_comm">
-            <div class="info_title">
+            <div class="info_title" id="user_name">
                 昵称
             </div>
             <div class="info_content">
-                你看什么看
+                {$Info.user_name}
             </div>
-            <div class="info_edit">
+            <div class="info_edit info_click">
                 <img src="/static/index/images/edit-bg.png" alt="">
             </div>
         </div>
@@ -36,7 +36,7 @@
                 邀请码
             </div>
             <div class="info_content">
-                YD749C
+                {$Info.invite}
             </div>
             <div class="info_edit"></div>
         </div>
@@ -46,7 +46,7 @@
                 手机号
             </div>
             <div class="info_content">
-                13564078415
+                {$Info.phone}
             </div>
             <div class="info_edit"></div>
         </div>
@@ -56,7 +56,7 @@
                 等级
             </div>
             <div class="info_content">
-                青铜小兵
+                {$Info.grade}
             </div>
             <div class="info_edit"></div>
         </div>
@@ -66,18 +66,18 @@
                 积分
             </div>
             <div class="info_content">
-                251
+                {$Info.integral}
             </div>
             <div class="info_edit"></div>
         </div>
 
 
         <div class="info_comm">
-            <div class="info_title">
+            <div class="info_title" id="alipay">
                 支付宝
             </div>
             <div class="info_content">
-                13564078415
+                {$Info.alipay}
             </div>
             <div class="info_edit info_click">
                 <img src="/static/index/images/edit-bg.png" alt="" class="info_edit_show">
@@ -88,9 +88,10 @@
             <div class="hidden_title">
                 我的支付宝
             </div>
-            <form method="post" action="">
+            <form method="post" action="" id="info_form">
+                <input type="hidden" name="id" value="{$Info.id}"/>
                 <label for="info_input" class="hidden_input">
-                    <input type="text" name="alipay" id="info_input"/>
+                    <input type="text" name="" placeholder="" id="info_input"/>
                 </label>
                 <label for="info_cancel" class="hidden_button">
                     <input type="button" value="取消" id="info_cancel"/>
@@ -110,18 +111,53 @@
     <script>
         var myInfo = $(".info_hidden");     //显示或隐藏的DIV
         var myCancel = $("#info_cancel");   //隐藏/取消  事件
+        var myConfirm = $("#info_confirm");   //确认/提交  事件
         $(function() {
             $(".info_click").click(function(event) {
+
+                var hiddenTitle = $(this).prev().prev().text();
+                var hiddenName = $(this).prev().prev().attr('id');
+                var hiddenContent= $(this).prev().text();
+                $('.hidden_title').text($.trim(hiddenTitle));
+                $('#info_input').attr({
+                    'name':hiddenName,
+                    'placeholder':$.trim(hiddenContent)
+                });
+
                 // showDiv();//调用显示DIV方法
-                //var hiddenTitle = $(this).Class(".info_title").text();
-                //$(myInfo).append()
-                //console.log(hiddenTitle);
                 $(myInfo).fadeToggle();
+                //取消/隐藏
                 $(myCancel).one("click", function() {
                         //对document绑定一个影藏Div方法
                         /*$(myInfo).hide();*/
+                        $('#info_input').val('');
                         $(myInfo).fadeOut();
                     });
+
+                //确认/提交
+                $(myConfirm).one("click", function() {
+                    var confirmCont = $('#info_input').val();
+                    if(confirmCont == ''){
+                        showAlertAutoClose("提交信息有误，请重新操作");
+                        $('#info_input').val('');
+                        $(myInfo).fadeOut();
+                        return false;
+                    }
+                    console.log('ok');
+                    $.ajax({
+                        url:"/index/info/infoEdit",
+                        type:"POST",
+                        dataType: "json",
+                        //data:'phone:phone,password:password,invitation:invitation,code:code',
+                        data:$('#info_form').serialize(),
+                        success:function(data){
+                            jsonAlertAutoClose(data)
+                        },
+                        error:function () {
+                            showAlertAutoClose("网络错误，请重试...");
+                        }
+                    });
+                });
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
