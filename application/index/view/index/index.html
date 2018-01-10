@@ -107,105 +107,29 @@
 
             <div class="swiper-container choice-lists" id="choiceSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="/index/goods/goodsDetails" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="/index/goods/goodsDetails"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="/index/goods/goodsDetails">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="/index/goods/goodsDetails">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="swiper-slide">
-                        <a href="/index/goods/goodsDetails" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="/index/goods/goodsDetails"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="/index/goods/goodsDetails">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="/index/goods/goodsDetails">￥ 500</a>
+                    {foreach name="Perfect" item="p"}
+                        <div class="swiper-slide">
+                            <a href="/index/goods/goodsDetails?id={$p.goods_id}" class="goods-thumbnail"><img src="{$p.banner}"></a>
+                            <div class="goods-title">
+                                <img src="/static/index/images/t-logo.png">
+                                <a href="/index/goods/goodsDetails?id={$p.goods_id}"><span>{$p.name|mb_substr=0,20,'utf-8'}</span></a>
+                            </div>
+                            <div class="goods-price">
+                                <span class="price-before">券价：￥{$p.price-$p.coupon_money}</span>
+                                <span class="price-after">￥{$p.price}</span>
+                                <div class="price-vou">
+                                    <div class="vou-title">
+                                        <a href="/index/goods/goodsDetails?id={$p.goods_id}">领券</a>
+                                    </div>
+                                    <div class="vou-num">
+                                        <a href="/index/goods/goodsDetails?id={$p.goods_id}">￥ {$p.coupon_money}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {/foreach}
 
-                    <div class="swiper-slide">
-                        <a href="/index/goods/goodsDetails" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="/index/goods/goodsDetails"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="/index/goods/goodsDetails">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="/index/goods/goodsDetails">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -221,105 +145,29 @@
 
             <div class="swiper-container choice-lists" id="hootSwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                    {foreach name="Hot" item="h"}
                     <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
+                        <a href="/index/goods/goodsDetails" class="goods-thumbnail"><img src="{$h.banner}"></a>
                         <div class="goods-title">
                             <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
+                            <a href="/index/goods/goodsDetails"><span>{$h.name|mb_substr=0,19,'utf-8'}</span></a>
                         </div>
                         <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
+                            <span class="price-before">券价：￥{$h.price-$h.coupon_money}</span>
+                            <span class="price-after">￥{$h.price}</span>
                             <div class="price-vou">
                                 <div class="vou-title">
-                                    <a href="#">领券</a>
+                                    <a href="/index/goods/goodsDetails">领券</a>
                                 </div>
                                 <div class="vou-num">
-                                    <a href="#">￥ 500</a>
+                                    <a href="/index/goods/goodsDetails">￥ {$h.coupon_money}</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {/foreach}
 
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <a href="#" class="goods-thumbnail"><img src="/static/index/images/goods.jpg"></a>
-                        <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
-                            <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                        </div>
-                        <div class="goods-price">
-                            <span class="price-before">券价：￥2500</span>
-                            <span class="price-after">￥3000</span>
-                            <div class="price-vou">
-                                <div class="vou-title">
-                                    <a href="#">领券</a>
-                                </div>
-                                <div class="vou-num">
-                                    <a href="#">￥ 500</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -337,76 +185,31 @@
             <img src="/static/index/images/side_back.jpg" alt="" id="right-side">
         </div>
 
-        <div class="lists-goods">
+        {foreach name="List" item="l"}
+            <div class="lists-goods">
 
-            <div class="lists-thumbnail">
-                <a href="/index/goods/goodsStrip">
-                    <img src="/static/index/images/goods.jpg">
-                </a>
+                <div class="lists-thumbnail">
+                    <a href="/index/goods/goodsStrip">
+                        <img src="{$l.banner}">
+                    </a>
+                </div>
+
+                <div class="lists-goods-title">
+                    <img src="/static/index/images/t-logo.png">
+                    <a href="/index/goods/goodsStrip"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
+                    <a href="/index/goods/goodsStrip"><p class="lists-goods-after">券后价：￥{$l.price-$l.coupon_money}</p></a>
+                    <a href="/index/goods/goodsStrip"><p class="lists-goods-before">原价：{$l.price}</p></a>
+                    <a href="/index/goods/goodsStrip"><p>销量：{$l.sales}</p></a>
+                </div>
+
+                <div class="lists-vou">
+                    <p><span>券</span></p>
+                    <P>￥ {$l.coupon_money}</P>
+                </div>
+
             </div>
+        {/foreach}
 
-            <div class="lists-goods-title">
-                <img src="/static/index/images/t-logo.png">
-                <a href="/index/goods/goodsStrip"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                <a href="/index/goods/goodsStrip"><p class="lists-goods-after">券后价：￥2000.00</p></a>
-                <a href="/index/goods/goodsStrip"><p class="lists-goods-before">原价：￥2500.00</p></a>
-                <a href="/index/goods/goodsStrip"><p>销量：1234</p></a>
-            </div>
-
-            <div class="lists-vou">
-                <p><span>券</span></p>
-                <P>￥ 500</P>
-            </div>
-
-        </div>
-
-        <div class="lists-goods">
-
-            <div class="lists-thumbnail">
-                <a href="#">
-                    <img src="/static/index/images/ceshi.png">
-                </a>
-            </div>
-
-            <div class="lists-goods-title">
-                <img src="/static/index/images/t-logo.png">
-                <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                <a href="#"><p class="lists-goods-after">券后价：￥2000.00</p></a>
-                <a href="#"><p class="lists-goods-before">原价：￥2500.00</p></a>
-                <a href="#"><p>销量：1234</p></a>
-            </div>
-
-            <div class="lists-vou">
-                <p><span>券</span></p>
-                <!--  <hr />-->
-                <P>￥ 500</P>
-            </div>
-
-        </div>
-
-        <div class="lists-goods">
-
-            <div class="lists-thumbnail">
-                <a href="#">
-                    <img src="/static/index/images/goods.jpg">
-                </a>
-            </div>
-
-            <div class="lists-goods-title">
-                <img src="/static/index/images/t-logo.png">
-                <a href="#"><span>瑞士天梭TISSOT海星机械皮带钢带男表TISS</span></a>
-                <a href="#"><p class="lists-goods-after">券后价：￥2000.00</p></a>
-                <a href="#"><p class="lists-goods-before">原价：￥2500.00</p></a>
-                <a href="#"><p>销量：1234</p></a>
-            </div>
-
-            <div class="lists-vou">
-                <p><span>券</span></p>
-                <!--  <hr />-->
-                <P>￥ 500</P>
-            </div>
-
-        </div>
     </div>
 
 

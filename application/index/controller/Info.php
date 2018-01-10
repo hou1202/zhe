@@ -37,7 +37,20 @@ class Info extends CommController
     public function infoEdit(){
         if($this -> request -> isPost()){
             $data = $this->request->post();
-            var_dump($data);die;
+            if(isset($data['user_name'])){
+                if(empty($data['user_name'])){
+                    return $this -> jsonSuccess('');
+                }else{
+                    //$ch
+                }
+                var_dump($data);die;
+            }elseif(isset($data['alipay'])){
+                var_dump($data);die;
+            }else{
+                return $this -> jsonFail('您所提交的信息有误...');
+            }
+        }else{
+            return $this -> jsonFail('非正确的信息提交方式...');
         }
     }
 }
