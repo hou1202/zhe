@@ -714,9 +714,12 @@
     margin:0 10%;
     user-select:none;
     outline:none;
+    border-radius:0;
     border:none;
     border-bottom:1px solid #960202;
     padding-left:1rem;
+    background:#fff;
+
 }
 .info .info_hidden .hidden_button {
     width:49%;
@@ -732,6 +735,7 @@
     margin:0 10%;
     user-select:none;
     outline:none;
+    border-radius:0;
     border:none;
     border-bottom:1px solid #960202;
     background:#fff;
