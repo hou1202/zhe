@@ -148,20 +148,20 @@
 
                     {foreach name="Hot" item="h"}
                     <div class="swiper-slide">
-                        <a href="/index/goods/goodsDetails" class="goods-thumbnail"><img src="{$h.banner}"></a>
+                        <a href="/index/goods/goodsDetails?id={$h.goods_id}" class="goods-thumbnail"><img src="{$h.banner}"></a>
                         <div class="goods-title">
                             <img src="/static/index/images/t-logo.png">
-                            <a href="/index/goods/goodsDetails"><span>{$h.name|mb_substr=0,19,'utf-8'}</span></a>
+                            <a href="/index/goods/goodsDetails?id={$h.goods_id}"><span>{$h.name|mb_substr=0,19,'utf-8'}</span></a>
                         </div>
                         <div class="goods-price">
                             <span class="price-before">券价：￥{$h.price-$h.coupon_money}</span>
                             <span class="price-after">￥{$h.price}</span>
                             <div class="price-vou">
                                 <div class="vou-title">
-                                    <a href="/index/goods/goodsDetails">领券</a>
+                                    <a href="/index/goods/goodsDetails?id={$h.goods_id}">领券</a>
                                 </div>
                                 <div class="vou-num">
-                                    <a href="/index/goods/goodsDetails">￥ {$h.coupon_money}</a>
+                                    <a href="/index/goods/goodsDetails?id={$h.goods_id}">￥ {$h.coupon_money}</a>
                                 </div>
                             </div>
                         </div>
@@ -189,17 +189,17 @@
             <div class="lists-goods">
 
                 <div class="lists-thumbnail">
-                    <a href="/index/goods/goodsStrip">
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}">
                         <img src="{$l.banner}">
                     </a>
                 </div>
 
                 <div class="lists-goods-title">
                     <img src="/static/index/images/t-logo.png">
-                    <a href="/index/goods/goodsStrip"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
-                    <a href="/index/goods/goodsStrip"><p class="lists-goods-after">券后价：￥{$l.price-$l.coupon_money}</p></a>
-                    <a href="/index/goods/goodsStrip"><p class="lists-goods-before">原价：{$l.price}</p></a>
-                    <a href="/index/goods/goodsStrip"><p>销量：{$l.sales}</p></a>
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="lists-goods-after">券后价：￥{$l.price-$l.coupon_money}</p></a>
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="lists-goods-before">原价：{$l.price}</p></a>
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p>销量：{$l.sales}</p></a>
                 </div>
 
                 <div class="lists-vou">
