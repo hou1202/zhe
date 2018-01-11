@@ -190,6 +190,7 @@ ul,li {
 .block-goods .goods-title {
     padding:0.7rem 0;
     border-bottom:1px dashed #ccc;
+    height:4rem;
 }
 .block-goods .goods-title img {
     width:1.2rem;

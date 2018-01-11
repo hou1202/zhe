@@ -136,6 +136,7 @@
     width:100%;
     padding-bottom:6rem;
     overflow:hidden;
+    position: relative;
 }
 .details img {
     width:100%;
@@ -344,6 +345,25 @@
 }
 .details_footer #tao span {
     color:#fff;
+}
+
+.details .cat_comm {
+    display:none;
+    width:90%;
+    font-size:1.4rem;
+    text-indent:2.5rem;
+    color:#da5514;
+    background:#fff;
+    border:1px solid #da5514;
+    border-radius:5px;
+    margin:0 5% 10% 5%;
+
+    padding:2.5rem 1.5rem;
+    position:absolute;
+    top:10rem;
+}
+.details .cat_comm img {
+    width:100%;
 }
 
 

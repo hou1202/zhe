@@ -1,18 +1,9 @@
     <!--header--引入-->
-    {include file="default/header_back" /}
+    {include file="default/header" /}
     <!--header--END-->
 
     <link rel="stylesheet" href="/static/index/css/goods.css"  />
 
-    <!--筛选-->
-    <div class="screen">
-        <ul>
-            <li class="screen_lists active"><a href="">综合</a></li>
-            <li class="screen_lists"><a href="">价格</a></li>
-            <li class="screen_lists"><a href="">优惠</a></li>
-            <li class="screen_lists"><a href="">销量</a></li>
-        </ul>
-    </div>
 
     <!--block-goods--条状产品列表-->
     <div class="strip_goods_lists">
@@ -37,21 +28,8 @@
         </div>
         {/foreach}
 
-
-
-
     </div>
 
-
-
-    <script>
-        $(function() {
-            $(".screen_lists").on("click",function() {
-                $(this).addClass("active").siblings().removeClass("active");
-            });
-        });
-
-    </script>
 
 
     <!--footer--引入-->

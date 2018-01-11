@@ -8,7 +8,7 @@
     <div class="details">
         <img src="{$getOne.banner}" alt="">
         <div class="details_info">
-            <img src="/static/index/images/t-logo.png" alt="">
+            <img src="{$getOne.type}" alt="">
             <span id="title">{$getOne.name|mb_substr=0,80,'utf-8'}</span>
             <div class="details_info_price">
                 <p id="quan"><span>券价：</span>￥{$getOne.price-$getOne.coupon_money}</p>
@@ -40,7 +40,7 @@
         </div>
         <div class="details_image">
             <i class="glyphicon glyphicon-send"></i>
-            查看商品图文详情
+            <a href="{$getOne.detail_url}">查看商品图文详情</a>
             <i class="glyphicon glyphicon-chevron-right"></i>
         </div>
         <div class="details_image_hidden">
@@ -55,7 +55,7 @@
                 <div class="block-goods">
                     <a href="/index/goods/goodsDetails?id={$r.goods_id}" class="goods-thumbnail"><img src="{$r.banner}"></a>
                     <div class="goods-title">
-                        <img src="/static/index/images/t-logo.png">
+                        <img src="{$r.type}">
                         <a href="/index/goods/goodsDetails?id={$r.goods_id}"><span>{$r.name|mb_substr=0,19,'utf-8'}</span></a>
                     </div>
                     <div class="goods-price">
@@ -75,6 +75,15 @@
 
         </div>
 
+        <!--<div class="cat_cont_hidden cat_comm">
+            <p>打开折金券平台任意或指定产品详情页面，即可以页面中查看到在平台领取优惠券，并使用优惠券购物后所得到的平台奖励金金额</p>
+            <img src="/static/index/images/push-bonus.jpg" alt="">
+        </div>
+
+        <div class="cat_tao_hidden cat_comm">
+            <p>打开折金券平台任意或指定产品详情页面，即可以页面中查看到在平台领取优惠券，并使用优惠券购物后所得到的平台奖励金金额</p>
+            <img src="/static/index/images/push-bonus.jpg" alt="">
+        </div>-->
 
     </div>
 
@@ -85,10 +94,10 @@
             $(".details_image").click(function(event) {
                 // showDiv();//调用显示DIV方法
                 $(myCarry).toggle();
-                $(document).one("click",
+                /*$(document).one("click",
                     function() { //对document绑定一个影藏Div方法
                         $(myCarry).hide();
-                    });
+                    });*/
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
@@ -109,4 +118,54 @@
             <li id="von"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/vounther.png"/><span>直接领券</span></a></li>
             <li id="tao"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/t-code.png"/><span>淘口令领券</span></a></li>
         </ul>
+
     </div>
+
+
+
+
+    <!--隐藏/显示客服模块-->
+    <!--<script>
+        var myCont = $(".cat_cont_hidden");
+        $(function() {
+            $("#cont").click(function(event) {
+                // showDiv();//调用显示DIV方法
+                $(myCont).toggle();
+                //$(document).one("click",
+                $(myCont).one("click",
+                    function() { //对document绑定一个影藏Div方法
+                        $(myCont).hide();
+                    });
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+            $(myCont).click(function(event) {
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+        });
+
+    </script>-->
+
+    <!--隐藏/显示淘口令模块-->
+    <!--<script>
+        var myTao = $(".cat_tao_hidden");
+        $(function() {
+            $("#tao").click(function(event) {
+                // showDiv();//调用显示DIV方法
+                $(myTao).toggle();
+                //$(document).one("click",
+                $(myTao).one("click",
+                    function() { //对document绑定一个影藏Div方法
+                        $(myTao).hide();
+                    });
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+            $(myTao).click(function(event) {
+
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+        });
+
+    </script>-->

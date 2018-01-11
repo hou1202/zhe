@@ -26,34 +26,34 @@
     <!--nav--分类-->
     <div class="nav">
         <div class="nav-title">
-            <a href="block-goods.html"><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=女鞋"><img src="/static/index/images/nav_1.png" alt="女鞋"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=床上用品"><img src="/static/index/images/nav_2.png" alt="床上用品"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=生活电器"><img src="/static/index/images/nav_3.png" alt="生活电器"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=女装/女士精品"><img src="/static/index/images/nav_4.png" alt="女装/女士精品"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=零食/坚果/特产"><img src="/static/index/images/nav_5.png" alt="零食/坚果/特产"></a>
         </div>
         <div class="nav-title">
-            <a href="strip-goods.html"><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=3C数码配件"><img src="/static/index/images/nav_6.png" alt="3C数码配件"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=彩妆/香水/美妆工具"><img src="/static/index/images/nav_7.png" alt="彩妆/香水/美妆工具"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=居家日用"><img src="/static/index/images/nav_8.png" alt="居家日用"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=童鞋/婴儿鞋/亲子鞋"><img src="/static/index/images/nav_9.png" alt="童鞋/婴儿鞋/亲子鞋"></a>
         </div>
         <div class="nav-title">
-            <a href=""><img src="/static/index/images/nav.png" alt=""></a>
+            <a href="/index/goods/navCouponList?nav=男装"><img src="/static/index/images/nav_10.png" alt="男装"></a>
         </div>
     </div>
 
@@ -73,23 +73,23 @@
     <div class="area">
         <!--new--新券-->
         <div class="new">
-            <a href="/index/goods/goodsStrip"><img src="/static/index/images/new.png" alt=""></a>
+            <a href="/index/goods/todayCouponGoodsList"><img src="/static/index/images/new.png" alt=""></a>
         </div>
         <!--bonus--奖金券-->
         <div class="four bonus">
-            <a href="/index/goods/goodsStrip"><img src="/static/index/images/bonus.png" alt=""></a>
+            <a href="/index/goods/ratioCouponGoodsList"><img src="/static/index/images/bonus.png" alt=""></a>
         </div>
         <!--tmall--天猫券-->
         <div class="four tmall">
-            <a href="/index/goods/goodsStrip"><img src="/static/index/images/tmall.png" alt=""></a>
+            <a href="/index/goods/tmallCouponGoodsList"><img src="/static/index/images/tmall.png" alt=""></a>
         </div>
         <!--big--大额券-->
         <div class="four big">
-            <a href="/index/goods/goodsBlock"><img src="/static/index/images/big.png" alt=""></a>
+            <a href="/index/goods/moneyCouponGoodsList"><img src="/static/index/images/big.png" alt=""></a>
         </div>
         <!--free--包邮-->
         <div class="four free">
-            <a href="/index/goods/goodsBlock"><img src="/static/index/images/free.png" alt=""></a>
+            <a href="/index/goods/nineCouponGoodsList"><img src="/static/index/images/free.png" alt=""></a>
         </div>
 
     </div>
@@ -102,7 +102,7 @@
                 <img src="/static/index/images/side_back.jpg">
                 <span class="title-main">精选好券</span>
                 <div class="title-vice"><span>精挑细选，只为给你好看！</span></div>
-                <a href=""><span class="title-more">More >></span></a>
+                <a href="/index/goods/perfectCouponGoodsList"><span class="title-more">More >></span></a>
             </div>
 
             <div class="swiper-container choice-lists" id="choiceSwiper">
@@ -112,7 +112,7 @@
                         <div class="swiper-slide">
                             <a href="/index/goods/goodsDetails?id={$p.goods_id}" class="goods-thumbnail"><img src="{$p.banner}"></a>
                             <div class="goods-title">
-                                <img src="/static/index/images/t-logo.png">
+                                <img src="{$p.type}">
                                 <a href="/index/goods/goodsDetails?id={$p.goods_id}"><span>{$p.name|mb_substr=0,20,'utf-8'}</span></a>
                             </div>
                             <div class="goods-price">
@@ -140,7 +140,7 @@
                 <img src="/static/index/images/side_back.jpg">
                 <span class="title-main">爆款牛券</span>
                 <div class="title-vice"><span>大家好，才是真的好！</span></div>
-                <a href=""><span class="title-more">More >></span></a>
+                <a href="/index/goods/HotCouponGoodsList"><span class="title-more">More >></span></a>
             </div>
 
             <div class="swiper-container choice-lists" id="hootSwiper">
@@ -150,7 +150,7 @@
                     <div class="swiper-slide">
                         <a href="/index/goods/goodsDetails?id={$h.goods_id}" class="goods-thumbnail"><img src="{$h.banner}"></a>
                         <div class="goods-title">
-                            <img src="/static/index/images/t-logo.png">
+                            <img src="{$h.type}">
                             <a href="/index/goods/goodsDetails?id={$h.goods_id}"><span>{$h.name|mb_substr=0,19,'utf-8'}</span></a>
                         </div>
                         <div class="goods-price">
@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="lists-goods-title">
-                    <img src="/static/index/images/t-logo.png">
+                    <img src="{$l.type}">
                     <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
                     <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="lists-goods-after">券后价：￥{$l.price-$l.coupon_money}</p></a>
                     <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="lists-goods-before">原价：{$l.price}</p></a>
