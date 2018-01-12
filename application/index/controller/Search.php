@@ -42,6 +42,11 @@ class Search extends CommController
                 if(empty($resp->results)){
                     $List = NULL;
                 }else{
+                    foreach($resp->results->tbk_coupon as $value){
+                        $arrayPrice = array();
+                        preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
+                        $value->coupon_info = $arrayPrice[0][1];
+                    }
                     $List = $resp->results->tbk_coupon;
                 }
                 return $this -> fetch('search/search',['List'=>$List]);

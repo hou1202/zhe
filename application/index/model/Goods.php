@@ -19,7 +19,7 @@ class Goods extends Model
     }
 
     protected function getTypeAttr($value){
-        $type = ['淘宝' => '/static/index/images/b-logo.png','天猫' => '/static/index/images/t-logo.png'];
+        $type = ['淘宝' => '/static/index/images/t-logo-0.png','天猫' => '/static/index/images/t-logo-1.png'];
         return $type[$value];
     }
 

@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="/static/index/css/goods.css"  />
 
     <!--筛选-->
-    <div class="screen">
+    <!--<div class="screen">
         <ul>
             <li class="screen_lists active"><a href="">综合</a></li>
             <li class="screen_lists"><a href="">价格</a></li>
             <li class="screen_lists"><a href="">优惠</a></li>
             <li class="screen_lists"><a href="">销量</a></li>
         </ul>
-    </div>
+    </div>-->
 
     <!--block-goods--条状产品列表-->
     <div class="strip_goods_lists">
@@ -27,20 +27,22 @@
             {foreach name="List" item="l"}
                 <div class="strip-goods">
                     <div class="strip-thumbnail">
-                        <a href="/index/goods/goodsDetails?id={$l->num_iid}">
+                        <a href="{$l->coupon_click_url}">
                             <img src="{$l->pict_url}">
                         </a>
                     </div>
                     <div class="strip-title">
-                        <img src="{$l->user_type}">
-                        <a href="/index/goods/goodsDetails?id={$l->num_iid}"><span>{$l->title|mb_substr=0,25,'utf-8'}</span></a>
-                        <a href="/index/goods/goodsDetails?id={$l->num_iid}"><p class="strip-goods-after">券后价：￥{$l->zk_final_price}</p></a>
-                        <a href="/index/goods/goodsDetails?id={$l->num_iid}"><p class="strip-goods-before">原价：￥{$l->zk_final_price}</p></a>
-                        <a href="/index/goods/goodsDetails?id={$l->num_iid}"><p>销量：{$l->volume}</p></a>
+                        <img src="/static/index/images/t-logo-{$l->user_type}.png">
+                        <a href="{$l->coupon_click_url}"><span>{$l->title|mb_substr=0,25,'utf-8'}</span></a>
+                        <a href="{$l->coupon_click_url}"><p class="strip-goods-after">券后价：￥{$l->zk_final_price-$l->coupon_info}</p></a>
+                        <a href="{$l->coupon_click_url}"><p class="strip-goods-before">原价：￥{$l->zk_final_price}</p></a>
+                        <a href="{$l->coupon_click_url}"><p>销量：{$l->volume}</p></a>
                     </div>
                     <div class="strip-vou">
+                        <a href="{$l->coupon_click_url}" style="color:#fff">
                         <p><span>券</span></p>
-                        <P>￥ {$l->zk_final_price}</P>
+                        <P>￥ {$l->coupon_info}</P>
+                        </a>>
                     </div>
                 </div>
             {/foreach}

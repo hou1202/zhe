@@ -41,7 +41,7 @@
         </div>
 
         <div class="search">
-            <form method="post" action="">
+            <form method="post" action="/index/search/searchApi" id="search_form">
                 <label for="keyword" class="search_input">
                     <input type="text" name="keyword" class="search_text" id="keyword" placeholder="请输入要搜索的产品名称"/>
                 </label>
@@ -51,5 +51,17 @@
             </form>
         </div>
     </div>
+
+    <script>
+        $("#search_submit").on('click',function(){
+            var key = $("#keyword").val();
+
+            if(key == ''){
+                showAlertAutoClose("请输入您要搜索的产品关键字...");
+                return false;
+            }
+
+        });
+    </script>
 
 <!--header_back--END-->
