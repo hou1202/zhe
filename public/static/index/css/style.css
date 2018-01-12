@@ -72,6 +72,7 @@ ul,li {
     border-radius:25px;
     padding-left:2rem;
     margin:0 1.2rem;
+    outline:none;
 }
 .search .search_submit {
     background:url(../images/serach.png) no-repeat;
@@ -80,6 +81,7 @@ ul,li {
     width:3.5rem;
     height:3.1rem;
     padding:0.75rem 1rem 0.75rem 0;
+    outline:none;
 }
 
 /*so--搜索*/
@@ -402,6 +404,14 @@ ul,li {
 .bomb p {
     line-height:2.5rem;
     margin-bottom:0;
+}
+
+/*未找到搜所内容*/
+.search_no_find{
+    width:100%;
+    padding:2rem 1rem 6rem 1rem;
+    text-align:center;
+    font-size:1.2rem;
 }
 
 

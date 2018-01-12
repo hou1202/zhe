@@ -242,4 +242,18 @@ return [
     //短信配置
     'sms_account' => 'AA00344',
     'sms_password' => 'AA0034452',
+
+    //淘宝KEY
+        //KEY
+        'T_AppKey' =>   '24764036',
+        //Secret
+        'T_AppSecret' =>    'f6d4f4eba7630f526cf690b70df8995f',
+        //PID-ZoneId
+        'A_zoneId' => '190618270',
+        //Platform 1：PC，2：无线
+        'P_Platform' => '1',
+        'W_Platform' => '2',
+
+
+
 ];
