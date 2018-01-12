@@ -71,7 +71,6 @@
             <div class="info_edit"></div>
         </div>
 
-
         <div class="info_comm">
             <div class="info_title" id="alipay">
                 支付宝
@@ -84,9 +83,20 @@
             </div>
         </div>
 
+        <div class="info_comm">
+            <div class="info_title" id="real_name">
+                真实姓名
+            </div>
+            <div class="info_content">
+                {$Info.real_name}
+            </div>
+            <div class="info_edit info_click">
+                <img src="/static/index/images/edit-bg.png" alt="" class="info_edit_show">
+            </div>
+        </div>
+
         <div class="info_hidden">
             <div class="hidden_title">
-                我的支付宝
             </div>
             <form method="post" action="" id="info_form">
                 <input type="hidden" name="id" value="{$Info.id}"/>
@@ -126,49 +136,55 @@
 
                 // showDiv();//调用显示DIV方法
                 $(myInfo).fadeToggle();
-                //取消/隐藏
-                $(myCancel).one("click", function() {
-                        //对document绑定一个影藏Div方法
-                        /*$(myInfo).hide();*/
-                        $('#info_input').val('');
-                        $(myInfo).fadeOut();
-                    });
 
-                //确认/提交
-                $(myConfirm).one("click", function() {
-                    var confirmCont = $('#info_input').val();
-                    if(confirmCont == ''){
-                        showAlertAutoClose("提交信息有误，请重新操作");
-                        $('#info_input').val('');
-                        $(myInfo).fadeOut();
-                        return false;
-                    }
-                    console.log('ok');
-                    $.ajax({
-                        url:"/index/info/infoEdit",
-                        type:"POST",
-                        dataType: "json",
-                        //data:'phone:phone,password:password,invitation:invitation,code:code',
-                        data:$('#info_form').serialize(),
-                        success:function(data){
-                            jsonAlertAutoClose(data)
-                        },
-                        error:function () {
-                            showAlertAutoClose("网络错误，请重试...");
-                        }
-                    });
-                });
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
             $(myInfo).click(function(event) {
-
                 event.stopPropagation(); //阻止事件向上冒泡
             });
         });
         function showDiv() {
             $(myInfo).fadeIn();
         }
+
+        //确认/提交
+        $(myConfirm).on("click", function() {
+            var confirmCont = $('#info_input').val();
+            if($.trim(confirmCont) == ''){
+                //showAlertAutoClose("提交信息有误，请重新操作");
+                $('#info_input').val('');
+                $(myInfo).fadeOut();
+                return false;
+            }
+            console.log('ok');
+            $.ajax({
+                url:"/index/info/infoEdit",
+                type:"POST",
+                dataType: "json",
+                //data:'phone:phone,password:password,invitation:invitation,code:code',
+                data:$('#info_form').serialize(),
+                success:function(data){
+                    jsonAlertAutoClose(data)
+                },
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
+                }
+            });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+
+        //取消/隐藏
+        $(myCancel).on("click", function() {
+            //对document绑定一个影藏Div方法
+            /*$(myInfo).hide();*/
+            $('#info_input').val('');
+            $(myInfo).fadeOut();
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+
     </script>
 
 

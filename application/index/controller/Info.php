@@ -13,7 +13,7 @@ use think\Hook;
 use think\Cookie;
 use app\index\model\User;
 use app\common\controller\ReturnJson;
-use app\index\validate\CarryValidate;
+use think\Validate;
 
 class Info extends CommController
 {
@@ -38,19 +38,48 @@ class Info extends CommController
         if($this -> request -> isPost()){
             $data = $this->request->post();
             if(isset($data['user_name'])){
-                if(empty($data['user_name'])){
-                    return $this -> jsonSuccess('');
-                }else{
-                    //$ch
-                }
-                var_dump($data);die;
+                $rule = [
+                    'user_name' => 'require|max:30',
+                ];
+                $message = [
+                    'user_name.require' => '设置用户名不得为空...',
+                    'user_name.max' => '用户名最大长度不得超过10个字...',
+                ];
+                return $this -> infoEditComm($rule,$message,$data,'user_name');
             }elseif(isset($data['alipay'])){
-                var_dump($data);die;
+                $rule = [
+                    'alipay' => 'require|max:30',
+                ];
+                $message = [
+                    'alipay.require' => '支付宝帐户不得为空...',
+                    'alipay.max' => '支付宝帐户最大长度不得超过30个字...',
+                ];
+                return $this -> infoEditComm($rule,$message,$data,'alipay');
+            }elseif(isset($data['real_name'])){
+                $rule = [
+                    'real_name' => 'require|max:30',
+                ];
+                $message = [
+                    'real_name.require' => '真实姓名不得为空...',
+                    'real_name.max' => '真实姓名最大长度不得超过10个字...',
+                ];
+                return $this -> infoEditComm($rule,$message,$data,'real_name');
             }else{
                 return $this -> jsonFail('您所提交的信息有误...');
             }
         }else{
             return $this -> jsonFail('非正确的信息提交方式...');
+        }
+    }
+
+    protected function infoEditComm($rule,$message,$data,$field){
+        $val = new Validate($rule,$message);
+        if($val->check($data)){
+            $user = new User();
+            $user -> setFieldById($data['id'],$field,$data[$field]);
+            return $this -> jsonSuccess('资料更新成功','/index/info/info');
+        }else{
+            return $this -> jsonFail($val->getError());
         }
     }
 }

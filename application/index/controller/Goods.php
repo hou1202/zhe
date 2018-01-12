@@ -123,7 +123,6 @@ class Goods extends Controller {
   * @ navCouponList() 导航优惠券列表
   * * */
     public function navCouponList(){
-        //return $this -> fetch('other/square',['List' => $goodsList]);
         if(isset($_GET['nav']) && !empty($_GET['nav'])){
             $nav = $this -> request -> get('nav');
             $goods = new GoodModel();

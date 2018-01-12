@@ -14,6 +14,7 @@ class Goods extends Model
 {
     public static $tableName = 'think_goods';
 
+    //用户奖金，并四舍五入
     protected function getCommissionAttr($value){
         return $value = sprintf("%1\$.2f",$value*0.3);
     }

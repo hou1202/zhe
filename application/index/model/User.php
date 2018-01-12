@@ -75,6 +75,16 @@ class User extends Model
             -> select();
     }
 
+    /*
+     *@setFieldById 更新某个字段的值
+     * $id  更新数据ID
+     * $field 更新的字段
+     * $value 更新字段的值
+     * */
+    public function setFieldById($id,$field,$value){
+        return $this -> where('id',$id) -> setField($field,$value);
+    }
+
 
 
 }
