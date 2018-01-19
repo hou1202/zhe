@@ -14,6 +14,7 @@ use think\Cookie;
 use app\index\model\User;
 use app\common\controller\ReturnJson;
 use think\Validate;
+use think\File;
 
 class Info extends CommController
 {
@@ -64,6 +65,15 @@ class Info extends CommController
                     'real_name.max' => '真实姓名最大长度不得超过10个字...',
                 ];
                 return $this -> infoEditComm($rule,$message,$data,'real_name');
+            }elseif(isset($data['portrait'])){
+                $rule = [
+                    'portrait' => 'require|max:255',
+                ];
+                $message = [
+                    'portrait.require' => '头像不得为空...',
+                    'portrait.max' => '头像上传地址有误，请重新上传...',
+                ];
+                return $this -> infoEditComm($rule,$message,$data,'portrait');
             }else{
                 return $this -> jsonFail('您所提交的信息有误...');
             }
@@ -81,5 +91,23 @@ class Info extends CommController
         }else{
             return $this -> jsonFail($val->getError());
         }
+    }
+
+    /*图像上传*/
+    public function uploader(){
+        // 获取表单上传文件
+        $files = request()->file('');
+        foreach($files as $file){
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+            if($info){
+                // 输出 42a79759f284b767dfcb2a0197904287.jpg
+                $path['name'] = DS . 'uploads/' . $info->getSavename();
+            }else{
+                // 上传失败获取错误信息
+                return $this->error($file->getError()) ;
+            }
+        }
+        echo json_encode($path);
     }
 }

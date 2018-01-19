@@ -25,7 +25,7 @@
                     <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,19,'utf-8'}</span></a>
                 </div>
                 <div class="goods-price">
-                    <span class="price-before">券价：￥{$l.price-$l.coupon_money}</span>
+                    <span class="price-before">券价：￥{if condition="($l.price-$l.coupon_money)<0"}0{else /}{$l.price-$l.coupon_money}{/if}</span>
                     <span class="price-after">￥{$l.price}</span>
                     <div class="price-vou">
                         <div class="vou-title">
@@ -50,6 +50,10 @@
             });
         });
     </script>
+
+
+
+
 
     <!--footer--引入-->
     {include file="default/footer" /}

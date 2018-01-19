@@ -1,0 +1,223 @@
+
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>查看商品信息
+                        <a href="#/goods/goodsList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="" >
+                                        <input type="hidden"  value="{$getOne.id}" name="id">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.goods_id}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.name}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品照片</label>
+                                            <div class="col-sm-6">
+                                                <div id="imageView">
+                                                    <img src="{$getOne.banner}" style="width:120px;height:120px">
+                                                </div>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">一级类目</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.class}" >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品价格</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="￥{$getOne.price}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">券后价格</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="￥{$getOne.price - $getOne.coupon_money}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="￥{$getOne.coupon_money}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">收比率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.ratio}%">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品佣金</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="￥{$getOne.commission}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">月销量</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.sales}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">店铺名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.seller_name}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">平台类型</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.type}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_id}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券总量</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_num}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券剩余量</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_surplus}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券开始时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_start}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券结束时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_end}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品详情</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.detail_url}" >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">淘宝客链接</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.tao_url}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券链接</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_url}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">优惠券推广链接</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" readonly value="{$getOne.coupon_extend}">
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

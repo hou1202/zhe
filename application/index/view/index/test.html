@@ -1,46 +1,64 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-    <title>jQueryµÄÒ»Ğ©ÓÃ·¨</title>
-    <script type="text/javascript" src="jquery1.3.2.js"></script>
+    <!--header--å¼•å…¥-->
+    {include file="default/header_back" /}
+    <!--header--END-->
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#faq').find('dd').hide();
-            //.Òş²ØÏÔÊ¾µÄÔªËØ¡£
-            $('#faq').find('dt').click(function() {
-                var answer = $(this).next(); //µ±Ç°½ÚµãµÄÏÂÒ»¸ö½Úµã
-                // alert(answer.is(':visible')); ·µ»Øtrue / false
-                if (answer.is(':visible')) {
-                    //Boolean²¼¶ûÖµis( String expr )ÓÃÒ»¸ö±í´ïÊ½À´¼ì²éµ±Ç°Ñ¡ÔñµÄÔªËØ¼¯ºÏ£¬
-                    // Èç¹ûÆäÖĞÖÁÉÙÓĞÒ»¸öÔªËØ·ûºÏÕâ¸ö¸ø¶¨µÄ±í´ïÊ½¾Í·µ»Øtrue¡£
-                    //answer.is(':visible')ÊÇÖ¸¿É¼ûµÄanswerÔªËØ.
-                    //Èç¹û¿É¼û¾Íµ÷ÓÃanswer.slideUp();Ê¹Ö®Òş²Ø.
-                    //elseÔòÊÇ²»¿É¼ûµÄÔªËØ µ÷ÓÃanswer.slideDown();Ê¹Ö®ÏÔÊ¾.
-                    //ÀàËÆµÄĞ´·¨»¹ÓĞanswer.is(':first')answer.is(':last')Ö®ÀàµÄ,ÀàËÆÓÚCSSµÄÎ±Ààa:hover
-                    answer.slideUp();
-                } else {
-                    answer.slideDown();
-                }
+    <link rel="stylesheet" href="/static/index/css/goods.css"  />
+
+
+
+    <!--block-goods--å—çŠ¶äº§å“åˆ—è¡¨-->
+    <div class="block_goods_lists">
+
+        <!--ç­›é€‰-->
+        <div class="screen">
+            <ul>
+                <li class="screen_lists active"><a href="">ç»¼åˆ</a></li>
+                <li class="screen_lists"><a href="">ä»·æ ¼</a></li>
+                <li class="screen_lists"><a href="">ä¼˜æƒ </a></li>
+                <li class="screen_lists"><a href="">é”€é‡</a></li>
+            </ul>
+        </div>
+
+        <div id="block_lists">
+            {foreach name="List" item="l"}
+            <div class="block-goods">
+                <a href="/index/goods/goodsDetails?id={$l.goods_id}" class="goods-thumbnail"><img src="{$l.banner}"></a>
+                <div class="goods-title">
+                    <img src="{$l.type}">
+                    <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,19,'utf-8'}</span></a>
+                </div>
+                <div class="goods-price">
+                    <span class="price-before">åˆ¸ä»·ï¼šï¿¥{$l.price-$l.coupon_money}</span>
+                    <span class="price-after">ï¿¥{$l.price}</span>
+                    <div class="price-vou">
+                        <div class="vou-title">
+                            <a href="/index/goods/goodsDetails?id={$l.goods_id}">é¢†åˆ¸</a>
+                        </div>
+                        <div class="vou-num">
+                            <a href="/index/goods/goodsDetails?id={$l.goods_id}">ï¿¥ {$l.coupon_money}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+        </div>
+
+
+    </div>
+
+
+    <script>
+        $(function() {
+            $(".screen_lists").on("click",function() {
+                $(this).addClass("active").siblings().removeClass("active");
             });
         });
     </script>
-    <style>
-        body{font-size:10.5pt;}
-        dt{background:#00ffcc;}
-    </style>
-</head>
-<body>
 
-    <dl id="faq">
-        <dt>½Å±¾Ö®¼Ò¼ò½é</dt>
-        <dd>½Å±¾Ö®¼ÒÊÇ¹úÄÚ×¨ÒµµÄÍøÕ¾½¨Éè×ÊÔ´¡¢½Å±¾±à³ÌÑ§Ï°ÀàÍøÕ¾</dd>
-        <dt>ÄãÖªµÀAJAXÂğ£¿</dt>
-        <dd>ËüÊÇÄ¿Ç°ºÜÁ÷ĞĞµÄ½»»¥Ê½WEBÇ°¶ËÓ¦ÓÃ¡£</dd>
-        <dt>½ñÍí£¬ÔÂÁÁºÜÔ²</dt>
-        <dd>ÀÏÆÅ£¬Ì§Í·ÍûÃ÷ÔÂ£¬µÍÍ·ÏëÀÏÆÅ£¡</dd>
-    </dl>
-</body>
-</html>
+
+
+
+
+    <!--footer--å¼•å…¥-->
+    {include file="default/footer" /}
+    <!--footer--END-->

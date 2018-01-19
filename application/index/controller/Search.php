@@ -20,15 +20,7 @@ class Search extends CommController
         if($this->request->isPost()){
             $key = $this->request->post();
             if(isset($key['keyword']) && !empty($key['keyword'])){
-
-                /*$cli = new TopClient();
-                $cli -> appkey = ThinkConfig::get('T_AppKey');
-                $cli -> secretKey = ThinkConfig::get('T_AppSecret');
-                $req = new TbkItemGetRequest();
-                $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,seller_id,volume,nick");
-                $req->setQ($key['keyword']);
-                $req->setSort("tk_rate_des");
-                $resp = $cli->execute($req);*/
+                //API接口：taobao.tbk.dg.item.coupon.get (好券清单API【导购】)
                 $c = new TopClient;
                 $c->appkey = ThinkConfig::get('T_AppKey');
                 $c->secretKey = ThinkConfig::get('T_AppSecret');

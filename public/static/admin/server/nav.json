@@ -4,6 +4,36 @@
     "url": "/main/desktop"
   },
   {
+    "t": "用户管理",
+    "url": "",
+    "child": [
+      {
+        "t": "用户列表",
+        "url": "/user/userList"
+      }
+    ]
+  },
+  {
+    "t": "产品管理",
+    "url": "",
+    "child": [
+      {
+        "t": "产品列表",
+        "url": "/goods/goodsList"
+      }
+    ]
+  },
+  {
+    "t": "通知管理",
+    "url": "",
+    "child": [
+      {
+        "t": "通知列表",
+        "url": "/notice/noticeList"
+      }
+    ]
+  },
+  {
     "t": "新闻管理",
     "url": "",
     "child": [

@@ -18,9 +18,9 @@
     <div class="strip_goods_lists">
         {if condition="$List==null"}
 
-        <div class="search_no_find">
-            抱歉，没能找到你想要的东西，再试试吧...
-        </div>
+            <div class="search_no_find">
+                抱歉，没能找到你想要的东西，再试试吧...
+            </div>
 
         {else /}
 
@@ -34,15 +34,26 @@
                     <div class="strip-title">
                         <img src="/static/index/images/t-logo-{$l->user_type}.png">
                         <a href="{$l->coupon_click_url}"><span>{$l->title|mb_substr=0,25,'utf-8'}</span></a>
-                        <a href="{$l->coupon_click_url}"><p class="strip-goods-after">券后价：￥{$l->zk_final_price-$l->coupon_info}</p></a>
+                        <a href="{$l->coupon_click_url}"><p class="strip-goods-after">券后价：￥{if condition="($l->zk_final_price-$l->coupon_info)<0"}0{else /}{$l->zk_final_price-$l->coupon_info}{/if}</p></a>
                         <a href="{$l->coupon_click_url}"><p class="strip-goods-before">原价：￥{$l->zk_final_price}</p></a>
                         <a href="{$l->coupon_click_url}"><p>销量：{$l->volume}</p></a>
                     </div>
                     <div class="strip-vou">
                         <a href="{$l->coupon_click_url}" style="color:#fff">
-                        <p><span>券</span></p>
-                        <P>￥ {$l->coupon_info}</P>
+                            <p><span>券</span></p>
+                            <P>￥ {$l->coupon_info}</P>
                         </a>>
+                    </div>
+                    <div class="goods_hidden_info" style="display:none;">
+                        <p id="title">{$l->title}</p>
+                        <p id="banner">{$l->pict_url}</p>
+                        <p id="type">/static/index/images/t-logo-{$l->user_type}.png</p>
+                        <p id="price">{$l->zk_final_price}</p>
+                        <p id="coupon_price">{if condition="($l->zk_final_price-$l->coupon_info)<0"}0{else /}{$l->zk_final_price-$l->coupon_info}{/if}</p>
+                        <p id="coupon_money">{$l->coupon_info}</p>
+                        <p id="volume">{$l->volume}</p>
+                        <p id="coupon_url">{$l->coupon_click_url}</p>
+                        <p id="goods_item">{$l->item_url}</p>
                     </div>
                 </div>
             {/foreach}
@@ -59,6 +70,35 @@
                 $(this).addClass("active").siblings().removeClass("active");
             });
         });
+
+        $(function(){
+           $(".clickHrefDetail").on("click",function(){
+               var parentClick = $(this).parent().next().children().text();
+               var title = $(this).parent().next().children().text();
+               var banner = $(this).parent().next().children().next().text();
+               var type = $(this).parent().next().children().next().next().text();
+               var price = $(this).parent().next().children().next().next().next().text();
+               var coupon_price = $(this).parent().next().children().next().next().next().next().text();
+               var coupon_money = $(this).parent().next().children().next().next().next().next().next().text();
+               var volume = $(this).parent().next().children().next().next().next().next().next().next().text();
+               var coupon_url = $(this).parent().next().children().next().next().next().next().next().next().next().text();
+               var goods_item = $(this).parent().next().children().next().next().next().next().next().next().next().next().text();
+               console.log(title);
+               console.log(banner);
+               console.log(type);
+               console.log(price);
+               console.log(coupon_price);
+               console.log(coupon_money);
+               console.log(volume);
+               console.log(coupon_url);
+               console.log(goods_item);
+
+           });
+        });
+        function submitSearch(){
+            $('#searchA').attr('href', '#/need/needSearch?keyword='+$('input[name=keyword]').val());
+            document.getElementById("searchA").click();
+        }
 
     </script>
 

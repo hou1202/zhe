@@ -26,7 +26,7 @@
             <div class="strip-title">
                 <img src="{$l.type}">
                 <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="strip-goods-after">券后价：￥{$l.price-$l.coupon_money}</p></a>
+                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="strip-goods-after">券后价：￥{if condition="($l.price-$l.coupon_money)<0"}0{else /}{$l.price-$l.coupon_money}{/if}</p></a>
                 <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="strip-goods-before">原价：￥{$l.price}</p></a>
                 <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p>销量：{$l.sales}</p></a>
             </div>

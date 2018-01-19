@@ -11,6 +11,7 @@ use think\captcha\Captcha;
 use think\Controller;
 use think\Session;
 use app\admin\model\Manager as ManagerModel;
+use app\common\controller\ReturnJson;
 
 class Index extends Controller
 {
@@ -64,6 +65,6 @@ class Index extends Controller
 
     public function loginOut(){
         Session::clear();
-        return ReturnJson::ReturnJ('退出登录成功！','success','http://web.yun.com/admin',true);
+        return ReturnJson::ReturnJ('退出登录成功！','success','http://web.zhe.com/admin',true);
     }
 }

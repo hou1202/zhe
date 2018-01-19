@@ -4,6 +4,11 @@
 
     <link rel="stylesheet" href="/static/index/css/personal.css"  />
 
+    <!--手机上传文件引入文件-->
+    <link rel="stylesheet" type="text/css" href="/static/plugin/aoupload/css/globle.css" />
+    <script src="/static/plugin/aoupload/js/webuploader.min.js"></script>
+    <script src="/static/plugin/aoupload/js/diyUpload.js"></script>
+
 
 
     <!--Info--个人信息-->
@@ -14,7 +19,7 @@
                 头像
             </div>
             <div class="info_content info_img">
-                <img src="{$Info.portrait}" alt="">
+                <img src="{$Info.portrait}" alt="" class="click_portrait">
             </div>
             <div class="info_edit"></div>
         </div>
@@ -113,9 +118,143 @@
 
         </div>
 
+        <div class="portrait_hidden">
+            <div class="hidden_title">
+                上传头像
+            </div>
+            <form method="post" action="" id="portrait_form">
+                <input type="hidden" name="id" value="{$Info.id}"/>
+                <div style="text-align:center;">
+                    <ul class="upload-ul clearfix">
+                        <li class="upload-pick">
+                            <div class="webuploader-container clearfix" id="portraitUpload"></div>
+                        </li>
+                    </ul>
+                </div>
+                <label for="info_cancel" class="hidden_button">
+                    <input type="button" value="取消" id="portrait_cancel"/>
+                </label>
+                <label for="info_confirm" class="hidden_button">
+                    <input type="button" value="确认" id="portrait_confirm"/>
+                </label>
+
+            </form>
+
+        </div>
+
     </div>
+    <!--头像图片上传JS脚本-->
+    <script>
+        //上传图片
+        var $tgaUpload = $('#portraitUpload').diyUpload({
+            url:'{:url("index/info/uploader")}',
+            buttonText : '',
+            //类型限制;
+            accept: {
+                title: "Images",
+                extensions: 'jpg,jpeg,png'
+            },
+            //配置生成缩略图的选项
+            thumb:{
+                width:50,
+                height:50,
+                quality:100,
+                allowMagnify:true,
+                crop:true,
+                type:"image/jpeg"      // 为空的话则保留原有图片格式。 否则强制转换成指定的类型(image/jpeg)。
+            },
+            swf:"/static/plugin/aoupload/Uploader.swf",
+            //是否支持多文件上传
+            multiple:false,
+            //设置为 true 后，不需要手动调用上传，有文件选择即开始上传
+            auto:true,
+            //文件上传方式,POST或者GET
+            method:"POST",
+            //服务器地址;
+            server:'{:url("index/info/uploader")}',
+            //最大上传的文件数量
+            fileNumLimit:1,
+            //总文件大小(单位字节);
+            fileSizeLimit:500000 * 1024,
+            //单个文件大小(单位字节);
+            fileSingleSizeLimit:50000 * 1024,
+            //自定义内容信息
+            custom:{
+                inputName:'portrait',
+                //input加入ID，只适用于单个上传图片
+                inputId:'portrait_id'
+            },
+            success:function( data ) {
+            },
+            error:function( err ) { }
+        });
+
+    </script>
+
+    <!--显示修改头像隐藏提示信息-->
+    <script>
+        var myPortrait = $(".portrait_hidden");     //显示或隐藏的DIV
+        var portraitCancel = $("#portrait_cancel");   //隐藏/取消  事件
+        var portraitConfirm = $("#portrait_confirm");   //确认/提交  事件
+        $(function() {
+            $(".click_portrait").click(function(event) {
+
+                // showDiv();//调用显示DIV方法
+                $(myPortrait).fadeToggle();
 
 
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+            $(myPortrait).click(function(event) {
+                event.stopPropagation(); //阻止事件向上冒泡
+            });
+        });
+        function showDiv() {
+            $(myPortrait).fadeIn();
+        }
+
+        //确认/提交
+        $(portraitConfirm).on("click", function() {
+            var confirmCont = $('#portrait_id').val();
+            if($.trim(confirmCont) == '' ){
+                //showAlertAutoClose("提交信息有误，请重新操作");
+                $(myPortrait).fadeOut();
+                //刷新上级页面，清除照片的上传序列
+                location.replace(location);
+                return false;
+            }
+
+            $.ajax({
+                url:"/index/info/infoEdit",
+                type:"POST",
+                dataType: "json",
+                //data:'phone:phone,password:password,invitation:invitation,code:code',
+                data:$('#portrait_form').serialize(),
+                success:function(data){
+                    jsonAlertAutoClose(data)
+                },
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
+                }
+            });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+
+        //取消/隐藏
+        $(portraitCancel).on("click", function() {
+            //对document绑定一个影藏Div方法
+            /*$(myPortrait).hide();*/
+            //$('#info_input').val('');
+
+            $(myPortrait).fadeOut();
+            //刷新上级页面，清除照片的上传序列
+            location.replace(location);
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+
+    </script>
 
     <!--显示隐藏提示信息-->
     <script>
