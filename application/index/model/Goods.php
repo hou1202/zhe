@@ -108,9 +108,10 @@ class Goods extends Model
     /*
      * @getGoodsListByTime() 今日优惠券列表
      * */
-    public function getGoodsListByTime(){
+    public function getGoodsListByTime($cond='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
-                    -> order('coupon_start DESC')
+                    -> where('coupon_start',date('Y-m-d',time()))
+                    -> order("$cond $sort")
                     -> limit(1,200)
                     -> select();
     }
@@ -118,9 +119,10 @@ class Goods extends Model
     /*
      * @getGoodsListByTmall() 天猫优惠券列表
      * */
-    public function getGoodsListByTmall(){
+    public function getGoodsListByTmall($cond='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     -> where('type','天猫')
+                    -> order("$cond $sort")
                     -> limit(1,200)
                     -> select();
     }
@@ -129,9 +131,10 @@ class Goods extends Model
     /*
      * @getGoodsListByCouponMoney() 大额优惠券列表
      * */
-    public function getGoodsListByCouponMoney(){
+    public function getGoodsListByCouponMoney($cond='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
-                    -> order('coupon_money DESC')
+                    -> where('coupon_money','>',30)
+                    -> order("$cond $sort")
                     -> limit(1,200)
                     -> select();
     }
@@ -139,9 +142,10 @@ class Goods extends Model
     /*
      * @getGoodsListByNine() 9.9优惠券列表
      * */
-    public function getGoodsListByNine(){
+    public function getGoodsListByNine($cond='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     ->where('(price-coupon_money) < 10')
+                    -> order("$cond $sort")
                     -> limit(1,200)
                     -> select();
     }
@@ -149,9 +153,10 @@ class Goods extends Model
     /*
      * @getGoodsListByRatio() 高奖金优惠券列表
      * */
-    public function getGoodsListByRatio(){
+    public function getGoodsListByRatio($cond='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
-            -> order('ratio DESC')
+            -> where('ratio','>','30')
+            -> order("$cond $sort")
             -> limit(1,200)
             -> select();
     }
@@ -168,9 +173,10 @@ class Goods extends Model
     /*
      * @getCouponNav() 导航优惠券
      * */
-    public function getCouponNav($nav){
+    public function getCouponNav($nav,$order='id',$sort='desc'){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
             -> where('class',$nav)
+            -> order("$order $sort")
             -> limit(1,200)
             -> select();
     }

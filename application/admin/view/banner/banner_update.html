@@ -1,0 +1,286 @@
+
+<!--上传文件引入文件-->
+<link rel="stylesheet" type="text/css" href="/static/plugin/aoupload/css/globle.css" />
+<script src="/static/plugin/aoupload/js/webuploader.min.js"></script>
+<script src="/static/plugin/aoupload/js/diyUpload.js"></script>
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>修改Banner
+                        <a href="#/banner/bannerList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="/admin/banner/bannerUpdate" data-sendingText="正在为您积极努力的去提交信息。。。" data-validate="validate">
+                                        <input type="hidden" name="id" value="{$getOne.id}">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Banner标题</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="Banner标题" name="title" value="{$getOne.title}" required="required">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Banner类型</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="type" value="0" {$getOne.type=="首页滚动Banner"?="checked"} /> 首页滚动Banner
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Banner图片</label>
+                                            <div class="col-sm-6">
+                                                <div style="text-align:center;">
+                                                    <ul class="upload-ul clearfix">
+
+                                                        <li id="fileBox_WU_FILE" class="">
+                                                            <div class="viewThumb">
+                                                                <input type="hidden" name="img" id="img_id" value="{$getOne.img}">
+                                                                <div class="diyBar" style="display: none;">
+                                                                    <div class="diyProgress" style="width: 100%;">上传完成</div>
+                                                                </div>
+
+                                                                <p class="diyControl">
+                                                                    <span class="diyLeft"><i></i></span>
+                                                                    <span class="diyCancel"><i></i></span>
+                                                                    <span class="diyRight"><i></i></span>
+                                                                </p>
+                                                                <img src="{$getOne.img}">
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="upload-pick">
+                                                            <div class="webuploader-container clearfix" id="imgUpload"></div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <p class="col-sm-4 help-block">尺寸：600*200</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">链接形式</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="shape" value="0" class="link-em" {$getOne.shape=="无链接"?="checked"} /> 无链接
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="shape" value="1" class="link-in" {$getOne.shape=="内部链接"?="checked"} /> 内部链接
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="shape" value="2" class="link-out" {$getOne.shape=="接口链接"?="checked"} /> 接口链接
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                            <div class="form-group link" {$getOne.shape=="无链接"?="style='display:none;'"}>
+                                                <label class="col-sm-2 control-label link-label">
+                                                    {if condition="$getOne.shape=='内部链接'"}内部链接地址{else /}接口链接关键词{/if}
+                                                </label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control link-input" name="link" value="{$getOne.link}">
+                                                </div>
+                                                <p class="col-sm-4 help-block"></p>
+                                            </div>
+                                            <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Banner状态</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="state" value="1" {$getOne.state=="启用"?="checked"} /> 启用
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="state" value="0" {$getOne.state=="关闭"?="checked"} /> 关闭
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <div class=" col-sm-12">
+                                                <button type="button" class="btn btn-primary J_ajaxSubmitBtn">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--图片上传JS脚本-->
+<script>
+    //上传图片
+    var $tgaUpload = $('#imgUpload').diyUpload({
+        //url:'/admin/file_upload/uploader',
+        buttonText : '',
+        //类型限制;
+        accept: {
+            title: "Images",
+            extensions: 'jpg,jpeg,png'
+        },
+        //配置生成缩略图的选项
+        thumb:{
+            width:50,
+            height:50,
+            quality:100,
+            allowMagnify:true,
+            crop:true,
+            type:"image/jpeg"      // 为空的话则保留原有图片格式。 否则强制转换成指定的类型(image/jpeg)。
+        },
+        swf:"/static/plugin/aoupload/Uploader.swf",
+        //是否支持多文件上传
+        multiple:false,
+        //设置为 true 后，不需要手动调用上传，有文件选择即开始上传
+        auto:true,
+        //文件上传方式,POST或者GET
+        method:"POST",
+        //服务器地址;
+        server:'/admin/file_upload/uploader',
+        //最大上传的文件数量
+        fileNumLimit:1,
+        //总文件大小(单位字节);
+        fileSizeLimit:500000 * 1024,
+        //单个文件大小(单位字节);
+        fileSingleSizeLimit:50000 * 1024,
+        //自定义内容信息
+        custom:{
+            inputName:'img',
+            //input加入ID，只适用于单个上传图片
+            inputId:'img_id'
+        },
+        success:function( data ) {
+            $("#fileBox_WU_FILE").remove();
+        },
+        error:function( err ) {
+            console.log(2);
+        }
+    });
+
+</script>
+
+<!--显示隐藏link信息-->
+<script>
+    var linkUrl = $(".link");
+    $(function() {
+        $(".link-in").click(function(event) {
+            $(linkUrl).hide();
+            // showDiv();//调用显示DIV方法
+            $(".link-label").text("内部链接地址");
+            $(".link-input").attr('placeholder','Banner内部链接地址，如：/index/index/index');
+            $(linkUrl).toggle();
+
+            $(".link-em").one("click",
+                function() { //对document绑定一个影藏Div方法
+                    $(linkUrl).hide();
+                });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+        $(linkUrl).click(function(event) {
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+    });
+    $(function() {
+        $(".link-out").click(function(event) {
+            $(linkUrl).hide();
+            // showDiv();//调用显示DIV方法
+            $(".link-label").text("接口链接关键词");
+            $(".link-input").attr('placeholder','Banner接口链接关键词，如：服装');
+            $(linkUrl).toggle();
+
+            $(".link-em").one("click",
+                function() { //对document绑定一个影藏Div方法
+                    $(linkUrl).hide();
+                });
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+        $(linkUrl).click(function(event) {
+
+            event.stopPropagation(); //阻止事件向上冒泡
+        });
+    });
+    function showDiv() {
+        $(linkUrl).fadeIn();
+    }
+</script>
+
+
+
+<script>
+    /*数据验证JS脚本*/
+    function callback1(returnData, $from) {
+        console.log($from);
+    }
+    function validate($from) {
+        var title = $from.find('input[name="title"]');
+        var img = $from.find('input[name="img"]');
+        var type = $from.find('input[name="type"]');
+        var shape = $from.find('input[name="shape"]');
+        var state = $from.find('input[name="state"]');
+        var link = $from.find('input[name="link"]');
+        console.log($.trim(title.val()).length);
+        if ($.trim(title.val()) == '' || $.trim(title.val()).length > 10) {
+            return 'Banner标题不能为空且长度不得大于10个字';
+        }
+
+        if ($.trim(img.val()) == '') {
+            return 'Banner图不能为空';
+        }
+
+        if ($.trim(type.val()) == '') {
+            return 'Banner类型不能为空';
+        }
+
+        if ($.trim(shape.val()) == '') {
+            return 'Banner链接形式不能为空';
+        }
+
+        if ($.trim(state.val()) == '') {
+            return 'Banner状态不能为空';
+        }
+
+        if ($.trim(link.val()).length > 255) {
+            return '链接长度超出限制';
+        }
+
+        return true;
+    }
+</script>
+

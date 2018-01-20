@@ -24,6 +24,16 @@
     ]
   },
   {
+    "t": "Banner管理",
+    "url": "",
+    "child": [
+      {
+        "t": "Banner列表",
+        "url": "/Banner/bannerList"
+      }
+    ]
+  },
+  {
     "t": "通知管理",
     "url": "",
     "child": [
@@ -40,36 +50,6 @@
       {
         "t": "新闻列表",
         "url": "/news/newsList"
-      }
-    ]
-  },
-  {
-    "t": "项目管理",
-    "url": "",
-    "child": [
-      {
-        "t": "项目列表",
-        "url": "/Program/programList"
-      }
-    ]
-  },
-  {
-    "t": "Banner管理",
-    "url": "",
-    "child": [
-      {
-        "t": "Banner列表",
-        "url": "/Video/videoList"
-      }
-    ]
-  },
-  {
-    "t": "背景图管理",
-    "url": "",
-    "child": [
-      {
-        "t": "背景图列表",
-        "url": "/Background/backgroundList"
       }
     ]
   },

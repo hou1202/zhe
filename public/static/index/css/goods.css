@@ -20,13 +20,35 @@
     text-align:center;
     float:left;
     font-size:1.7rem;
+    position: relative;
 }
 .screen li a {
-    display:block;
+
     color:#4b4b4b;
 }
 .screen .active a {
     color:#960202;
+}
+.screen .goods_up{
+    width:30%;
+    height:2.25rem;
+    position:absolute;
+    top:0;
+}
+.screen .goods_up i{
+    margin-top:1rem;
+    display:block;
+    color:#ccc;
+}
+.screen .goods_down{
+    width:30%;
+    height:2.25rem;
+    position:absolute;
+    top:2.25rem;
+}
+.screen .goods_down i{
+    display:block;
+    color:#ccc;
 }
 
 /*block_goods_lists---块状产品列表*/

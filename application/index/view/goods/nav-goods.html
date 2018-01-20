@@ -28,17 +28,21 @@
             <a href="" style="display: none" id="goodsSort"></a>
         </ul>
     </div>
-    <!--<script>
+    <script>
         $(".sort_list").on("click",function(){
             var id = $(this).parent().attr('id');
             var url = window.location.pathname;
             var nav = $.getUrlParam('nav');
             var sort = $(this).attr('title');
+            console.log(id);
+            console.log(url);
+            console.log(nav);
+            console.log(sort);
 
             $('#goodsSort').attr('href', url+'?cond='+id+'&nav='+nav+'&sort='+sort);
             document.getElementById("goodsSort").click();
         });
-    </script>-->
+    </script>
 
     <!--block-goods--条状产品列表-->
     <div class="strip_goods_lists">
@@ -62,6 +66,9 @@
             </div>
         </div>
         {/foreach}
+
+
+
 
     </div>
 

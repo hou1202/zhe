@@ -40,12 +40,64 @@ class Goods extends Controller {
     }
 
     /*
+     * @getAreaType 首页快捷专区进入类型判断
+     * @type    类型
+     *      1 =》 1号区域，今日新券
+     *      2 =》 2号区域，高奖金券
+     *      3 =》 3号区域，天猫好券
+     *      4 =》 4号区域，大额好券
+     *      5 =》 5号区域，9.9券
+     * */
+    public function getAreaType(){
+        if(isset($_GET['type']) && !empty($_GET['type'])){
+            $data = $this -> request -> get();
+            //var_dump($type);die;
+            $goods = new GoodModel();
+            $goodsList = null;
+            if($data['type'] == 1){
+                if(isset($data['id'])){
+                    $goodsList = $goods -> getGoodsListByTime($data['id'],$data['sort']);
+                }else{
+                    $goodsList = $goods -> getGoodsListByTime();
+                }
+            }elseif($data['type'] == 2){
+                if(isset($data['id'])){
+                    $goodsList = $goods -> getGoodsListByRatio($data['id'],$data['sort']);
+                }else{
+                    $goodsList = $goods -> getGoodsListByRatio();
+                }
+            }elseif($data['type'] == 3){
+                if(isset($data['id'])){
+                    $goodsList = $goods -> getGoodsListByTmall($data['id'],$data['sort']);
+                }else{
+                    $goodsList = $goods -> getGoodsListByTmall();
+                }
+            }elseif($data['type'] == 4){
+                if(isset($data['id'])){
+                    $goodsList = $goods -> getGoodsListByCouponMoney($data['id'],$data['sort']);
+                }else{
+                    $goodsList = $goods -> getGoodsListByCouponMoney();
+                }
+            }elseif($data['type'] == 5){
+                if(isset($data['id'])){
+                    $goodsList = $goods -> getGoodsListByNine($data['id'],$data['sort']);
+                }else{
+                    $goodsList = $goods -> getGoodsListByNine();
+                }
+            }
+            return $this -> fetch('goods/area-goods',['List' => $goodsList]);
+        }else{
+            $this -> redirect('/index/goods/couponSquare');
+        }
+    }
+
+    /*
      * @ todayCouponGoodsList() 今日优惠券列表
      * * */
-    public function todayCouponGoodsList(){
-        $goods = new GoodModel();
+    public function todayCouponGoodsList($goods){
+        //$goods = new GoodModel();
         $goodsList = $goods -> getGoodsListByTime();
-        return $this -> fetch('goods/block-goods',['List' => $goodsList]);
+        //return $this -> fetch('goods/block-goods',['List' => $goodsList]);
 
     }
 
@@ -124,10 +176,16 @@ class Goods extends Controller {
   * * */
     public function navCouponList(){
         if(isset($_GET['nav']) && !empty($_GET['nav'])){
-            $nav = $this -> request -> get('nav');
+            $data = $this -> request -> get();
+            //var_dump($data);die;
             $goods = new GoodModel();
-            $goodsList = $goods -> getCouponNav($nav);
-            return $goodsList ?  $this -> fetch('goods/strip-goods',['List' => $goodsList]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
+            if(isset($data['cond'])){
+                $goodsList = $goods -> getCouponNav($data['nav'],$data['cond'],$data['sort']);
+            }else{
+                $goodsList = $goods -> getCouponNav($data['nav']);
+            }
+
+            return $goodsList ?  $this -> fetch('goods/nav-goods',['List' => $goodsList]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
         }else{
             $this -> redirect('/index/goods/couponSquare');
         }
