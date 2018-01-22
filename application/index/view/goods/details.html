@@ -11,7 +11,7 @@
             <img src="{$getOne.type}" alt="">
             <span id="title">{$getOne.name|mb_substr=0,80,'utf-8'}</span>
             <div class="details_info_price">
-                <p id="quan"><span>券价：</span>￥{$getOne.price-$getOne.coupon_money}</p>
+                <p id="quan"><span>券价：</span>￥{if condition="($getOne.price-$getOne.coupon_money)<0"}0{else /}{$getOne.price-$getOne.coupon_money}{/if}</p>
                 <p><span>原价：</span>￥{$getOne.price}</p>
                 <p><span>销量：</span>{$getOne.sales}</p>
             </div>
