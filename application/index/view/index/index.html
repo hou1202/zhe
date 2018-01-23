@@ -211,7 +211,46 @@
         {/foreach}
 
     </div>
+    <div class="loadInfo" >
+        上拉加载更多好东西......
+    </div>
 
+
+
+
+    <!--上拉加载更多-->
+    <script>
+        var page =0;
+        var stop=true;//触发开关，防止多次调用事件
+        $(window).scroll( function(event){
+            //当内容滚动到底部时加载新的内容 1 为距离底部多少像素时，触发加载操作，可自行修改
+            if ($(this).scrollTop() + $(window).height() + 6 >= $(document).height() && $(this).scrollTop() > 6) {
+                //加载中提示信息
+                var loadInfo = $(".loadInfo");
+                loadInfo.html('Loding…');
+
+                //追加条数
+                page += 20;
+                $.ajax({
+                    url:"/index/index/index",
+                    data:{
+                        startNum:page
+                    },
+                    dataType: "json",
+                    type:"post",
+                    success:function(data){
+                        if( data == '' ) {
+                            loadInfo.html('——我们的底线已经暴露给你了——');
+                            return;
+                        }
+                        $(".lists").append(data);//追加
+                        loadInfo.html('上拉加载更多好东西......');
+                        stop=true;
+                    }
+                });
+            }
+        });
+    </script>
 
     <!--轮播图片流动Banner——swiper-->
     <script>

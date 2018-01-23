@@ -12,6 +12,7 @@ namespace app\index\controller;
 use think\Controller;
 use app\index\model\Goods as GoodModel;
 use app\common\controller\ReturnJson;
+use app\common\controller\ReturnGoodsList;
 
 class Goods extends Controller {
 
@@ -51,43 +52,53 @@ class Goods extends Controller {
     public function getAreaType(){
         if(isset($_GET['type']) && !empty($_GET['type'])){
             $data = $this -> request -> get();
-            //var_dump($type);die;
-            $goods = new GoodModel();
-            $goodsList = null;
-            if($data['type'] == 1){
-                if(isset($data['id'])){
-                    $goodsList = $goods -> getGoodsListByTime($data['id'],$data['sort']);
-                }else{
-                    $goodsList = $goods -> getGoodsListByTime();
-                }
-            }elseif($data['type'] == 2){
-                if(isset($data['id'])){
-                    $goodsList = $goods -> getGoodsListByRatio($data['id'],$data['sort']);
-                }else{
-                    $goodsList = $goods -> getGoodsListByRatio();
-                }
-            }elseif($data['type'] == 3){
-                if(isset($data['id'])){
-                    $goodsList = $goods -> getGoodsListByTmall($data['id'],$data['sort']);
-                }else{
-                    $goodsList = $goods -> getGoodsListByTmall();
-                }
-            }elseif($data['type'] == 4){
-                if(isset($data['id'])){
-                    $goodsList = $goods -> getGoodsListByCouponMoney($data['id'],$data['sort']);
-                }else{
-                    $goodsList = $goods -> getGoodsListByCouponMoney();
-                }
-            }elseif($data['type'] == 5){
-                if(isset($data['id'])){
-                    $goodsList = $goods -> getGoodsListByNine($data['id'],$data['sort']);
-                }else{
-                    $goodsList = $goods -> getGoodsListByNine();
-                }
+            switch($data['type']){
+                case 1 :
+                    return $this->areaExeDataList($data,'getGoodsListByTime');
+                    break;
+                case 2 :
+                    return $this->areaExeDataList($data,'getGoodsListByRatio');
+                    break;
+                case 3 :
+                    return $this->areaExeDataList($data,'getGoodsListByTmall');
+                    break;
+                case 4 :
+                    return $this->areaExeDataList($data,'getGoodsListByCouponMoney');
+                    break;
+                case 5 :
+                    return $this->areaExeDataList($data,'getGoodsListByNine');
+                    break;
+                default :
+                    $this -> redirect('/index/goods/couponSquare');
+                    break;
             }
-            return $this -> fetch('goods/area-goods',['List' => $goodsList]);
+
         }else{
             $this -> redirect('/index/goods/couponSquare');
+        }
+    }
+
+    /*
+     * @ areaExeDataList用于辅助@ getAreaType
+     * $data        get方式传过来的数据
+     * $goods       实例化的GoodsModel类
+     * $goodsModel  所需访问的GoodsModel类中的方法
+     * */
+    protected function areaExeDataList($data,$goodsModel){
+        $goods = new GoodModel();
+        $goodsList = null;
+        if(isset($data['cond']) && !empty($data['cond'])){
+            if(isset($data['startNum'])){
+                $goodsList = $goods -> $goodsModel($data['cond'],$data['sort'],$data['startNum']);
+                $data = ReturnGoodsList::areaBlockGoodsListByResult($goodsList);
+                echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            }else{
+                $goodsList = $goods -> $goodsModel($data['cond'],$data['sort']);
+                return $this -> fetch('goods/area-goods',['List' => $goodsList]);
+            }
+        }else{
+            $goodsList = $goods -> $goodsModel();
+            return $this -> fetch('goods/area-goods',['List' => $goodsList]);
         }
     }
 
@@ -141,6 +152,7 @@ class Goods extends Controller {
 
     }
 
+
     /*
     * @ perfectCouponGoodsList() 精选好券列表
     * * */
@@ -177,15 +189,20 @@ class Goods extends Controller {
     public function navCouponList(){
         if(isset($_GET['nav']) && !empty($_GET['nav'])){
             $data = $this -> request -> get();
-            //var_dump($data);die;
             $goods = new GoodModel();
-            if(isset($data['cond'])){
-                $goodsList = $goods -> getCouponNav($data['nav'],$data['cond'],$data['sort']);
+            if(isset($data['cond']) && !empty($data['cond'] && isset($data['startNum']))){
+                    //var_dump($data);die;
+                    $goodsList = $goods -> getCouponNav($data['nav'],$data['cond'],$data['sort'],$data['startNum']);
+                    $data = ReturnGoodsList::stripGoodsListByResult($goodsList);
+                    echo json_encode($data,JSON_UNESCAPED_UNICODE);
+
             }else{
                 $goodsList = $goods -> getCouponNav($data['nav']);
+                return $this -> fetch('goods/nav-goods',['List' => $goodsList]);
             }
 
-            return $goodsList ?  $this -> fetch('goods/nav-goods',['List' => $goodsList]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
+            //return $goodsList ?  $this -> fetch('goods/nav-goods',['List' => $goodsList]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
+
         }else{
             $this -> redirect('/index/goods/couponSquare');
         }

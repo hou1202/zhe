@@ -1,0 +1,119 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Hou-ShiShu
+ * Date: 2018/1/23
+ * Time: 10:11
+ */
+
+namespace app\common\controller;
+
+
+class ReturnGoodsList
+{
+    static function stripGoodsListByResult($resource){
+        $count=count($resource);
+        $html = '';
+        if(!empty($count)){
+            foreach($resource as $value){
+                if($value["price"]-$value["coupon_money"] < 0){
+                    $coupon_after = 0;
+                }else{
+                    $coupon_after =$value["price"]-$value["coupon_money"];
+                }
+                $html .= '<div class="strip-goods">';
+                $html .= '<div class="strip-thumbnail">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value['goods_id'].'">';
+                $html .='<img src="'.$value["banner"].'">';
+                $html .= '</a>';
+                $html .= '</div>';
+                $html .= '<div class="strip-title">';
+                $html .= '<img src="'.$value["type"].'">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><span>'.mb_substr($value["name"],0,25,"utf-8").'</span></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p class="strip-goods-after">券后价：￥'.$coupon_after.'</p></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p class="strip-goods-before">原价：￥'.$value["price"].'</p></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p>销量：'.$value["sales"].'</p></a>';
+                $html .= '</div>';
+                $html .= '<div class="strip-vou">';
+                $html .= '<p><span>券</span></p>';
+                $html .= '<P>￥ '.$value["coupon_money"].'</P>';
+                $html .= '</div>';
+                $html .= '</div>';
+            }
+        }
+        return $html;
+    }
+
+
+    static function indexGoodsListByResult($resource){
+        $count=count($resource);
+        $html = '';
+        if(!empty($count)){
+            foreach($resource as $value){
+                if($value["price"]-$value["coupon_money"] < 0){
+                    $coupon_after = 0;
+                }else{
+                    $coupon_after =$value["price"]-$value["coupon_money"];
+                }
+                $html .= '<div class="lists-goods">';
+                $html .= '<div class="lists-thumbnail">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'">';
+                $html .= '<img src="'.$value["banner"].'">';
+                $html .= '</a>';
+                $html .= '</div>';
+                $html .= '<div class="lists-goods-title">';
+                $html .= '<img src="'.$value["type"].'">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><span>'.mb_substr($value["name"],0,25,"utf-8").'</span></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p class="lists-goods-after">券后价：￥'.$coupon_after.'</p></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p class="lists-goods-before">原价：'.$value["price"].'</p></a>';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value["goods_id"].'"><p>销量：'.$value["sales"].'</p></a>';
+                $html .= '</div>';
+                $html .= '<div class="lists-vou">';
+                $html .= '<p><span>券</span></p>';
+                $html .= '<P>￥ '.$value["coupon_money"].'</P>';
+                $html .= '</div>';
+                $html .= '</div>';
+            }
+        }
+        return $html;
+    }
+
+    /*
+     * 快捷专区加载更多，数据组装
+     * */
+    static function areaBlockGoodsListByResult($resource){
+        $count=count($resource);
+        $html = '';
+        if(!empty($count)){
+            foreach($resource as $value){
+                if($value["price"]-$value["coupon_money"] < 0){
+                    $coupon_after = 0;
+                }else{
+                    $coupon_after =$value["price"]-$value["coupon_money"];
+                }
+                $html .= '<div class="block-goods">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value['goods_id'].'" class="goods-thumbnail"><img src="'.$value["banner"].'"></a>';
+                $html .= '<div class="goods-title">';
+                $html .= '<img src="'.$value["type"].'">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value['goods_id'].'"><span>'.mb_substr($value["name"],0,25,"utf-8").'</span></a>';
+                $html .= '</div>';
+                $html .= '<div class="goods-price">';
+                $html .= '<span class="price-before">券价：￥'.$coupon_after.'</span>';
+                $html .= '<span class="price-after">￥'.$value["price"].'</span>';
+                $html .= '<div class="price-vou">';
+                $html .= '<div class="vou-title">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value['goods_id'].'">领券</a>';
+                $html .= '</div>';
+                $html .= '<div class="vou-num">';
+                $html .= '<a href="/index/goods/goodsDetails?id='.$value['goods_id'].'">￥ '.$value["coupon_money"].'</a>';
+                $html .= '</div>';
+                $html .= '</div>';
+                $html .= '</div>';
+                $html .= '</div>';
+
+            }
+        }
+        return $html;
+    }
+
+}

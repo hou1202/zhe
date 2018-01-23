@@ -28,21 +28,7 @@
             <a href="" style="display: none" id="goodsSort"></a>
         </ul>
     </div>
-    <script>
-        $(".sort_list").on("click",function(){
-            var id = $(this).parent().attr('id');
-            var url = window.location.pathname;
-            var nav = $.getUrlParam('nav');
-            var sort = $(this).attr('title');
-            console.log(id);
-            console.log(url);
-            console.log(nav);
-            console.log(sort);
 
-            $('#goodsSort').attr('href', url+'?cond='+id+'&nav='+nav+'&sort='+sort);
-            document.getElementById("goodsSort").click();
-        });
-    </script>
 
     <!--block-goods--条状产品列表-->
     <div class="strip_goods_lists">
@@ -67,9 +53,9 @@
         </div>
         {/foreach}
 
-
-
-
+    </div>
+    <div class="loadInfo" >
+        上拉加载更多好东西......
     </div>
 
 
@@ -83,6 +69,72 @@
 
     </script>
 
+
+
+    <!--上拉加载更多-->
+    <script>
+        var page =0;
+        var stop=true;//触发开关，防止多次调用事件
+        $(window).scroll( function(event){
+            //当内容滚动到底部时加载新的内容 1 为距离底部多少像素时，触发加载操作，可自行修改
+            if ($(this).scrollTop() + $(window).height() + 6 >= $(document).height() && $(this).scrollTop() > 6) {
+                //加载中提示信息
+                var loadInfo = $(".loadInfo");
+                loadInfo.html('Loding…');
+                //获取URL中数据
+
+                var nav = $.getUrlParam('nav');
+                var cond = $.getUrlParam('cond');
+                if(cond == null){
+                    cond = 'id';
+                }
+                var sort = $.getUrlParam('sort');
+                if(sort == null){
+                    sort = 'desc';
+                }
+                console.log(nav);
+                console.log(cond);
+                console.log(sort);
+
+
+                //追加条数
+                page += 20;
+                $.ajax({
+                    url:"/index/goods/navCouponList",
+                    data:{
+                        startNum:page,
+                        nav:nav,
+                        cond:cond,
+                        sort:sort
+                    },
+                    dataType: "json",
+                    type:"get",
+                    success:function(data){
+                        if( data == '' ) {
+                            loadInfo.html('——我们的底线已经暴露给你了——');
+                            return;
+                        }
+                        $(".strip_goods_lists").append(data);//追加
+                        loadInfo.html('上拉加载更多好东西......');
+                        stop=true;
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!--帅选-->
+    <script>
+        $(".sort_list").on("click",function(){
+            var cond = $(this).parent().attr('id');
+            var url = window.location.pathname;
+            var nav = $.getUrlParam('nav');
+            var sort = $(this).attr('title');
+
+            $('#goodsSort').attr('href', url+'?cond='+cond+'&nav='+nav+'&sort='+sort);
+            document.getElementById("goodsSort").click();
+        });
+    </script>
 
     <!--footer--引入-->
     {include file="default/footer" /}

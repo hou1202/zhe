@@ -68,10 +68,10 @@ class Goods extends Model
     /*
      * @getIndexListCoupon() 首页推荐好券50个
      * */
-    public function getIndexListCoupon(){
+    public function getIndexListCoupon($start=0,$end=10){
         return $this ->field('id,goods_id,name,banner,price,coupon_money,sales,type,sales')
             //-> order('sales DESC')
-            -> limit(50)
+            -> limit("$start,$end")
             ->select();
     }
 
@@ -108,22 +108,22 @@ class Goods extends Model
     /*
      * @getGoodsListByTime() 今日优惠券列表
      * */
-    public function getGoodsListByTime($cond='id',$sort='desc'){
+    public function getGoodsListByTime($cond='id',$sort='desc',$start=0,$end=20){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     -> where('coupon_start',date('Y-m-d',time()))
                     -> order("$cond $sort")
-                    -> limit(1,200)
+                    -> limit("$start,$end")
                     -> select();
     }
 
     /*
      * @getGoodsListByTmall() 天猫优惠券列表
      * */
-    public function getGoodsListByTmall($cond='id',$sort='desc'){
+    public function getGoodsListByTmall($cond='id',$sort='desc',$start=0,$end=20){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     -> where('type','天猫')
                     -> order("$cond $sort")
-                    -> limit(1,200)
+                    -> limit("$start,$end")
                     -> select();
     }
 
@@ -131,33 +131,33 @@ class Goods extends Model
     /*
      * @getGoodsListByCouponMoney() 大额优惠券列表
      * */
-    public function getGoodsListByCouponMoney($cond='id',$sort='desc'){
+    public function getGoodsListByCouponMoney($cond='id',$sort='desc',$start=0,$end=20){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     -> where('coupon_money','>',30)
                     -> order("$cond $sort")
-                    -> limit(1,200)
+                    -> limit("$start,$end")
                     -> select();
     }
 
     /*
      * @getGoodsListByNine() 9.9优惠券列表
      * */
-    public function getGoodsListByNine($cond='id',$sort='desc'){
+    public function getGoodsListByNine($cond='id',$sort='desc',$start=0,$end=20){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
                     ->where('(price-coupon_money) < 10')
                     -> order("$cond $sort")
-                    -> limit(1,200)
+                    -> limit("$start,$end")
                     -> select();
     }
 
     /*
      * @getGoodsListByRatio() 高奖金优惠券列表
      * */
-    public function getGoodsListByRatio($cond='id',$sort='desc'){
+    public function getGoodsListByRatio($cond='id',$sort='desc',$start=0,$end=20){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
             -> where('ratio','>','30')
             -> order("$cond $sort")
-            -> limit(1,200)
+            -> limit("$start,$end")
             -> select();
     }
 
@@ -173,11 +173,18 @@ class Goods extends Model
     /*
      * @getCouponNav() 导航优惠券
      * */
-    public function getCouponNav($nav,$order='id',$sort='desc'){
+    public function getCouponNav($nav,$order='id',$sort='desc',$start=0,$end=10){
         return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
             -> where('class',$nav)
             -> order("$order $sort")
-            -> limit(1,200)
+            -> limit("$start,$end")
+            -> select();
+    }
+
+    /*测试*/
+    public function getTestGoods($start=0,$end=200){
+        return $this -> field('id,goods_id,name,banner,price,type,sales,coupon_money')
+            -> limit($start,$end)
             -> select();
     }
 
