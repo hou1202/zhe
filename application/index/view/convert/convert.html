@@ -16,9 +16,9 @@
         </div>
 
         <div class="convert_tao">
-            <form method="post" action="">
+            <form method="post" action="/index/search/commandSearchApi" id="exchange_form">
                 <label for="convert-keyword" class="convert_tao_text">
-                    <textarea name="keyword" id="convert-keyword" placeholder="请将“淘口令”复制到这里，精确找到你想要的商品"></textarea>
+                    <textarea name="command" id="convert-keyword" placeholder="请将“淘口令”复制到这里，精确找到你想要的商品"></textarea>
                 </label>
                 <label for="convert-submit" class="convert_tao_submit">
                     <input type="submit" value="兑券" id="convert-submit" />
@@ -30,6 +30,17 @@
             <a href="/index/message/index?type=2"><span>查看兑换券帮助说明</span></a>
         </div>
     </div>
+
+    <script>
+        $("#convert-submit").on('click',function(){
+            var key = $("#convert-keyword").val();
+
+            if(key == ''){
+                showAlertAutoClose("请输入您要搜索的产品关键字...");
+                return false;
+            }
+        });
+    </script>
 
     <!--footer--引入-->
     {include file="default/footer" /}
