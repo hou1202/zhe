@@ -6,6 +6,7 @@
  * @since 1.0, 2017.12.20
  */
 namespace app\api\controller\request;
+use app\api\controller\RequestCheckUtil;
 
 class WirelessShareTpwdQueryRequest
 {

@@ -50,6 +50,7 @@ class Goods extends Controller {
     }
 
     protected function getTaoCommand($text,$url,$logo){
+        //taobao.tbk.tpwd.create (淘宝客淘口令)
         $c = new TopClient;
         $c->appkey = ThinkConfig::get('T_AppKey');
         $c->secretKey = ThinkConfig::get('T_AppSecret');

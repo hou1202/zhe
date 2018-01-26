@@ -6,57 +6,11 @@
 
 <!--筛选-->
 <div class="screen">
-    <ul>
-        <li class="screen_lists active " id="id">
-            <a class="sort_list" title="desc">综合</a>
-        </li>
-        <li class="screen_lists" id="price-coupon_money">
-            <a >价格</a>
-            <div class="goods_up sort_list" title="asc"><i class="glyphicon glyphicon-menu-up"></i></div>
-            <div class="goods_down sort_list" title="desc"><i class="glyphicon glyphicon-menu-down "></i></div>
-        </li>
-        <li class="screen_lists" id="coupon_money">
-            <a >优惠</a>
-            <div class="goods_up sort_list" title="asc"><i class="glyphicon glyphicon-menu-up"></i></div>
-            <div class="goods_down sort_list" title="desc"><i class="glyphicon glyphicon-menu-down "></i></div>
-        </li>
-        <li class="screen_lists" id="sales">
-            <a >销量</a>
-            <div class="goods_up sort_list" title="asc"><i class="glyphicon glyphicon-menu-up"></i></div>
-            <div class="goods_down sort_list" title="desc"><i class="glyphicon glyphicon-menu-down "></i></div>
-        </li>
-        <a href="" style="display: none" id="goodsSort"></a>
-    </ul>
+
 </div>
 
 
-<!--block-goods--条状产品列表-->
-<div class="strip_goods_lists">
-    {volist name="List" id="l"}
-        <div class="strip-goods">
-            <div class="strip-thumbnail">
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}">
-                    <img src="{$l.banner}">
-                </a>
-            </div>
-            <div class="strip-title">
-                <img src="{$l.type}">
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><span>{$l.name|mb_substr=0,25,'utf-8'}</span></a>
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="strip-goods-after">券后价：￥{if condition="($l.price-$l.coupon_money)<0"}0{else /}{$l.price-$l.coupon_money}{/if}</p></a>
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p class="strip-goods-before">原价：￥{$l.price}</p></a>
-                <a href="/index/goods/goodsDetails?id={$l.goods_id}"><p>销量：{$l.sales}</p></a>
-            </div>
-            <div class="strip-vou">
-                <p><span>券</span></p>
-                <P>￥ {$l.coupon_money}</P>
-            </div>
-        </div>
-    {/volist}
 
-</div>
-<div class="loadInfo" style="text-align:center;font-size:1.5rem;color:#b7b7b7;padding-bottom:6rem;">
-    上拉加载更多好东西......
-</div>
 
 
 
@@ -72,63 +26,7 @@
 
 
 
-<script>
-    var page =0;
-    var stop=true;//触发开关，防止多次调用事件
-    $(window).scroll( function(event){
-        //当内容滚动到底部时加载新的内容 1 为距离底部多少像素时，触发加载操作，可自行修改
-        if ($(this).scrollTop() + $(window).height() + 1 >= $(document).height() && $(this).scrollTop() > 1) {
-            //加载中提示信息
-            $(".loadInfo").html('Loding…');
-            //追加条数
-            page += 5;
-            $.ajax({
-                url:"/index/test/articleList",
-                data:{
-                    startNum:page
-                },
-                dataType: "json",
-                type:"post",
-                success:function(data){
-                   /* if( data.count == 0 ) {
-                        $('.loadInfo').html('——我们的底线已经暴露给你了——');
-                        return;
-                    }
-                    var html = '';
-                    $.each(data['result'],function(i,item){
-                        html +='<div class=\"strip-goods\">';
-                        html +='<div class=\"strip-thumbnail\">';
-                        html +='<a href=\"/index/goods/goodsDetails?id='+item.goods_id+'\">';
-                        html +='<img src=\"'+item.banner+'\">';
-                        html +='</a>';
-                        html +='</div>';
-                        html +='<div class=\"strip-title\">';
-                        html +='<img src=\"'+item.type+'\">';
-                        html +='<a href=\"/index/goods/goodsDetails?id='+item.goods_id+'\"><span>'+item.name+'</span></a>';
-                        html +='<a href=\"/index/goods/goodsDetails?id='+item.goods_id+'\"><p class=\"strip-goods-after\">券后价：￥'+item.price+'</p></a>';
-                        html +='<a href=\"/index/goods/goodsDetails?id='+item.goods_id+'\"><p class=\"strip-goods-before\">原价：￥'+item.price+'</p></a>';
-                        html +='<a href=\"/index/goods/goodsDetails?id='+item.goods_id+'\"><p>销量：'+item.sales+'</p></a>';
-                        html +='</div>';
-                        html +='<div class=\"strip-vou\">';
-                        html +='<p><span>券</span></p>';
-                        html +='<P>￥ '+item.coupon_money+'</P>';
-                        html +='</div>';
-                        html +='</div>';
-                    });*/
-                   console.log(data);
-                    console.log(data.count);
-                    if( data == '' ) {
-                        $('.loadInfo').html('——我们的底线已经暴露给你了——');
-                        return;
-                    }
-                    $(".strip_goods_lists").append(data);//追加
-                    $('.loadInfo').html('上拉加载更多好东西......');
-                    stop=true;
-                }
-            });
-        }
-    });
-</script>
+
 
 
 

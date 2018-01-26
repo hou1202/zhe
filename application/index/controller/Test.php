@@ -23,9 +23,24 @@ class Test extends CommController {
      * @ todayCouponGoodsList() 今日优惠券列表
      * * */
     public function index(){
-        $goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByTime();
-        return $this -> fetch('index/test',['List' => $goodsList]);
+        //var_dump( get_headers('http://www.dwntme.com/h.Zb0Z5MD'),true);
+        //curl的百度百科
+        $url = 'http://www.dwntme.com/h.Zb0Z5MD';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+// 不需要页面内容
+        curl_setopt($ch, CURLOPT_NOBODY, 1);
+// 不直接输出
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+// 返回最后的Location
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_exec($ch);
+        $info = curl_getinfo($ch,CURLINFO_EFFECTIVE_URL);
+        curl_close($ch);
+        var_dump('真实url为：'.$info) ;
+
+        return $this -> fetch('index/test');
 
     }
     public function test(){

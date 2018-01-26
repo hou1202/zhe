@@ -7,6 +7,8 @@
  */
 namespace app\api\controller\request;
 
+use app\api\controller\RequestCheckUtil;
+
 class TbkItemInfoGetRequest
 {
 	/** 
