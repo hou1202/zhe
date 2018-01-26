@@ -63,7 +63,7 @@
 .strip_goods_lists {
     width:100%;
     /*height:10.5rem;*/
-    margin-bottom:5.6rem;
+    padding-bottom:1rem;
     overflow:hidden;
 }
 
@@ -371,23 +371,57 @@
     color:#fff;
 }
 
-.details .cat_comm {
+.cat_comm {
     display:none;
     width:90%;
     font-size:1.4rem;
-    text-indent:2.5rem;
+    /*text-indent:2.5rem;*/
     color:#da5514;
     background:#fff;
     border:1px solid #da5514;
     border-radius:5px;
     margin:0 5% 10% 5%;
-
     padding:2.5rem 1.5rem;
-    position:absolute;
+    position:fixed;
     top:10rem;
+    text-align:center;
 }
-.details .cat_comm img {
+.cat_cont_hidden img{
     width:100%;
 }
+.cat_tao_hidden .command {
+    width:100%;
+    padding:1.5rem 1rem;
+    border:1px dashed #da5514;
+    resize: none;
+
+}
+.cat_tao_hidden .copy-button {
+    width:10rem;
+    height:3rem;
+    background:#fff;
+    border:1px solid #da5514;
+    border-radius:5px;
+    margin:1.5rem auto;
+}
+.cat_tao_hidden p {
+    color: #8e8e8e;
+    font-size:8px;
+}
+.cat_tao_hidden p i {
+    width:12px;
+}
+.cat_tao_hidden .closed_com {
+    width:100%;
+    text-align:center;
+    padding-top:1.5rem;
+
+}
+.cat_comm .closed_com i {
+    width:3rem;
+    height:3rem;
+    font-size:30px;
+}
+
 
 

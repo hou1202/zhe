@@ -77,12 +77,18 @@
         var stop=true;//触发开关，防止多次调用事件
         $(window).scroll( function(event){
             //当内容滚动到底部时加载新的内容 1 为距离底部多少像素时，触发加载操作，可自行修改
-            if ($(this).scrollTop() + $(window).height() + 6 >= $(document).height() && $(this).scrollTop() > 6) {
+            var sheight = $(this).scrollTop() + $(window).height();     //页面卷起的高度+页面文档高度(即可视区域)
+            var gheight = $(document).height();     //整个文档的高度
+            if (sheight + 1 >= gheight && $(this).scrollTop() > 1) {
                 //加载中提示信息
                 var loadInfo = $(".loadInfo");
                 loadInfo.html('Loding…');
+                //控制，避免重复提交数据
+                if(!stop){
+                    return false;
+                }
+                stop = false;
                 //获取URL中数据
-
                 var nav = $.getUrlParam('nav');
                 var cond = $.getUrlParam('cond');
                 if(cond == null){
@@ -92,13 +98,10 @@
                 if(sort == null){
                     sort = 'desc';
                 }
-                console.log(nav);
-                console.log(cond);
-                console.log(sort);
 
 
                 //追加条数
-                page += 20;
+                page += 10;
                 $.ajax({
                     url:"/index/goods/navCouponList",
                     data:{

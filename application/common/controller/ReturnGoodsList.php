@@ -11,6 +11,11 @@ namespace app\common\controller;
 
 class ReturnGoodsList
 {
+    /*
+     * @stripGoodsListByResult      条状产品列表数据组装
+     * $resource                    资源集
+     * @return html                  返回组装完成的html
+     * */
     static function stripGoodsListByResult($resource){
         $count=count($resource);
         $html = '';
@@ -45,6 +50,11 @@ class ReturnGoodsList
     }
 
 
+    /*
+     * @stripGoodsListByResult      首页产品列表数据组装
+     * $resource                    资源集
+     * @return html                  返回组装完成的html
+     * */
     static function indexGoodsListByResult($resource){
         $count=count($resource);
         $html = '';
@@ -79,7 +89,9 @@ class ReturnGoodsList
     }
 
     /*
-     * 快捷专区加载更多，数据组装
+     * @stripGoodsListByResult      快捷专区产品列表数据组装
+     * $resource                    资源集
+     * @return html                  返回组装完成的html
      * */
     static function areaBlockGoodsListByResult($resource){
         $count=count($resource);
@@ -111,6 +123,45 @@ class ReturnGoodsList
                 $html .= '</div>';
                 $html .= '</div>';
 
+            }
+        }
+        return $html;
+    }
+
+
+    /*
+     * @stripGoodsListByResult      搜索产品列表数据组装
+     * $resource                    资源集
+     * @return html                  返回组装完成的html
+     * */
+    static function searchGoodsListByResult($resource){
+        $count=count($resource);
+        $html = '';
+        if(!empty($count)){
+            foreach($resource as $value){
+                if($value->zk_final_price-$value->coupon_info < 0){
+                    $coupon_after = 0;
+                }else{
+                    $coupon_after =$value->zk_final_price-$value->coupon_info;
+                }
+                $html .= '<div class="strip-goods">';
+                $html .= '<div class="strip-thumbnail">';
+                $html .= '<a href="'.$value->coupon_click_url.'">';
+                $html .='<img src="'.$value->pict_url.'">';
+                $html .= '</a>';
+                $html .= '</div>';
+                $html .= '<div class="strip-title">';
+                $html .= '<img src="/static/index/images/t-logo-'.$value->user_type.'.png">';
+                $html .= '<a href="'.$value->coupon_click_url.'"><span>'.mb_substr($value->title,0,25,"utf-8").'</span></a>';
+                $html .= '<a href="'.$value->coupon_click_url.'"><p class="strip-goods-after">券后价：￥'.$coupon_after.'</p></a>';
+                $html .= '<a href="'.$value->coupon_click_url.'"><p class="strip-goods-before">原价：￥'.$value->zk_final_price.'</p></a>';
+                $html .= '<a href="'.$value->coupon_click_url.'"><p>销量：'.$value->volume.'</p></a>';
+                $html .= '</div>';
+                $html .= '<div class="strip-vou">';
+                $html .= '<p><span>券</span></p>';
+                $html .= '<P>￥ '.$value->coupon_info.'</P>';
+                $html .= '</div>';
+                $html .= '</div>';
             }
         }
         return $html;

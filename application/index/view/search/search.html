@@ -61,7 +61,57 @@
         {/if}
 
     </div>
+    <div class="loadInfo" >
+        上拉加载更多好东西......
+    </div>
 
+    <!--上拉加载更多-->
+    <script>
+        var page =1;
+        var addNum = 20;
+        var stop=true;//触发开关，防止多次调用事件
+        $(window).scroll( function(event){
+            //当内容滚动到底部时加载新的内容 1 为距离底部多少像素时，触发加载操作，可自行修改
+            if ($(this).scrollTop() + $(window).height() + 6 >= $(document).height() && $(this).scrollTop() > 6) {
+                //加载中提示信息
+                var loadInfo = $(".loadInfo");
+                loadInfo.html('Loding…');
+                if(!stop){
+                    return false;
+                }
+                //获取URL中数据
+                var keyword = $.getUrlParam('keyword');
+
+                //追加页数
+                page += 1;
+
+                console.log(keyword);
+                console.log(page);
+
+                $.ajax({
+                    url:"/index/search/searchApi",
+                    data:{
+                        keyword:keyword,
+                        startNum:page,
+                        addNum:addNum
+                    },
+                    dataType: "json",
+                    type:"get",
+                    success:function(data){
+                        if( data == '' ) {
+                            loadInfo.html('——我们的底线已经暴露给你了——');
+                            return;
+                        }
+                        $(".strip_goods_lists").append(data);//追加
+                        var widthEle = $(".goods-thumbnail img");
+                        widthEle.css("height",widthEle.width());
+                        loadInfo.html('上拉加载更多好东西......');
+                        stop=true;
+                    }
+                });
+            }
+        });
+    </script>
 
 
     <script>
@@ -70,7 +120,9 @@
                 $(this).addClass("active").siblings().removeClass("active");
             });
         });
+    </script>
 
+    <script>
         $(function(){
            $(".clickHrefDetail").on("click",function(){
                var parentClick = $(this).parent().next().children().text();
@@ -99,7 +151,6 @@
             $('#searchA').attr('href', '#/need/needSearch?keyword='+$('input[name=keyword]').val());
             document.getElementById("searchA").click();
         }
-
     </script>
 
 

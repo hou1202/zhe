@@ -13,6 +13,9 @@ use think\Controller;
 use app\index\model\Goods as GoodModel;
 use app\common\controller\ReturnJson;
 use app\common\controller\ReturnGoodsList;
+use app\api\controller\TopClient;
+use app\api\controller\request\TbkTpwdCreateRequest;
+use think\config as ThinkConfig;
 
 class Goods extends Controller {
 
@@ -35,9 +38,27 @@ class Goods extends Controller {
             $getOne = $goods -> getGoodsDetailsById($id);
             $Recommend = $goods ->getRecommendGoodsById($id);
             return $getOne ?  $this -> fetch('goods/details',['getOne' => $getOne,'Recommend' => $Recommend]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
+        }elseif($this->request->isPost()){
+            $data = $this -> request -> post();
+            //var_dump($data);
+            $returnRes = $this->getTaoCommand($data['text'],$data['url'],$data['logo']);
+            echo json_encode($returnRes,JSON_UNESCAPED_UNICODE);
         }else{
             return ReturnJson::ReturnA("未获取到相应的产品信息...");
         }
+
+    }
+
+    protected function getTaoCommand($text,$url,$logo){
+        $c = new TopClient;
+        $c->appkey = ThinkConfig::get('T_AppKey');
+        $c->secretKey = ThinkConfig::get('T_AppSecret');
+        $req = new TbkTpwdCreateRequest;
+        $req->setText($text);
+        $req->setUrl($url);
+        $req->setLogo($logo);
+        $resp = $c->execute($req);
+        return $resp->data->model;
     }
 
     /*
@@ -190,13 +211,19 @@ class Goods extends Controller {
         if(isset($_GET['nav']) && !empty($_GET['nav'])){
             $data = $this -> request -> get();
             $goods = new GoodModel();
-            if(isset($data['cond']) && !empty($data['cond'] && isset($data['startNum']))){
-                    //var_dump($data);die;
+            if(isset($data['cond']) && !empty($data['cond'])){
+
+                if(isset($data['startNum'])){
                     $goodsList = $goods -> getCouponNav($data['nav'],$data['cond'],$data['sort'],$data['startNum']);
                     $data = ReturnGoodsList::stripGoodsListByResult($goodsList);
                     echo json_encode($data,JSON_UNESCAPED_UNICODE);
+                }else{
+                    $goodsList = $goods -> getCouponNav($data['nav'],$data['cond'],$data['sort']);
+                    return $this -> fetch('goods/nav-goods',['List' => $goodsList]);
+                }
 
             }else{
+                //var_dump($data);
                 $goodsList = $goods -> getCouponNav($data['nav']);
                 return $this -> fetch('goods/nav-goods',['List' => $goodsList]);
             }

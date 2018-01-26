@@ -99,6 +99,9 @@
                 //加载中提示信息
                 var loadInfo = $(".loadInfo");
                 loadInfo.html('Loding…');
+                if(!stop){
+                    return false;
+                }
                 //获取URL中数据
                 var type = $.getUrlParam('type');
                 var cond = $.getUrlParam('cond');

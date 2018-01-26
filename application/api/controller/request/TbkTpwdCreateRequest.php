@@ -6,6 +6,7 @@
  * @since 1.0, 2017.08.23
  */
 namespace app\api\controller\request;
+use app\api\controller\RequestCheckUtil;
 
 class TbkTpwdCreateRequest
 {

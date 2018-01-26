@@ -4,9 +4,10 @@
 
     <link rel="stylesheet" href="/static/index/css/goods.css"  />
 
+
     <!--carry--产品详情页面-->
     <div class="details">
-        <img src="{$getOne.banner}" alt="">
+        <img src="{$getOne.banner}" alt="" id="tao-img">
         <div class="details_info">
             <img src="{$getOne.type}" alt="">
             <span id="title">{$getOne.name|mb_substr=0,80,'utf-8'}</span>
@@ -74,20 +75,49 @@
             {/foreach}
 
         </div>
+    </div>
 
-        <!--<div class="cat_cont_hidden cat_comm">
-            <p>打开折金券平台任意或指定产品详情页面，即可以页面中查看到在平台领取优惠券，并使用优惠券购物后所得到的平台奖励金金额</p>
-            <img src="/static/index/images/push-bonus.jpg" alt="">
+    <!--联系客服-->
+    <div class="cat_cont_hidden cat_comm">
+        <img src="/static/index/images/kefu_weixin.png" alt="">
+        <p>使用微信，扫描图中二维码，即可添加平台客服，为您解决所有问题</p>
+        <div class="closed_com closed_cont">
+            <i class="glyphicon glyphicon-off"></i>
         </div>
+    </div>
 
-        <div class="cat_tao_hidden cat_comm">
-            <p>打开折金券平台任意或指定产品详情页面，即可以页面中查看到在平台领取优惠券，并使用优惠券购物后所得到的平台奖励金金额</p>
-            <img src="/static/index/images/push-bonus.jpg" alt="">
+    <!--淘口令-->
+    <div class="cat_tao_hidden cat_comm">
+        <!--<div class="command" id="copy-text">
+            复制此文字内容，打开APP，即可获得产品优惠信息，并可购买
         </div>-->
+        <textarea readonly="" id="clip_text" class="command">复制此文字内容，打开APP，即可获得产品优惠信息，并可购买</textarea>
+        <button id="click-copy" onClick="copyButton()" class="copy-button">一键复制淘口令</button>
+        <p><i class="glyphicon glyphicon-flag"></i> 点击"一键复制淘口令"后，请打开[淘宝]，即可购买</p>
+        <p><i class="glyphicon glyphicon-flag"></i> 若点击"一键复制淘口令"失败，可长按文本框内内容或点击下方"直接领券"，即可购买</p>
+        <div class="closed_com closed_tao">
+            <i class="glyphicon glyphicon-off"></i>
+        </div>
+    </div>
+
+    <!--Alert-Start-->
+    <div class="bomb">
+        <p></p>
+    </div>
+    <!--Alert-End-->
+
+    <!--FOOTER-->
+    <div class="details_footer">
+        <ul>
+            <li id="home"><a href="/"><img src="/static/index/images/home-active.png"/><span>首页</span></a></li>
+            <li id="cont"><a><img src="/static/index/images/message_bg.png"/><span>客服</span></a></li>
+            <li id="von"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/vounther.png"/><span>直接领券</span></a></li>
+            <li id="tao"><a><img src="/static/index/images/t-code.png"/><span>淘口令领券</span></a></li>
+        </ul>
 
     </div>
 
-
+    <!--图文详情隐藏/显示-->
     <script>
         var myCarry = $(".details_image_hidden");
         $(function() {
@@ -95,9 +125,9 @@
                 // showDiv();//调用显示DIV方法
                 $(myCarry).toggle();
                 /*$(document).one("click",
-                    function() { //对document绑定一个影藏Div方法
-                        $(myCarry).hide();
-                    });*/
+                 function() { //对document绑定一个影藏Div方法
+                 $(myCarry).hide();
+                 });*/
 
                 event.stopPropagation(); //阻止事件向上冒泡
             });
@@ -111,28 +141,24 @@
         }
     </script>
 
-    <div class="details_footer">
-        <ul>
-            <li id="home"><a href="/"><img src="/static/index/images/home-active.png"/><span>首页</span></a></li>
-            <li id="cont"><a href=""><img src="/static/index/images/message_bg.png"/><span>客服</span></a></li>
-            <li id="von"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/vounther.png"/><span>直接领券</span></a></li>
-            <li id="tao"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/t-code.png"/><span>淘口令领券</span></a></li>
-        </ul>
-
-    </div>
-
-
+    <!--设置产品图片宽高一致-->
+    <script>
+        $(document).ready(function(){
+            var widthEle = $(".goods-thumbnail img");
+            widthEle.css("height",widthEle.width());
+        });
+    </script>
 
 
     <!--隐藏/显示客服模块-->
-    <!--<script>
+    <script>
         var myCont = $(".cat_cont_hidden");
         $(function() {
             $("#cont").click(function(event) {
-                // showDiv();//调用显示DIV方法
+                //调用显示DIV方法
                 $(myCont).toggle();
                 //$(document).one("click",
-                $(myCont).one("click",
+                $(".closed_cont").one("click",
                     function() { //对document绑定一个影藏Div方法
                         $(myCont).hide();
                     });
@@ -145,17 +171,39 @@
             });
         });
 
-    </script>-->
+    </script>
 
     <!--隐藏/显示淘口令模块-->
-    <!--<script>
+    <script>
         var myTao = $(".cat_tao_hidden");
+        var title = $("#title").text();
+        var url = $("#von a").attr("href");
+        var logo = $("#tao-img").attr("src");
+        var stop = true;
         $(function() {
             $("#tao").click(function(event) {
-                // showDiv();//调用显示DIV方法
+                if(stop){
+                    $.ajax({
+                        url:"/index/goods/goodsDetails",
+                        data:{
+                            text:title,
+                            url:url,
+                            logo:logo
+                        },
+                        dataType: "json",
+                        type:"post",
+                        success:function(data){
+                            console.log(data);
+                            $(".command").append(data);//追加
+                            stop = false;
+                        }
+                    });
+                }
+
+                //调用显示DIV方法
                 $(myTao).toggle();
-                //$(document).one("click",
-                $(myTao).one("click",
+                //隐藏
+                $('.closed_tao').one("click",
                     function() { //对document绑定一个影藏Div方法
                         $(myTao).hide();
                     });
@@ -168,4 +216,29 @@
             });
         });
 
-    </script>-->
+    </script>
+
+    <!--一键复制淘口令-->
+    <script type="text/javascript">
+        function copyButton() {
+            var NumClip=document.getElementById("clip_text");
+            var NValue=NumClip.value;
+            var valueLength = NValue.length;
+            selectText(NumClip, 0, valueLength);
+            document.execCommand("Copy","false",null); // 执行浏览器复制命令
+            showAlertAutoClose("已功功复制淘口令，快去淘宝看看吧！");
+        }
+        // input自带的select()方法在苹果端无法进行选择，所以需要自己去写一个类似的方法
+        function selectText(obj, startIndex, stopIndex) {
+            if (obj.setSelectionRange) {
+                obj.setSelectionRange(startIndex, stopIndex);
+            } else if (obj.createTextRange) {
+                var range = obj.createTextRange();
+                range.collapse(true);
+                range.moveStart('character', startIndex);
+                range.moveEnd('character', stopIndex - startIndex);
+                range.select();
+            }
+            obj.focus();
+        }
+    </script>
