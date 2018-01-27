@@ -115,31 +115,17 @@ class Search extends CommController
             $data = $this->request->post();
             //var_dump($data);die;
             if(isset($data['command']) && !empty($data['command'])){
-
-                /*if(isset($data['startNum'])){
-                    $goodsList = $this -> getTaoApiData($data['keyword'],$data['startNum']);
-                    $returnRes = ReturnGoodsList::searchGoodsListByResult($goodsList);
-                    echo json_encode($returnRes,JSON_UNESCAPED_UNICODE);
-                }else{
-                    $goodsList = $this -> getTaoApiData($data['keyword']);
-                    return $this -> fetch('search/ordin-search',['List'=>$goodsList]);
-                }*/
-
                 $analysis = $this -> getAnalysisCommandApi($data['command']);
                 if($analysis -> suc){
-                    //var_dump($analysis);
                     $gid = $this ->explainUrlGetId($analysis->url);
-                    //var_dump($gid);
                     $result = $this->getDetailsByIdApi($gid);
-                    //var_dump($result);
+                    //$goodsList = $goodsList = $this -> getTaoGoodApiData($result->title,1,1);
+                    //var_dump($goodsList);
                     if($result){
-                        $command = $this -> setCommandByAnalysisCommand($result->item_url,$result->pict_url,$result->title);
-                        //var_dump($command);
                         return $this -> fetch('search/analysis_search',['State'=>true,'List'=>$result]);
                     }else{
                         return $this -> fetch('search/analysis_search',['State'=>false]);
                     }
-                    //print_r($gid);
                 }else{
                     return $this -> fetch('search/analysis_search',['State'=>false]);
                 }
@@ -159,10 +145,8 @@ class Search extends CommController
             if(isset($data['id']) && !empty($data['id'])){
 
                 $result = $this->getDetailsByIdApi($data['id']);
-                //var_dump($result);
                 if($result){
                     $command = $this -> setCommandByAnalysisCommand($result->item_url,$result->pict_url,$result->title);
-                    //var_dump($command);
                     return $this -> fetch('search/analysis_details',['getOne' => $result,'Command'=>$command->model]);
                 }else{
                     return ReturnJson::ReturnA("未获取到相应的产品信息...");

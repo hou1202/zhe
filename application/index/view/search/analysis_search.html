@@ -28,26 +28,16 @@
                     <img src="/static/index/images/t-logo-{$List->user_type}.png">
                     <a href="/index/search/commandSearchDetail?id={$List->num_iid}"><span>{$List->title|mb_substr=0,25,'utf-8'}</span></a>
                     <a href="/index/search/commandSearchDetail?id={$List->num_iid}"><p class="strip-goods-after">券后价：￥{$List->zk_final_price}</p></a>
-                    <a href="/index/search/commandSearchDetail?id={$List->num_iid}"><p class="strip-goods-before">原价：￥{$List->reserve_price}</p></a>
+                    <a href="/index/search/commandSearchDetail?id={$List->num_iid}"><p class="strip-goods-before">原价：￥{$List->zk_final_price}</p></a>
                     <a href="/index/search/commandSearchDetail?id={$List->num_iid}"><p>销量：{$List->volume}</p></a>
                 </div>
                 <div class="strip-vou">
                     <a href="/index/search/commandSearchDetail?id={$List->num_iid}" style="color:#fff">
                         <p><span>券</span></p>
-                        <P>￥ {$List->reserve_price-$List->zk_final_price}</P>
+                        <P>￥ {$List->zk_final_price}</P>
                     </a>>
                 </div>
-                <!--<div class="goods_hidden_info" style="display:none;">
-                    <p id="title">{$List->title}</p>
-                    <p id="banner">{$List->pict_url}</p>
-                    <p id="type">/static/index/images/t-logo-{$List->user_type}.png</p>
-                    <p id="price">{$List->reserve_price}</p>
-                    <p id="coupon_price">{$List->zk_final_price}</p>
-                    <p id="coupon_money">{$List->reserve_price-$List->zk_final_price}</p>
-                    <p id="volume">{$List->volume}</p>
-                    <p id="coupon_url">{$List->item_url}</p>
-                    <p id="goods_item">{$List->item_url}</p>
-                </div>-->
+
             </div>
 
 
