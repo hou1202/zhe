@@ -24,6 +24,20 @@
     ]
   },
   {
+    "t": "选品管理",
+    "url": "",
+    "child": [
+      {
+        "t": "选品库列表",
+        "url": "/favorites/favoritesList"
+      },
+      {
+        "t": "选品图列表",
+        "url": "/favorites/bannerList"
+      }
+    ]
+  },
+  {
     "t": "Banner管理",
     "url": "",
     "child": [

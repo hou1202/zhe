@@ -1,0 +1,181 @@
+
+<link rel="stylesheet" href="/static/admin/js/vendor/uploadify/mydemo/uploadify-demo.css">
+<script src="/static/admin/js/vendor/uploadify/jquery.uploadify.min.js"></script>
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>修改选品图
+                        <a href="#/favorites/bannerList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="/admin/favorites/favoritesUpdate" data-sendingText="正在为您积极努力的去提交信息。。。" data-validate="validate">
+                                        <input type="hidden"  value="{$getOne.id}" name="id">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">标题</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="标题" name="title" value="{$getOne.title}">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选品库ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="number" class="form-control" placeholder="选品库ID" name="f_id" value="{$getOne.f_id}">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选品库名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="选品库名称" name="f_name" value="{$getOne.f_name}">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">选品排序</label>
+                                            <div class="col-sm-6">
+                                                <input type="number" class="form-control" placeholder="数字越大越靠前（1-100）" name="sort" value="{$getOne.sort}">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">状态</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="state" value="1" {$getOne.state=="启用"?="checked"} /> 启用
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="state" value="0" {$getOne.state=="关闭"?="checked"}/> 关闭
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">缩略图</label>
+                                            <div class="col-sm-6">
+                                                <input type="button" id="uploadify1"/>
+                                                <div id="waitUploadNum"></div>
+                                                <div id="imageView">
+                                                    <img src="{$getOne.thumbnail}" style="width:120px;height:80px">
+                                                    <input type='hidden' name='thumbnail' value={$getOne.thumbnail}>
+                                                </div>
+                                            </div>
+                                            <p class="col-sm-4 help-block">建议尺寸：400*600</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <div class=" col-sm-12">
+                                                <button type="button" class="btn btn-primary J_ajaxSubmitBtn">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    /*图片上传JS脚本*/
+    try {
+        $('#uploadify1').uploadify('destroy');
+    } catch (e) {
+    }
+    $('#uploadify1').uploadify({
+        'auto': true,                                 //选择文件后是否自动上传
+        'multi': false,                               //是否支持多文件上传
+        'swf': '/static/admin/js/vendor/uploadify/uploadify.swf',                                   //swf文件路径
+        'buttonImage': '/static/admin/js/vendor/uploadify/mydemo/btn1.png',                   //按钮图片路径
+        'width': 90,                               //按钮宽
+        'height': 34,                             //按钮高
+        'fileObjName': 'imgFile',                   //表单域的name
+        'uploadLimit': 999,                   //最多上传文件数量，默认999
+        'queueSizeLimit': 999,             //队列长度限制，默认999
+        'buttonCursor': 'hand',                       //上传按钮Hover时的鼠标形状，默认值是’hand’
+        'queueID': 'waitUploadNum',                           //上传队列的#id，用于css。不设定则不显示进度条
+        'removeCompleted': true,           //表示在上传完成后是否删除队列中的对应元素。默认是True，即上传完成后就看不到上传文件进度条了
+        'removeTimeout': 2,               //表示上传完成后多久删除队列中的进度条，默认为3秒
+        'preventCaching': true,                       //若设置为true，一个随机数将被加载swf文件URL的后面，防止浏览器缓存
+        'fileSizeLimit': '3072KB',               //上传文件大小限制，默认单位是KB，若需要限制大小在100KB以内，可设置该属性为：100KB
+        'fileTypeDesc': 'Image Files',                 //文件类型的说明
+        'fileTypeExts': '*.gif; *.jpg; *.png; *.jpeg',                 //指定允许上传的文件类型。默认*.*。比如只支持gif , jpg , png类型的图像，那么该属性设置为: ‘*.gif; *.jpg ; *.png’
+        'formData': '{"uid":"250"}',                         //指定上传文件附带的其他数据
+        'uploader': '/static/admin/server/upload.php',                         //服务器脚本路径
+        'onUploadSuccess': function (file, data, response) {
+            /**
+             * 在每一个文件上传成功后触发！
+             * file：为uploadify自己组装的文件对象
+             * data：为服务器返回的信息
+             * response：true或false
+             */
+            var data = jQuery.parseJSON(data);
+            var $imageView = $("#imageView");
+            $imageView.empty();
+            $imageView.append($("<img src='" + data.url + "' style='width:120px;height:80px'/><input type='hidden' name='thumbnail' value='" + data.url + "'>"));  //这里不能遍历data对象，因为它不是一个队列
+            console.log(data);
+        }
+
+    });
+</script>
+
+
+
+<script>
+    /*数据验证JS脚本*/
+    function callback1(returnData, $from) {
+        console.log($from);
+    }
+    function validate($from) {
+        var title = $from.find('input[name="title"]');
+        var fid = $from.find('input[name="f_id"]');
+        var fname = $from.find('input[name="f_name"]');
+        var thumbnail = $from.find('input[name="thumbnail"]');
+        var sort = $from.find('textarea[name="sort"]');
+        if ($.trim(title.val()) == '') {
+            return '选品图标题不能为空且长度不得大于10个字';
+        }
+
+        if ($.trim(fid.val()) == '' && !isNaN($.trim(fid.val()))) {
+            return '选品库ID不能为空且选品库ID为数字';
+        }
+
+        if ($.trim(fname.val()) == '') {
+            return '选品库名称不能为空且长度不得大于10个字';
+        }
+
+        if ($.trim(thumbnail.val()) == '') {
+            return '缩略图不能为空';
+        }
+
+
+
+        return true;
+    }
+</script>
+

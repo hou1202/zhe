@@ -1,0 +1,26 @@
+
+<!--header--引入-->
+{include file="default/header" /}
+<!--header--END-->
+
+<!--css--JS--引入-->
+<link rel="stylesheet" href="/static/index/css/convert.css"  />
+<!--引入--END-->
+
+<!--convert--兑换-->
+<div class="selection">
+    {foreach name="List" item="l"}
+        <div>
+            <a href="/index/convert/selectionList?id={$l.f_id}">
+                <img src="{$l.thumbnail}">
+            </a>
+        </div>
+    {/foreach}
+
+</div>
+
+
+
+<!--footer--引入-->
+{include file="default/footer" /}
+<!--footer--END-->

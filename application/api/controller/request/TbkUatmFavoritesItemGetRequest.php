@@ -6,6 +6,7 @@
  * @since 1.0, 2017.07.26
  */
 namespace app\api\controller\request;
+use app\api\controller\RequestCheckUtil;
 
 class TbkUatmFavoritesItemGetRequest
 {

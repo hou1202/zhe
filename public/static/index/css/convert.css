@@ -86,3 +86,18 @@
 .convert .convert_explain span {
     border-bottom:1px solid #da5514;
 }
+
+.selection {
+    width:100%;
+    padding:2rem 1rem 6rem 1rem;
+
+}
+.selection a{
+    display:block;
+}
+.selection img {
+    width:100%;
+    border-radius:5px;
+    box-shadow:0 3px 5px #c0c0c0;
+    margin-bottom:1rem;
+}

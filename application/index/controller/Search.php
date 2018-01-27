@@ -116,13 +116,16 @@ class Search extends CommController
             //var_dump($data);die;
             if(isset($data['command']) && !empty($data['command'])){
                 $analysis = $this -> getAnalysisCommandApi($data['command']);
+                //var_dump($analysis);die;
                 if($analysis -> suc){
                     $gid = $this ->explainUrlGetId($analysis->url);
+                    //var_dump($gid);die;
                     $result = $this->getDetailsByIdApi($gid);
-                    //$goodsList = $goodsList = $this -> getTaoGoodApiData($result->title,1,1);
+
                     //var_dump($goodsList);
                     if($result){
-                        return $this -> fetch('search/analysis_search',['State'=>true,'List'=>$result]);
+                        $goodsList = $goodsList = $this -> getTaoGoodApiData($result->title,1,20);
+                        return $this -> fetch('search/analysis_search',['State'=>true,'getOne'=>$result,'List'=>$goodsList]);
                     }else{
                         return $this -> fetch('search/analysis_search',['State'=>false]);
                     }
@@ -183,6 +186,7 @@ class Search extends CommController
      * */
     protected function explainUrlGetId($url){
         preg_match_all("/(\w+=\w+)(#\w+)?/i",$url,$match);
+        //var_dump($match);die;
         $result = explode("=",$match[0][4]);
         return$result[1];
     }
@@ -201,7 +205,13 @@ class Search extends CommController
         $req->setPlatform(ThinkConfig::get('W_Platform'));
         $req->setNumIids($id);
         $resp = $c->execute($req);
-        return $resp->results->n_tbk_item[0];
+        //var_dump($resp);die;
+        if($resp->results == null){
+            return $resp->results->n_tbk_item[0];
+        }else{
+            return false;
+        }
+        //return $resp->results->n_tbk_item[0];
     }
 
     /*

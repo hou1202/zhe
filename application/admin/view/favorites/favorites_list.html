@@ -1,0 +1,46 @@
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header><i class="fa fa-fw fa-file"></i>选品库列表</header>
+
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="table-responsive">
+                                        <table id="example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>选品库ID</th>
+                                                <th>选品库类型</th>
+                                                <th>选品库名称</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {foreach name='List' item='l'}
+                                            <tr>
+                                                <td>{$l->favorites_id}</td>
+                                                <td>{if condition="$l->type == 2"}高佣金类型{else /}普通类型{/if}</td>
+                                                <td>{$l->favorites_title}</td>
+
+                                            </tr>
+                                            {/foreach}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
