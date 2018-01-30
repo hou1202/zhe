@@ -16,7 +16,7 @@ use think\Db;
 use app\common\controller\ReturnJson;
 use app\api\controller\TopClient;
 use app\api\controller\request\TbkUatmFavoritesItemGetRequest;
-use app\api\controller\request\WirelessShareTpwdCreateRequest;
+use app\api\controller\request\TbkDgItemCouponGetRequest;
 use app\api\controller\request\TbkTpwdCreateRequest;
 use app\api\controller\dmain\GenPwdIsvParamDto;
 use app\common\controller\ReturnGoodsList;
@@ -118,13 +118,45 @@ class Convert extends Controller {
         return $resp->data->model;
     }
 
+    /*推荐产品*/
+    protected function recomendGoods($cat){
+        $c = new TopClient;
+        $c->appkey = ThinkConfig::get('T_AppKey');
+        $c->secretKey = ThinkConfig::get('T_AppSecret');
+        $req = new TbkDgItemCouponGetRequest;
+        $req->setAdzoneId(ThinkConfig::get('A_zoneId'));
+        $req->setPlatform(ThinkConfig::get('W_Platform'));
+        $req->setCat($cat);
+        $req->setPageSize('10');
+        $req->setPageNo(rand(1,20));
+        $resp = $c->execute($req);
+        if(empty($resp->results)){
+            $List = NULL;
+        }else{
+            foreach($resp->results->tbk_coupon as $value){
+                    $arrayPrice = array();
+                    preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
+                    $value->coupon_info = $arrayPrice[0][1];
+                    $value->coupon_price = $value->zk_final_price-$value->coupon_info;
+                    if($value->coupon_price < 0){
+                        $value->coupon_price=0;
+                    };
+            }
+            $List = $resp->results->tbk_coupon;
+        }
+        return $List;
+        //return $resp->results->tbk_coupon;
+        //var_dump($resp->results->tbk_coupon);die;
+    }
+
     /*选品库商品详情*/
     public function selectionDetails(){
         if($this->request->isGet()){
             $data = $this -> request -> get();
             $command = $this -> getTaoCommand($data['coupon_url'],$data['banner'],$data['name']);
+            $recom = $this -> recomendGoods($data['category']);
             //var_dump($wirelessCommand);die;
-            return $this -> fetch('convert/selection_details',['getOne'=>$data,'Command'=>$command]);
+            return $this -> fetch('convert/selection_details',['getOne'=>$data,'Command'=>$command,'Recom'=>$recom]);
         }
     }
 }

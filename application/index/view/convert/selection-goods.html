@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/static/index/css/goods.css"  />
 
     <!--筛选-->
-    <div class="screen">
+   <!-- <div class="screen">
         <ul>
             <li class="screen_lists active " id="id">
                 <a class="sort_list" title="desc">综合</a>
@@ -27,7 +27,7 @@
             </li>
             <a href="" style="display: none" id="goodsSort"></a>
         </ul>
-    </div>
+    </div>-->
     <!--<script>
         $(".sort_list").on("click",function(){
             var id = $(this).parent().attr('id');
@@ -41,20 +41,20 @@
     </script>-->
 
     <!--block-goods--条状产品列表-->
-    <div class="strip_goods_lists">
+    <div class="strip_goods_lists " id="parent_click">
         {foreach name="List" item="l"}
         <div class="strip-goods click_get">
             <div class="strip-thumbnail">
-                <a href="{$l->click_url}">
+                <a>
                     <img src="{$l->pict_url}" class="img_url">
                 </a>
             </div>
             <div class="strip-title">
                 <img src="/static/index/images/t-logo-{$l->user_type}.png" class="user_type">
-                <a href="{$l->click_url}"><span class="title">{$l->title|mb_substr=0,25,'utf-8'}</span></a>
-                <a href="{$l->click_url}"><p class="strip-goods-after">券后价：￥<samp class="after_price">{if condition="($l->zk_final_price-$l->coupon_info)<0"}0{else /}{$l->zk_final_price-$l->coupon_info}{/if}</samp></p></a>
-                <a href="{$l->click_url}"><p class="strip-goods-before">原价：￥<samp class="before_price">{$l->zk_final_price}</samp></p></a>
-                <a href="{$l->click_url}"><p>销量：<samp class="vol">{$l->volume}</samp></p></a>
+                <a><span class="title">{$l->title|mb_substr=0,25,'utf-8'}</span></a>
+                <a><p class="strip-goods-after">券后价：￥<samp class="after_price">{if condition="($l->zk_final_price-$l->coupon_info)<0"}0{else /}{$l->zk_final_price-$l->coupon_info}{/if}</samp></p></a>
+                <a><p class="strip-goods-before">原价：￥<samp class="before_price">{$l->zk_final_price}</samp></p></a>
+                <a><p>销量：<samp class="vol">{$l->volume}</samp></p></a>
             </div>
             <div class="strip-vou">
                 <a style="color:#fff">
@@ -79,7 +79,7 @@
     </div>
 
     <script>
-        $(".click_get").on('click',function(){
+        $("#parent_click").on('click','.click_get',function(){
             var g_title = $(this).find(".title").text();
             var img_url = $(this).find(".img_url").attr("src");
             var before_price = $(this).find(".before_price").text();
@@ -93,8 +93,8 @@
             var rate = $(this).find(".rate").text();
             var user_type = $(this).find(".user_type").attr("src");
             var category = $(this).find(".category").text();
-            console.log(category);
-           /*console.log(g_title);
+            /*console.log(category);
+           console.log(g_title);
            console.log(img_url);
            console.log(before_price);
            console.log(after_price);
@@ -125,7 +125,7 @@
 
     <script>
         $(function() {
-            $(".screen_lists").on("click",function() {
+            $(".screen_lists").on("click",'.parent_click',function() {
                 $(this).addClass("active").siblings().removeClass("active");
             });
         });

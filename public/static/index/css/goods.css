@@ -175,7 +175,7 @@
 }
 .details .details_info {
     width:100%;
-    padding:1.5rem 1.5rem 1rem 1.5rem;
+    padding:1.5rem 1.5rem 0 1.5rem;
     overflow:hidden;
 
 }
@@ -201,7 +201,7 @@
 .details .details_info .details_info_price {
     width:79%;
     overflow:hidden;
-    float:left;
+    /*float:left;*/
 }
 .details .details_info .details_info_price p span{
     letter-spacing:0.5rem;
@@ -212,8 +212,10 @@
 }
 .details .details_info .details_info_free {
     width:20%;
-    padding-top:2.5rem;
+    /*padding-top:2.5rem;*/
     float:right;
+    position:relative;
+    top:-5.4rem;
 }
 .details .details_info .details_info_free img{
     width:3.5rem;

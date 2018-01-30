@@ -182,22 +182,30 @@ class ReturnGoodsList
                 }else{
                     $coupon_after =$value->zk_final_price - $value->coupon_info;
                 }
-                $html .= '<div class="strip-goods">';
+                $html .= '<div class="strip-goods click_get">';
                 $html .= '<div class="strip-thumbnail">';
-                $html .= '<a href="'.$value->click_url.'">';
-                $html .='<img src="'.$value->pict_url.'">';
+                $html .= '<a>';
+                $html .='<img src="'.$value->pict_url.'" class="img_url">';
                 $html .= '</a>';
                 $html .= '</div>';
                 $html .= '<div class="strip-title">';
-                $html .= '<img src="/static/index/images/t-logo-'.$value->user_type.'.png">';
-                $html .= '<a href="'.$value->click_url.'"><span>'.mb_substr($value->title,0,25,"utf-8").'</span></a>';
-                $html .= '<a href="'.$value->click_url.'"><p class="strip-goods-after">券后价：￥'.$coupon_after.'</p></a>';
-                $html .= '<a href="'.$value->click_url.'"><p class="strip-goods-before">原价：￥'.$value->zk_final_price.'</p></a>';
-                $html .= '<a href="'.$value->click_url.'"><p>销量：'.$value->volume.'</p></a>';
+                $html .= '<img src="/static/index/images/t-logo-'.$value->user_type.'.png" class="user_type">';
+                $html .= '<a><span class="title">'.mb_substr($value->title,0,25,"utf-8").'</span></a>';
+                $html .= '<a><p class="strip-goods-after">券后价：￥<samp class="after_price">'.$coupon_after.'</samp></p></a>';
+                $html .= '<a><p class="strip-goods-before">原价：￥<samp class="before_price">'.$value->zk_final_price.'</samp></p></a>';
+                $html .= '<a><p>销量：<samp class="vol">'.$value->volume.'</samp></p></a>';
                 $html .= '</div>';
                 $html .= '<div class="strip-vou">';
-                $html .= '<p><span>券</span></p>';
-                $html .= '<P>￥ '.$value->coupon_info.'</P>';
+                $html .= '<a style="color:#fff"><p><span>券</span></p>';
+                $html .= '<P>￥ <samp class="coupon">'.$value->coupon_info.'</samp></P></a>';
+                $html .= '</div>';
+                $html .= '<div style="display:none">';
+                $html .= '<p class="g_id">'.$value->num_iid.'</p>';
+                $html .= '<p class="tao_url">'.$value->click_url.'</p>';
+                $html .= '<p class="coupon_url">'.$value->coupon_click_url.'</p>';
+                $html .= '<p class="item_url">'.$value->item_url.'</p>';
+                $html .= '<p class="rate">'.$value->tk_rate.'</p>';
+                $html .= '<p class="category">'.$value->category.'</p>';
                 $html .= '</div>';
                 $html .= '</div>';
             }
