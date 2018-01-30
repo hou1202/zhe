@@ -116,10 +116,14 @@
 }
 .strip-goods .strip-title p {
     font-size:1rem;
-
     height:2rem;
     line-height:2rem;
     margin:0;
+}
+.strip-goods .strip-title p samp{
+    font-size:1.4rem;
+    height:2rem;
+    line-height:2rem;
 }
 .strip-goods .strip-title .strip-goods-after {
     font-size:1.2rem;
@@ -150,6 +154,10 @@
 .strip-goods .strip-vou span {
     font-size:2rem;
     font-family:myAxureHand;
+}
+.strip-goods .strip-vou p samp{
+    font-size:1.6rem;
+    font-family:myGongFang;
 }
 
 

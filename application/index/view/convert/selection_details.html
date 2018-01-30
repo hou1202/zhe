@@ -12,7 +12,7 @@
             <img src="{$getOne.type}" alt="">
             <span id="title">{$getOne.name|mb_substr=0,80,'utf-8'}</span>
             <div class="details_info_price">
-                <p id="quan"><span>券价：</span>￥{if condition="($getOne.price-$getOne.coupon_money)<0"}0{else /}{$getOne.price-$getOne.coupon_money}{/if}</p>
+                <p id="quan"><span>券后价：</span>￥{$getOne.coupon_price}</p>
                 <p><span>原价：</span>￥{$getOne.price}</p>
                 <p><span>销量：</span>{$getOne.sales}</p>
             </div>
@@ -24,10 +24,10 @@
         <div class="details_vou">
             <div class="details_favour">
                 <div class="details_favour_title">
-                    <a href="{$getOne.coupon_extend}">领券</a>
+                    <a href="">领券</a>
                 </div>
                 <div class="details_favour_num">
-                    <a href="{$getOne.coupon_extend}">￥ {$getOne.coupon_money}</a>
+                    <a href="">￥ {$getOne.coupon_money}</a>
                 </div>
             </div>
             <div class="details_bonus">
@@ -35,7 +35,7 @@
                     奖 金
                 </div>
                 <div class="details_bonus_num">
-                    ￥ {$getOne.commission*0.3|round=###,2}
+                    ￥ {$getOne.price*$getOne.ratio/100*0.3||round=###,2}
                 </div>
             </div>
         </div>
@@ -52,27 +52,7 @@
 
             <h2>看看还有什么</h2>
 
-            {foreach name="Recommend" item="r"}
-                <div class="block-goods">
-                    <a href="/index/goods/goodsDetails?id={$r.goods_id}" class="goods-thumbnail"><img src="{$r.banner}"></a>
-                    <div class="goods-title">
-                        <img src="{$r.type}">
-                        <a href="/index/goods/goodsDetails?id={$r.goods_id}"><span>{$r.name|mb_substr=0,19,'utf-8'}</span></a>
-                    </div>
-                    <div class="goods-price">
-                        <span class="price-before">券价：￥{$r.price-$r.coupon_money}</span>
-                        <span class="price-after">￥{$r.price}</span>
-                        <div class="price-vou">
-                            <div class="vou-title">
-                                <a href="/index/goods/goodsDetails?id={$r.goods_id}">领券</a>
-                            </div>
-                            <div class="vou-num">
-                                <a href="/index/goods/goodsDetails?id={$r.goods_id}">￥ {$r.coupon_money}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {/foreach}
+
 
         </div>
     </div>
@@ -91,7 +71,7 @@
         <!--<div class="command" id="copy-text">
             复制此文字内容，打开APP，即可获得产品优惠信息，并可购买
         </div>-->
-        <textarea readonly="" id="clip_text" class="command">复制此文字内容，打开APP，即可获得产品优惠信息，并可购买</textarea>
+        <textarea readonly="" id="clip_text" class="command">复制此文字内容，打开APP，即可获得产品优惠信息，并可购买{$Command}</textarea>
         <button id="click-copy" onClick="copyButton()" class="copy-button">一键复制淘口令</button>
         <p><i class="glyphicon glyphicon-flag"></i> 点击"一键复制淘口令"后，请打开[淘宝]，即可购买</p>
         <p><i class="glyphicon glyphicon-flag"></i> 若点击"一键复制淘口令"失败，可长按文本框内内容或点击下方"直接领券"，即可购买</p>
@@ -111,7 +91,7 @@
         <ul>
             <li id="home"><a href="/"><img src="/static/index/images/home-active.png"/><span>首页</span></a></li>
             <li id="cont"><a><img src="/static/index/images/message_bg.png"/><span>客服</span></a></li>
-            <li id="von"><a href="{$getOne.coupon_extend}"><img src="/static/index/images/vounther.png"/><span>直接领券</span></a></li>
+            <li id="von"><a href="{$getOne.coupon_url}"><img src="/static/index/images/vounther.png"/><span>直接领券</span></a></li>
             <li id="tao"><a><img src="/static/index/images/t-code.png"/><span>淘口令领券</span></a></li>
         </ul>
 
@@ -176,28 +156,8 @@
     <!--隐藏/显示淘口令模块-->
     <script>
         var myTao = $(".cat_tao_hidden");
-        var title = $("#title").text();
-        var url = $("#von a").attr("href");
-        var logo = $("#tao-img").attr("src");
-        var stop = true;
         $(function() {
             $("#tao").click(function(event) {
-                if(stop){
-                    $.ajax({
-                        url:"/index/goods/goodsDetails",
-                        data:{
-                            text:title,
-                            url:url,
-                            logo:logo
-                        },
-                        dataType: "json",
-                        type:"post",
-                        success:function(data){
-                            $(".command").append(data);//追加
-                            stop = false;
-                        }
-                    });
-                }
 
                 //调用显示DIV方法
                 $(myTao).toggle();

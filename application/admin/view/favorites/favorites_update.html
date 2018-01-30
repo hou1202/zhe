@@ -1,6 +1,7 @@
-
-<link rel="stylesheet" href="/static/admin/js/vendor/uploadify/mydemo/uploadify-demo.css">
-<script src="/static/admin/js/vendor/uploadify/jquery.uploadify.min.js"></script>
+<!--上传文件引入文件-->
+<link rel="stylesheet" type="text/css" href="/static/plugin/aoupload/css/globle.css" />
+<script src="/static/plugin/aoupload/js/webuploader.min.js"></script>
+<script src="/static/plugin/aoupload/js/diyUpload.js"></script>
 
 <div class="content_wrapper">
 
@@ -73,14 +74,26 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">缩略图</label>
                                             <div class="col-sm-6">
-                                                <input type="button" id="uploadify1"/>
-                                                <div id="waitUploadNum"></div>
-                                                <div id="imageView">
-                                                    <img src="{$getOne.thumbnail}" style="width:120px;height:80px">
-                                                    <input type='hidden' name='thumbnail' value={$getOne.thumbnail}>
+                                                <div style="text-align:center;">
+                                                    <ul class="upload-ul clearfix">
+
+                                                        <li id="fileBox_WU_FILE" class="">
+                                                            <div class="viewThumb">
+                                                                <input type="hidden" name="img" id="img_id" value="{$getOne.thumbnail}">
+                                                                <div class="diyBar" style="display: none;">
+                                                                    <div class="diyProgress" style="width: 100%;">上传完成</div>
+                                                                </div>
+                                                                <img src="{$getOne.thumbnail}">
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="upload-pick">
+                                                            <div class="webuploader-container clearfix" id="imgUpload"></div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <p class="col-sm-4 help-block">建议尺寸：400*600</p>
+                                            <p class="col-sm-4 help-block">尺寸：600*200</p>
                                         </div>
                                         <hr/>
 
@@ -101,47 +114,55 @@
 
 </div>
 
+<!--图片上传JS脚本-->
 <script>
-    /*图片上传JS脚本*/
-    try {
-        $('#uploadify1').uploadify('destroy');
-    } catch (e) {
-    }
-    $('#uploadify1').uploadify({
-        'auto': true,                                 //选择文件后是否自动上传
-        'multi': false,                               //是否支持多文件上传
-        'swf': '/static/admin/js/vendor/uploadify/uploadify.swf',                                   //swf文件路径
-        'buttonImage': '/static/admin/js/vendor/uploadify/mydemo/btn1.png',                   //按钮图片路径
-        'width': 90,                               //按钮宽
-        'height': 34,                             //按钮高
-        'fileObjName': 'imgFile',                   //表单域的name
-        'uploadLimit': 999,                   //最多上传文件数量，默认999
-        'queueSizeLimit': 999,             //队列长度限制，默认999
-        'buttonCursor': 'hand',                       //上传按钮Hover时的鼠标形状，默认值是’hand’
-        'queueID': 'waitUploadNum',                           //上传队列的#id，用于css。不设定则不显示进度条
-        'removeCompleted': true,           //表示在上传完成后是否删除队列中的对应元素。默认是True，即上传完成后就看不到上传文件进度条了
-        'removeTimeout': 2,               //表示上传完成后多久删除队列中的进度条，默认为3秒
-        'preventCaching': true,                       //若设置为true，一个随机数将被加载swf文件URL的后面，防止浏览器缓存
-        'fileSizeLimit': '3072KB',               //上传文件大小限制，默认单位是KB，若需要限制大小在100KB以内，可设置该属性为：100KB
-        'fileTypeDesc': 'Image Files',                 //文件类型的说明
-        'fileTypeExts': '*.gif; *.jpg; *.png; *.jpeg',                 //指定允许上传的文件类型。默认*.*。比如只支持gif , jpg , png类型的图像，那么该属性设置为: ‘*.gif; *.jpg ; *.png’
-        'formData': '{"uid":"250"}',                         //指定上传文件附带的其他数据
-        'uploader': '/static/admin/server/upload.php',                         //服务器脚本路径
-        'onUploadSuccess': function (file, data, response) {
-            /**
-             * 在每一个文件上传成功后触发！
-             * file：为uploadify自己组装的文件对象
-             * data：为服务器返回的信息
-             * response：true或false
-             */
-            var data = jQuery.parseJSON(data);
-            var $imageView = $("#imageView");
-            $imageView.empty();
-            $imageView.append($("<img src='" + data.url + "' style='width:120px;height:80px'/><input type='hidden' name='thumbnail' value='" + data.url + "'>"));  //这里不能遍历data对象，因为它不是一个队列
-            console.log(data);
+    //上传图片
+    var $tgaUpload = $('#imgUpload').diyUpload({
+        //url:'/admin/file_upload/uploader',
+        buttonText : '',
+        //类型限制;
+        accept: {
+            title: "Images",
+            extensions: 'jpg,jpeg,png'
+        },
+        //配置生成缩略图的选项
+        thumb:{
+            width:50,
+            height:50,
+            quality:100,
+            allowMagnify:true,
+            crop:true,
+            type:"image/jpeg"      // 为空的话则保留原有图片格式。 否则强制转换成指定的类型(image/jpeg)。
+        },
+        swf:"/static/plugin/aoupload/Uploader.swf",
+        //是否支持多文件上传
+        multiple:false,
+        //设置为 true 后，不需要手动调用上传，有文件选择即开始上传
+        auto:true,
+        //文件上传方式,POST或者GET
+        method:"POST",
+        //服务器地址;
+        server:'/admin/file_upload/uploader',
+        //最大上传的文件数量
+        fileNumLimit:1,
+        //总文件大小(单位字节);
+        fileSizeLimit:500000 * 1024,
+        //单个文件大小(单位字节);
+        fileSingleSizeLimit:50000 * 1024,
+        //自定义内容信息
+        custom:{
+            inputName:'thumbnail',
+            //input加入ID，只适用于单个上传图片
+            inputId:'img_id'
+        },
+        success:function( data ) {
+            $("#fileBox_WU_FILE").remove();
+        },
+        error:function( err ) {
+            console.log(2);
         }
-
     });
+
 </script>
 
 

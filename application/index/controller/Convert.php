@@ -16,6 +16,9 @@ use think\Db;
 use app\common\controller\ReturnJson;
 use app\api\controller\TopClient;
 use app\api\controller\request\TbkUatmFavoritesItemGetRequest;
+use app\api\controller\request\WirelessShareTpwdCreateRequest;
+use app\api\controller\request\TbkTpwdCreateRequest;
+use app\api\controller\dmain\GenPwdIsvParamDto;
 use app\common\controller\ReturnGoodsList;
 
 class Convert extends Controller {
@@ -41,12 +44,14 @@ class Convert extends Controller {
         return $this -> fetch('convert/convert');
     }
 
+    /*选品图列表*/
     public function selection(){
         $result = Db::table("think_favorites") -> field('f_id,thumbnail')->where('state',1)->order('sort DESC')->select();
         //var_dump($result);die;
         return $this -> fetch('convert/selection',['List'=>$result]);
     }
 
+    /*选品库产品列表*/
     public function selectionList(){
         if(isset($_GET['id']) && !empty($_GET['id'])){
             $data = $this -> request -> get();
@@ -67,6 +72,7 @@ class Convert extends Controller {
 
     }
 
+    /*接口访问选品库产品*/
     protected function getFavoritesTaoApi($id,$pageNo=1,$pageSize=20){
         $c = new TopClient;
         $c->appkey = ThinkConfig::get('T_AppKey');
@@ -77,26 +83,48 @@ class Convert extends Controller {
         $req->setAdzoneId(ThinkConfig::get('A_zoneId'));
         $req->setFavoritesId($id);
         $req->setPageNo($pageNo);
-        $req->setFields("num_iid,title,pict_url,reserve_price,zk_final_price,user_type,item_url,volume,shop_title,zk_final_price_wap,event_start_time,event_end_time,tk_rate,status,type");
+        $req->setFields("num_iid,title,pict_url,reserve_price,zk_final_price,user_type,item_url,volume,shop_title,zk_final_price_wap,tk_rate,status,type,click_url,category,coupon_click_url,coupon_info");
         $resp = $c->execute($req);
-        //var_dump($resp->results->uatm_tbk_item);die;
+
         if(empty($resp->results)){
             $List = NULL;
         }else{
-            if(isset($resp->results->uatm_tbk_item->coupon_info)){
-                foreach($resp->results->uatm_tbk_item as $value){
+            foreach($resp->results->uatm_tbk_item as $value){
+                if(isset($value->coupon_info)){
                     $arrayPrice = array();
                     preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
                     $value->coupon_info = $arrayPrice[0][1];
-                }
-            }else{
-                foreach($resp->results->uatm_tbk_item as $value){
-                    $value->click_url = $value->item_url;
+                }else{
                     $value->coupon_info = 0;
+                    $value->coupon_click_url = $value->click_url;
                 }
             }
             $List = $resp->results->uatm_tbk_item;
         }
         return $List;
+    }
+
+    /*生成淘口令*/
+    protected function getTaoCommand($url,$logo,$title){
+        /*访问接口taobao.tbk.tpwd.create*/
+        $c = new TopClient;
+        $c->appkey = ThinkConfig::get('T_AppKey');
+        $c->secretKey = ThinkConfig::get('T_AppSecret');
+        $req = new TbkTpwdCreateRequest;
+        $req->setText($title);
+        $req->setUrl($url);
+        $req->setLogo($logo);
+        $resp = $c->execute($req);
+        return $resp->data->model;
+    }
+
+    /*选品库商品详情*/
+    public function selectionDetails(){
+        if($this->request->isGet()){
+            $data = $this -> request -> get();
+            $command = $this -> getTaoCommand($data['coupon_url'],$data['banner'],$data['name']);
+            //var_dump($wirelessCommand);die;
+            return $this -> fetch('convert/selection_details',['getOne'=>$data,'Command'=>$command]);
+        }
     }
 }
