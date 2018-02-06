@@ -9,7 +9,7 @@
     <div class="details">
         <img src="{$getOne.banner}" alt="" id="tao-img">
         <div class="details_info">
-            <img src="{$getOne.type}" alt="">
+            <img src="{$getOne.type}" alt="" >
             <span id="title">{$getOne.name|mb_substr=0,80,'utf-8'}</span>
             <div class="details_info_price">
                 <p id="quan"><span>券后价：</span>￥{$getOne.coupon_price}</p>
@@ -35,7 +35,7 @@
                     奖 金
                 </div>
                 <div class="details_bonus_num">
-                    ￥ {if condition="sprintf('%.2f', $getOne.price*$getOne.ratio/100*0.3)<0.01"}0.01{else /}{$getOne.price*$getOne.ratio/100*0.3|round=###,2}{/if}
+                    ￥ {$getOne.bonus}
                 </div>
             </div>
         </div>

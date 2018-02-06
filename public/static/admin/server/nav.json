@@ -14,6 +14,26 @@
     ]
   },
   {
+    "t": "导航管理",
+    "url": "",
+    "child": [
+      {
+        "t": "导航列表",
+        "url": "/nav/navList"
+      }
+    ]
+  },
+  {
+    "t": "Banner管理",
+    "url": "",
+    "child": [
+      {
+        "t": "Banner列表",
+        "url": "/Banner/bannerList"
+      }
+    ]
+  },
+  {
     "t": "产品管理",
     "url": "",
     "child": [
@@ -38,12 +58,16 @@
     ]
   },
   {
-    "t": "Banner管理",
+    "t": "订单管理",
     "url": "",
     "child": [
       {
-        "t": "Banner列表",
-        "url": "/Banner/bannerList"
+        "t": "提交列表",
+        "url": "/order/orderList"
+      },
+      {
+        "t": "淘订单",
+        "url": "/order/taoOrderList"
       }
     ]
   },

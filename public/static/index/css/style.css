@@ -413,6 +413,27 @@ ul,li {
     text-align:center;
     font-size:1.2rem;
 }
+.no_data {
+    width:100%;
+}
+.no_data img {
+
+    width:100%;
+}
+
+/*我们为你推荐*/
+.rec_info {
+    width:100%;
+    height:4rem;
+    line-height:4rem;
+    text-align:center;
+    color:#da5514;
+    font-size:1.8rem;
+    margin-bottom:0.5rem;
+}
+.rec_info span {
+    margin:0 1rem;
+}
 
 /*加载更多*/
 .loadInfo {

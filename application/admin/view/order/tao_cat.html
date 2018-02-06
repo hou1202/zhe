@@ -1,0 +1,302 @@
+
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>查看淘宝客订单
+                        <a href="#/order/taoOrderList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="" data-sendingText="" data-validate="validate">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单编号</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.order_id}" value="{$getOne.order_id}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.name}" value="{$getOne.name}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.goods_id}" value="{$getOne.goods_id}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单状态</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.order_state}" value="{$getOne.order_state}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品数</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.num}" value="{$getOne.num}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">商品单价</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.price}" value="{$getOne.price}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">收入比率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.ratio_collect}" value="{$getOne.ratio_collect}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">分成比率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.ratio_divided}" value="{$getOne.ratio_divided}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">付款金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.real_price}" value="{$getOne.real_price}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">效果预估</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.est_effect}" value="{$getOne.est_effect}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">结算金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.settle_price}" value="{$getOne.settle_price}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">预估收入</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.est_collect}" value="{$getOne.est_collect}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">佣金比率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.ratio_commission}" value="{$getOne.ratio_commission}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">佣金金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.commission}" value="{$getOne.commission}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">补贴比率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.ratio_subsidy}" value="{$getOne.ratio_subsidy}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">补贴金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.subsidy}" value="{$getOne.subsidy}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">补贴类型</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.type_subsidy}" value="{$getOne.type_subsidy}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">结算时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.settle_time}" value="{$getOne.settle_time}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单类型</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.type}" value="{$getOne.type}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">创建时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.build_time}" value="{$getOne.build_time}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">点击时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.click_time}" value="{$getOne.click_time}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">掌柜旺旺</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.wangwang}" value="{$getOne.wangwang}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">所属店铺</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.seller_name}" value="{$getOne.seller_name}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">成交平台</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.trade_plat}" value="{$getOne.trade_plat}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">第三方来源</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.third}" value="{$getOne.third}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">类目名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.class}" value="{$getOne.class}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">来源媒体ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.source_id}" value="{$getOne.source_id}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">媒体名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.source_name}" value="{$getOne.source_name}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">广告位ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.zone_id}" value="{$getOne.zone_id}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">广告位名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="{$getOne.zone_name}" value="{$getOne.zone_name}" readonly >
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

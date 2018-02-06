@@ -13,18 +13,37 @@
     <div class="banner">
         <div class="swiper-container" id="bannerSwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="/static/index/images/1.jpg"></div>
-
-                <div class="swiper-slide"><img src="/static/index/images/2.jpg"></div>
-
-                <div class="swiper-slide"><img src="/static/index/images/3.jpg"></div>
-
+                {foreach name="Banner" item="b"}
+                    <div class="swiper-slide">
+                        <a href="{$b.link}"><img src="{$b.img}" alt="{$b.title}"></a>
+                    </div>
+                {/foreach}
             </div>
         </div>
     </div>
 
     <!--nav--分类-->
     <div class="nav">
+        <ul>
+            {foreach name="Nav" item="n"}
+                <li class="nav_li">
+                    <a href="/index/goods/navCouponList?nav={$n.key}">
+                        <img src="{$n.img}" alt="{$n.title}">
+                        <p>{$n.title}</p>
+                    </a>
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+    <!--设置产品图片宽高一致-->
+    <script>
+        $(document).ready(function(){
+            var widthEle = $(".nav_li img");
+            widthEle.css("height",widthEle.width());
+        });
+    </script>
+
+    <!--<div class="nav">
         <div class="nav-title">
             <a href="/index/goods/navCouponList?nav=女鞋"><img src="/static/index/images/nav_1.png" alt="女鞋"></a>
         </div>
@@ -55,7 +74,7 @@
         <div class="nav-title">
             <a href="/index/goods/navCouponList?nav=男装"><img src="/static/index/images/nav_10.png" alt="男装"></a>
         </div>
-    </div>
+    </div>-->
 
     <!--exchange--兑换-->
     <div class="exchange">

@@ -8,12 +8,40 @@
 /*nav导航*/
 .nav {
     width:100%;
-    padding:0 5px 15px 5px;
+    padding:5px 5px 10px 5px;
     border-bottom:1px solid #dcdcdc;
 }
-.nav-title {
+.nav ul{
+    width:100%;
+    overflow:hidden;
+    margin-bottom:0;
+    padding-left:0;
+}
+.nav ul li {
     width:20%;
-    /*height:5rem;*/
+    float:left;
+    text-align:center;
+}
+.nav .nav_li {
+    padding:0.4rem;
+}
+.nav .nav_li a {
+    display:block;
+    color:#da5514;
+}
+.nav .nav_li img{
+    width:60%;
+}
+.nav .nav_li p{
+    margin:0.4rem 0;
+    font-size:1.5rem;
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow:hidden;
+}
+/*.nav-title {
+    width:20%;
+    !*height:5rem;*!
     padding:1.5rem;
     float:left;
 }
@@ -23,7 +51,7 @@
 }
 .nav-title img {
     width:95%;
-}
+}*/
 
 /*exchange兑换区*/
 .exchange {

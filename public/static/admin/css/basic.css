@@ -166,7 +166,7 @@ body{width:100%;min-height:100%;background:#ededed;}
  *对bootstrap的补全或覆盖
  *============================
  */
-.table , .table th{text-align:center;}
+.table , .table th{text-align:center;vertical-align:middle; }
 
 .table thead,.table tfoot{background:#ebebeb;}
 .form-inline .gap{display:inline-block;width:10px;}
@@ -185,6 +185,7 @@ button i,a i{margin-right:6px;}
 form .title_bar{padding:8px 10px;font-weight:bold;background:#ebebeb;border-bottom:2px solid #ddd;margin-bottom:14px;}
 .form-horizontal .modal-content .form-group {margin-left:0 !important;margin-right:0 !important;}
 .modal-header .modal-title{font-size:16px;}
+.table td{vertical-align:middle !important;}
 
 /**
  *============================

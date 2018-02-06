@@ -253,6 +253,10 @@ return [
         //Platform 1：PC，2：无线
         'P_Platform' => '1',
         'W_Platform' => '2',
+    //使用奖金比率（奖金=佣金*比率）
+    'bonus_ratio' => '0.3',
+    //邀请人奖金比率（奖金=购买人奖金*比率）
+    'invite_ratio' => '0.3',
 
 
 

@@ -11,7 +11,6 @@ use app\common\controller\CommController;
 use app\common\controller\ReturnJson;
 use app\index\model\User;
 use think\Hook;
-use think\Controller;
 use think\Cookie;
 
 class Personal extends CommController {

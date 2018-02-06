@@ -49,7 +49,7 @@ class Banner extends Model
    * @getBannerForList Banner列表显示
    * */
     public function getBannerForList(){
-        return $this -> field('id,title,img,type,shape,link,state,create_time')
+        return $this -> field('id,title,img,type,shape,link,state,sort,create_time')
             //-> order('l.id DESC')
             -> paginate(10,false,['path' => '/admin/main#/banner/bannerList' ]);
     }

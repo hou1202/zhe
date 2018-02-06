@@ -7,18 +7,20 @@
 <!--order-push--订单提交-->
 <div class="order_push">
     <div class="order_push_form">
-        <form method="post" action="">
+        <form method="post" action="" id="order_form">
             <label for="order_push_num" class="order_push_input">
-                <input type="text" name="number" id="order_push_num"  placeholder="请将淘宝购物订单编号复制到这里进行提交"/>
+                <input type="text" name="order_num" id="order_push_num"  placeholder="请将淘宝购物订单编号复制到这里进行提交"/>
             </label>
             <label for="order_push_submit" class="order_push_input order_push_input_submit">
-                <input type="submit" value="提交订单" id="order_push_submit" />
+                <input type="button" value="提交订单" id="order_push_submit" />
             </label>
         </form>
     </div>
 
     <div class="order_push_info">
-        <p><i class="glyphicon glyphicon-off"></i> 奖励规则：提交您通过本平台复制淘口令下单购买的商品订单号，您将可以拿到由平台发放的平台使用奖励金。</p>
+        <p><strong>奖励规则</strong></p>
+        <p><i class="glyphicon glyphicon-off"></i>  提交您通过本平台复制淘口令下单购买的商品订单号，您将可以拿到由平台发放的平台使用奖励金。</p>
+        <p><i class="glyphicon glyphicon-off"></i>  您所提交的订单信息，将在平台确认该订单已交易完成后48小时内将奖励金发放至您的平台账户。</p>
         <p class="info_bottom cat_bonus"><i class="glyphicon glyphicon-fire"></i> 如何查看平台奖励金？</p>
         <p class="info_bottom cat_order"><i class="glyphicon glyphicon-fire"></i> 如何获取淘宝订单号？</p>
     </div>
@@ -82,6 +84,38 @@
     function showDiv() {
         $(myOrder).fadeIn();
     }
+</script>
+
+<script>
+    $("#order_push_submit").on('click',function(){
+        /*alert(1);*/
+        var order = $('#order_push_num').val();
+
+        if($.trim(order) == ''){
+            showAlertAutoClose("提交订单编号不得为空");
+            return false;
+        }
+
+        if($.trim(order).length != 18 || isNaN($.trim(order))) {
+            showAlertAutoClose("订单编号格式有误，请重新确认");
+            return false;
+        }
+
+        $.ajax({
+            url:"/index/order/orderPush",
+            type:"POST",
+            dataType: "json",
+            //data:'phone:phone,password:password,invitation:invitation,code:code',
+            data:$('#order_form').serialize(),
+            success:function(data){
+                jsonAlertAutoClose(data)
+            },
+            error:function () {
+                showAlertAutoClose("网络错误，请重试...");
+            }
+        });
+
+    });
 </script>
 
 

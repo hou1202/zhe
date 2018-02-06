@@ -1,0 +1,207 @@
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>更新订单
+                        <a href="#/order/orderList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="/admin/order/orderUpdate" data-sendingText="正在为您积极努力的去提交信息。。。" data-validate="validate">
+                                        <input type="hidden"  value="{$getOne.id}" name="id">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单号</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="订单号" value="{$getOne.order_id}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提交用户</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提交用户" value="{$getOne.user_name}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">产品名称</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="产品名称" value="{$getOne.name}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">产品ID</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="产品ID" value="{$getOne.goods_id}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">所属平台</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="所属平台" value="{$getOne.type}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">产品单价</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="产品单价" value="{$getOne.price}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">实付金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="实付金额" value="{$getOne.real_price}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">产品数量</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="产品数量" value="{$getOne.num}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">产品佣金</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="产品佣金" value="{$getOne.commission}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单奖金</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="订单奖金" value="{$getOne.bonus}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">邀请人</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="邀请人" value="{$getOne.p_user_name}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单返利</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="订单返利" value="{$getOne.invitation_bonus}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">下单时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="下单时间" value="{$getOne.build_time}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提交时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提交时间" value="{$getOne.create_time}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">订单状态</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="订单状态" value="{$getOne.order_state}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">审核状态</label>
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label>
+                                                        <input type="radio" name="state" value="0" {$getOne.state=="待审核"?="checked"}/> 待审核
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="state" value="1" {$getOne.state=="通过审核"?="checked"} /> 通过审核
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="state" value="2" {$getOne.state=="驳回审核"?="checked"} /> 驳回审核
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <div class=" col-sm-12">
+                                                <button type="button" class="btn btn-primary J_ajaxSubmitBtn">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<script>
+    /*数据验证JS脚本*/
+    function callback1(returnData, $from) {
+        console.log($from);
+    }
+    function validate($from) {
+        var state = $from.find('input[name="state"]');
+        if ($.trim(state.val()) == '') {
+            return '提交修改状态信息不能为空';
+        }
+
+        return true;
+    }
+</script>
+

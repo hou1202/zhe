@@ -3,3 +3,4 @@ composer.lock
 *.log
 public/runtime
 application/database.php
+public/upload

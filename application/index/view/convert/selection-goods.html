@@ -52,7 +52,7 @@
             <div class="strip-title">
                 <img src="/static/index/images/t-logo-{$l->user_type}.png" class="user_type">
                 <a><span class="title">{$l->title|mb_substr=0,25,'utf-8'}</span></a>
-                <a><p class="strip-goods-after">券后价：￥<samp class="after_price">{if condition="($l->zk_final_price-$l->coupon_info)<0"}0{else /}{$l->zk_final_price-$l->coupon_info}{/if}</samp></p></a>
+                <a><p class="strip-goods-after">券后价：￥<samp class="after_price">{$l->coupon_price}</samp></p></a>
                 <a><p class="strip-goods-before">原价：￥<samp class="before_price">{$l->zk_final_price}</samp></p></a>
                 <a><p>销量：<samp class="vol">{$l->volume}</samp></p></a>
             </div>
@@ -62,6 +62,7 @@
                     <P>￥ <samp class="coupon">{$l->coupon_info}</samp></P>
                 </a>
             </div>
+            <!--显示未展示数据-->
             <div style="display:none">
                 <p class="g_id">{$l->num_iid}</p>
                 <p class="tao_url">{$l->click_url}</p>
@@ -78,6 +79,7 @@
         上拉加载更多好东西......
     </div>
 
+    <!--进入产品详情-->
     <script>
         $("#parent_click").on('click','.click_get',function(){
             var g_title = $(this).find(".title").text();
@@ -121,8 +123,7 @@
         });
     </script>
 
-
-
+    <!--选中效果控制，暂时无效-->
     <script>
         $(function() {
             $(".screen_lists").on("click",'.parent_click',function() {

@@ -43,6 +43,15 @@
                                         <hr/>
 
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">Banner排序</label>
+                                            <div class="col-sm-6">
+                                                <input type="number" class="form-control" placeholder="数字越大越靠前（1-100）" name="sort" >
+                                            </div>
+                                            <p class="col-sm-4 help-block">*必填</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
                                             <label class="col-sm-2 control-label">Banner图片</label>
                                             <div class="col-sm-6">
                                                 <div style="text-align:center;">
@@ -232,7 +241,6 @@
         var shape = $from.find('input[name="shape"]');
         var state = $from.find('input[name="state"]');
         var link = $from.find('input[name="link"]');
-        console.log($.trim(title.val()).length);
         if ($.trim(title.val()) == '' || $.trim(title.val()).length > 10) {
             return 'Banner标题不能为空且长度不得大于10个字';
         }

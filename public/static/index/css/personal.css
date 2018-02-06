@@ -482,7 +482,24 @@
     margin-bottom:0;
     text-decoration:underline;
 }
-cat_order_hidden
+.order_push .cat_comm{
+    display:none;
+    width:90%;
+    padding: 1.5rem 1rem;
+    margin:0 5%;
+    background:#fff;
+    color:#da5514;
+    text-indent: 30px;
+    font-size:1.5rem;
+    border:1px solid #da5514;
+    border-radius:5px;
+    position:absolute;
+    top:10rem;
+
+}
+.order_push .cat_comm img{
+    width:100%;
+}
 
 /*order_verify--订单审核*/
 .order_verify {
@@ -491,7 +508,7 @@ cat_order_hidden
 }
 .order_verify .verify_block {
     width:100%;
-    height:13.2rem;
+    height:10.5rem;
     border-bottom:1px solid #dcdcdc;
     padding-top:1rem;
 }
@@ -504,32 +521,36 @@ cat_order_hidden
 }
 .order_verify .verify_block .verify_message {
     width:100%;
-    height:7.5rem;
-    padding-top:0.5rem;
+    height:5rem;
+    padding:0.5rem 0 0 1rem;
 }
 .order_verify .verify_block .verify_message .verify_img {
-    width:7rem;
+    /*width:7rem;
     height:7rem;
     text-align:center;
     border:1px solid #da5514;
     border-radius:5px;
-    padding:0.25rem;
+    padding:0.25rem;*/
+    height:4.5rem;
+    line-height:4.5rem;
+    color:#da5514;
     float:left;
 }
-.order_verify .verify_block .verify_message .verify_img img{
+/*.order_verify .verify_block .verify_message .verify_img img{
     width:6.3rem;
     height:6.3rem;
-}
+}*/
 .order_verify .verify_block .verify_message .verify_message_info {
-    width:58%;
-    height:7rem;
+    width:70%;
+    height:4.5rem;
+    line-height:2rem;
     padding:0 0.5rem;
     float:left;
     text-indent:2rem;
 }
 .order_verify .verify_block .verify_message .verify_message_info span {
     font-size:1.2rem;
-
+    color:#da5514;
 }
 .order_verify .verify_block .verify_message .verify_message_info p{
     text-indent:1rem;
@@ -541,6 +562,7 @@ cat_order_hidden
     width:100%;
     height:2rem;
     line-height:2rem;
+
 }
 .order_verify .verify_block .verify_time p {
     margin-bottom:0;
@@ -551,7 +573,7 @@ cat_order_hidden
 }
 .order_verify .verify_block .verify_message .state_com{
     width:5rem;
-    height:7rem;
+    height:4.5rem;
     float:left;
     overflow:hidden;
 }
@@ -562,7 +584,7 @@ cat_order_hidden
     line-height:2.5rem;
     color:#fff;
     border-radius:5px;
-    margin-top:2.25rem;
+    margin-top:1rem;
 }
 .order_verify .verify_block .verify_message .verify_state p {
     background:#da5514;

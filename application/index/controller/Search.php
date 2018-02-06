@@ -8,7 +8,6 @@
 namespace app\index\controller;
 
 
-use app\api\controller\request\TbkItemGetRequest;
 use app\api\controller\request\TbkDgItemCouponGetRequest;
 use app\api\controller\TopClient;
 use app\common\controller\CommController;
@@ -16,9 +15,10 @@ use think\config as ThinkConfig;
 use app\api\controller\request\WirelessShareTpwdQueryRequest;
 use app\api\controller\request\TbkItemInfoGetRequest;
 use app\api\controller\request\WirelessShareTpwdCreateRequest;
-use app\api\controller\request\TbkItemConvertRequest;
 use app\api\controller\dmain\GenPwdIsvParamDto;
 use app\common\controller\ReturnJson;
+use app\common\controller\ApiDataHandle;
+use app\common\controller\SetBaseData;
 
 
 use app\common\controller\ReturnGoodsList;
@@ -31,36 +31,15 @@ class Search extends CommController
     public function searchApi(){
         if($this->request->isGet()){
             $data = $this->request->get();
-            //var_dump($data);die;
             if(isset($data['keyword']) && !empty($data['keyword'])){
-                //var_dump($data);die;
-
-                /*$c = new TopClient;
-                $c->appkey = ThinkConfig::get('T_AppKey');
-                $c->secretKey = ThinkConfig::get('T_AppSecret');
-                $req = new TbkDgItemCouponGetRequest;
-                $req->setAdzoneId(ThinkConfig::get('A_zoneId'));
-                $req->setQ($data['keyword']);
-                $req->setPlatform(ThinkConfig::get('W_Platform'));
-                $req->setPageSize('100');
-                $resp = $c->execute($req);
-
-                if(empty($resp->results)){
-                    $List = NULL;
-                }else{
-                    foreach($resp->results->tbk_coupon as $value){
-                        $arrayPrice = array();
-                        preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
-                        $value->coupon_info = $arrayPrice[0][1];
-                    }
-                    $List = $resp->results->tbk_coupon;
-                }*/
                 if(isset($data['startNum'])){
-                    $goodsList = $this -> getTaoGoodApiData($data['keyword'],$data['startNum']);
+                    //获取优惠券产品
+                    $goodsList = ApiDataHandle::getCouponGoodsByKey($data['keyword'],$data['startNum']);
+                    //分页加载数据组装
                     $returnRes = ReturnGoodsList::searchGoodsListByResult($goodsList);
                     echo json_encode($returnRes,JSON_UNESCAPED_UNICODE);
                 }else{
-                    $goodsList = $this -> getTaoGoodApiData($data['keyword']);
+                    $goodsList = ApiDataHandle::getCouponGoodsByKey($data['keyword']);
                     return $this -> fetch('search/search',['List'=>$goodsList]);
                 }
 
@@ -71,7 +50,7 @@ class Search extends CommController
         }
     }
 
-    /*
+    /*x
      * @getTaoGoodApiData 访问API，辅助于普通产品搜索searchApi
      * $key               搜索关键字
      * $pageNo            分布搜索起始页
@@ -103,9 +82,6 @@ class Search extends CommController
         return $List;
     }
 
-    /*protected function showSearch($data){
-        return $this -> fetch('search/search',['List'=>$data]);
-    }*/
 
     /*
      * @commandSearchApi        淘口令搜索
@@ -115,16 +91,21 @@ class Search extends CommController
             $data = $this->request->post();
             //var_dump($data);die;
             if(isset($data['command']) && !empty($data['command'])){
-                $analysis = $this -> getAnalysisCommandApi($data['command']);
-                //var_dump($analysis);die;
+                //解析淘口令
+                $analysis = ApiDataHandle::analysisWirelessCommand($data['command']);
                 if($analysis -> suc){
+                    //分析URL
                     $gid = $this ->explainUrlGetId($analysis->url);
-                    //var_dump($gid);die;
-                    $result = $this->getDetailsByIdApi($gid);
-
-                    //var_dump($goodsList);
+                    //获取商品详情（简单版）
+                    $result = ApiDataHandle::getSimpleGoodsInfoById($gid);
                     if($result){
-                        $goodsList = $goodsList = $this -> getTaoGoodApiData($result->title,1,20);
+                        $goodsList = ApiDataHandle::getCouponGoodsByKey($result->title,1,20);
+                        if($goodsList && count($goodsList)<20){
+                            $num = 19-count($goodsList);
+                            $cat=$goodsList['0']->category;
+                            $catList = ApiDataHandle::getCouponGoodsByCat($cat,1,$num);
+                            $goodsList =array_merge($goodsList,$catList);
+                        }
                         return $this -> fetch('search/analysis_search',['State'=>true,'getOne'=>$result,'List'=>$goodsList]);
                     }else{
                         return $this -> fetch('search/analysis_search',['State'=>false]);
@@ -144,26 +125,19 @@ class Search extends CommController
      * */
     public function commandSearchDetail(){
         if($this->request->isGet()){
-            $data = $this->request->get();
-            if(isset($data['id']) && !empty($data['id'])){
 
-                $result = $this->getDetailsByIdApi($data['id']);
-                if($result){
-                    $command = $this -> setCommandByAnalysisCommand($result->item_url,$result->pict_url,$result->title);
-                    return $this -> fetch('search/analysis_details',['getOne' => $result,'Command'=>$command->model]);
-                }else{
-                    return ReturnJson::ReturnA("未获取到相应的产品信息...");
-                }
-
-
-            }else{
-                return $this -> jsonFail('产品信息有误，请重试...');
-            }
+            $data = $this -> request -> get();
+            //加入产品奖金数据
+            $data['bonus'] = SetBaseData::setGoodsBonus($data['price'],false,$data['ratio']);
+            //生成淘口令
+            $command = ApiDataHandle::getTaoCommand($data['coupon_url'],$data['banner'],$data['name']);
+            //获取推荐产品，随机获取1-20页内的10个产品
+            $recommend = ApiDataHandle::getCouponGoodsByCat($data['category'],rand(1,20),10);
+            return $this -> fetch('convert/selection_details',['getOne'=>$data,'Command'=>$command,'Recom'=>$recommend]);
         }
-
     }
 
-    /*
+    /*x
      * @getAnalysisCommandApi       解析淘口令，辅助于淘口令搜索commandSearchApi
      * $data                        淘口令
      * @return                      返回淘口令解析结果
@@ -176,7 +150,9 @@ class Search extends CommController
         $req = new WirelessShareTpwdQueryRequest;
         $req->setPasswordContent($data);
         $resp = $c->execute($req);
+        //var_dump($resp);die;
         return $resp;
+
     }
 
     /*
@@ -197,6 +173,7 @@ class Search extends CommController
      * @return                  产品详情
      * */
     protected function getDetailsByIdApi($id){
+        //var_dump($id);die;
         $c = new TopClient;
         $c->appkey = ThinkConfig::get('T_AppKey');
         $c->secretKey = ThinkConfig::get('T_AppSecret');
@@ -206,7 +183,8 @@ class Search extends CommController
         $req->setNumIids($id);
         $resp = $c->execute($req);
         //var_dump($resp);die;
-        if($resp->results == null){
+        if($resp->results != null){
+            //var_dump($resp->results->n_tbk_item[0]);die;
             return $resp->results->n_tbk_item[0];
         }else{
             return false;
@@ -232,24 +210,7 @@ class Search extends CommController
         return $resp;
     }
 
-    /**/
-    protected function setUrlExchange(){
-        $c = new TopClient;
-        $c->appkey = ThinkConfig::get('T_AppKey');
-        $c->secretKey = ThinkConfig::get('T_AppSecret');
-        $req = new TbkItemConvertRequest;
-        $req->setFields("num_iid,click_url");
-        $req->setNumIids("123,456");
-        $req->setAdzoneId("123");
-        $req->setPlatform("123");
-        $req->setUnid("demo");
-        $req->setDx("1");
-        $resp = $c->execute($req);
-    }
 
 
 
-    protected function getTaoOrdinApiData($key,$pageNo=1,$pageSize=20){
-
-    }
 }

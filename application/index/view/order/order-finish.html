@@ -6,132 +6,34 @@
 
 <!--order_verify--订单审核-->
 <div class="order_verify">
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
+    {if condition="$Verify"}
+        {foreach name="Verify" item="V"}
+        <div class="verify_block">
+            <div class="verify_title">
+                <span>提交时间：{$V.create_time}</span>
             </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
+            <div class="verify_message">
+                <div class="verify_img">
+                    <i class="glyphicon glyphicon-leaf"></i>
+                </div>
+                <div class="verify_message_info">
+                    <span>订单号</span>
+                    <p>{$V.order_num}</p>
+                </div>
+                <div class="finish_state state_com">
+                    <p>已完成</p>
+                </div>
             </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
-            </div>
-        </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
-        </div>
-    </div>
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
-            </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
-            </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
+            <div class="verify_time">
+                <p><i class="glyphicon glyphicon-screenshot"></i> 处理时间：{$V.update_time}</p>
             </div>
         </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
+        {/foreach}
+    {else /}
+        <div class="no_data">
+            <img src="/static/index/images/no-bg.png">
         </div>
-    </div>
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
-            </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
-            </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
-            </div>
-        </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
-        </div>
-    </div>
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
-            </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
-            </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
-            </div>
-        </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
-        </div>
-    </div>
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
-            </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
-            </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
-            </div>
-        </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
-        </div>
-    </div>
-    <div class="verify_block">
-        <div class="verify_title">
-            <span>订单号：20171225182102142</span>
-        </div>
-        <div class="verify_message">
-            <div class="verify_img">
-                <img src="/static/index/images/goods.jpg" alt="">
-            </div>
-            <div class="verify_message_info">
-                <span>法兰零卡宣一草味女士精品香水 法国进口 纯天然植物萃取</span>
-                <p>优惠券：￥50</p>
-                <p>奖励金：￥500</p>
-            </div>
-            <div class="finish_state state_com">
-                <p>已完成</p>
-            </div>
-        </div>
-        <div class="verify_time">
-            <p>提交时间：2017/12/25 18:21:23</p>
-        </div>
-    </div>
+    {/if}
 
 </div>
 

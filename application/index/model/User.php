@@ -40,6 +40,17 @@ class User extends Model
     }
 
     /*
+     * @ getUserIdByMobile    通过手机号码获取用户ID信息
+     * $phone   用户手机号码
+     * @return 用户完整信息
+     * */
+    public function getUserIdByMobile($phone){
+        return $this->field('id')->where(['phone' => $phone])->find();
+    }
+
+
+
+    /*
      * @ getParentUserIdByInvite    通过邀请码，获取父级用户ID
      * $invite 父级用户邀请码
      * @return id

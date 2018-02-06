@@ -7,14 +7,14 @@
 
     <!--carry--产品详情页面-->
     <div class="details">
-        <img src="{$getOne->pict_url}" alt="" id="tao-img">
+        <img src="{$getOne.banner}" alt="" id="tao-img">
         <div class="details_info">
-            <img src="/static/index/images/t-logo-{$getOne->user_type}.png" alt="">
-            <span id="title">{$getOne->title|mb_substr=0,80,'utf-8'}</span>
+            <img src="{$getOne.type}" alt="">
+            <span id="title">{$getOne.title|mb_substr=0,80,'utf-8'}</span>
             <div class="details_info_price">
-                <p id="quan"><span>券后价：</span>￥{$getOne->zk_final_price}</p>
-                <p><span>原价：</span>￥{$getOne->reserve_price}</p>
-                <p><span>销量：</span>{$getOne->volume}</p>
+                <p id="quan"><span>券后价：</span>￥{$getOne.coupon_price}</p>
+                <p><span>原价：</span>￥{$getOne->price}</p>
+                <p><span>销量：</span>{$getOne->sales}</p>
             </div>
             <div class="details_info_free">
                 <img src="/static/index/images/free-post.png" alt="">
@@ -27,7 +27,7 @@
                     <a href="">领券</a>
                 </div>
                 <div class="details_favour_num">
-                    <a href="">￥ {$getOne->reserve_price-$getOne->zk_final_price}</a>
+                    <a href="">￥ {$getOne.coupon_money}</a>
                 </div>
             </div>
             <div class="details_bonus">
@@ -35,13 +35,13 @@
                     奖 金
                 </div>
                 <div class="details_bonus_num">
-                    ￥ {$getOne->reserve_price-$getOne->zk_final_price}
+                    ￥ {$getOne.bonus}
                 </div>
             </div>
         </div>
         <div class="details_image">
             <i class="glyphicon glyphicon-send"></i>
-            <a href="{$getOne->item_url}">查看商品图文详情</a>
+            <a href="{$getOne.detail_url}">查看商品图文详情</a>
             <i class="glyphicon glyphicon-chevron-right"></i>
         </div>
         <div class="details_image_hidden">
@@ -51,7 +51,36 @@
         <div class="details_recommend">
 
             <h2>看看还有什么</h2>
-
+            {foreach name="Recom" item="r"}
+            <div class="block-goods click_get">
+                <a  class="goods-thumbnail"><img src="{$r->pict_url}" class="img_url"></a>
+                <div class="goods-title">
+                    <img src="/static/index/images/t-logo-{$r->user_type}.png" class="user_type">
+                    <a><span class="title">{$r->title|mb_substr=0,19,'utf-8'}</span></a>
+                </div>
+                <div class="goods-price">
+                    <span class="price-before">券价：￥<samp class="after_price">{$r->coupon_price}</samp></span>
+                    <span class="price-after">￥<samp class="before_price">{$r->zk_final_price}</samp></span>
+                    <div class="price-vou">
+                        <div class="vou-title">
+                            <a>领券</a>
+                        </div>
+                        <div class="vou-num">
+                            <a>￥ <samp class="coupon">{$r->coupon_info}</samp></a>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none">
+                    <p class="g_id">{$r->num_iid}</p>
+                    <p class="vol">{$r->volume}</p>
+                    <p class="tao_url">{$r->coupon_click_url}</p>
+                    <p class="coupon_url">{$r->coupon_click_url}</p>
+                    <p class="item_url">{$r->item_url}</p>
+                    <p class="rate">{$r->commission_rate}</p>
+                    <p class="category">{$r->category}</p>
+                </div>
+            </div>
+            {/foreach}
 
 
         </div>
@@ -119,6 +148,50 @@
         function showDiv() {
             $(myCarry).fadeIn();
         }
+    </script>
+
+    <!--产品详情跳转-->
+    <script>
+        $("#parent_click").on('click','.click_get',function(){
+            var g_title = $(this).find(".title").text();
+            var img_url = $(this).find(".img_url").attr("src");
+            var before_price = $(this).find(".before_price").text();
+            var after_price = $(this).find(".after_price").text();
+            var vol = $(this).find(".vol").text();
+            var coupon = $(this).find(".coupon").text();
+            var g_id = $(this).find(".g_id").text();
+            var tao_url = $(this).find(".tao_url").text();
+            var coupon_url = $(this).find(".coupon_url").text();
+            var item_url = $(this).find(".item_url").text();
+            var rate = $(this).find(".rate").text();
+            var user_type = $(this).find(".user_type").attr("src");
+            var category = $(this).find(".category").text();
+            /*console.log(category);
+             console.log(g_title);
+             console.log(img_url);
+             console.log(before_price);
+             console.log(after_price);
+             console.log(vol);
+             console.log(coupon);
+             console.log(g_id);
+             console.log(tao_url);
+             console.log(coupon_url);
+             console.log(item_url);
+             console.log(rate);*/
+            window.location.href ="/index/convert/selectionDetails?goods_id="+g_id+"" +
+                "&name="+g_title+"" +
+                "&banner="+img_url+"" +
+                "&detail_url="+item_url+"" +
+                "&tao_url="+tao_url+"" +
+                "&price="+before_price+"" +
+                "&coupon_price="+after_price+"" +
+                "&sales="+vol+"" +
+                "&ratio="+rate+"" +
+                "&type="+user_type+"" +
+                "&coupon_money="+coupon+"" +
+                "&coupon_url="+coupon_url+""+
+                "&category="+category+"";
+        });
     </script>
 
     <!--设置产品图片宽高一致-->

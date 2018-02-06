@@ -11,6 +11,7 @@ use app\admin\controller\ReturnJson;
 use app\index\model\Goods;
 use think\Controller;
 use app\common\controller\ReturnGoodsList;
+use think\Db;
 
 class Index extends Controller
 {
@@ -22,10 +23,12 @@ class Index extends Controller
            $data = ReturnGoodsList::indexGoodsListByResult($List);
            echo json_encode($data,JSON_UNESCAPED_UNICODE);
        }else{
+           $nav = Db::table('think_nav') -> field('title,img,key') -> where('state',1) -> order('sort DESC') ->limit(10) -> select();
+           $banner = Db::table('think_banner') -> field('title,img,shape,link') -> where('state',1) -> where('type',0) -> order('sort DESC') -> select();
            $Perfect = $goods ->getIndexPerfectCoupon();
            $Hot = $goods ->getIndexHotCoupon();
            $List = $goods ->getIndexListCoupon();
-           return $this -> fetch('index/index',['Perfect'=>$Perfect,'Hot'=>$Hot,'List'=>$List]);
+           return $this -> fetch('index/index',['Perfect'=>$Perfect,'Hot'=>$Hot,'List'=>$List,'Nav'=>$nav,'Banner'=>$banner]);
        }
 
     }
