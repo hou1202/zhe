@@ -42,10 +42,18 @@ class Order extends Model
      * $type        订单状态
      * */
     public function getUserOrderById($id,$type){
-        return $this -> field('id,order_num,create_time')
+        return $this -> field('id,order_id,create_time,update_time')
                     -> where('user_id',$id)
                     -> where('state',$type)
                     -> select();
 
+    }
+
+    /*
+     * @getOrderInfoByOrderId       通过订单ID判断订单是否存在
+     * $orderId                     订单ID
+     * */
+    public function getOrderInfoByOrderId($orderId){
+        return $this-> field('id,order_id') -> where('order_id',$orderId) -> find();
     }
 }

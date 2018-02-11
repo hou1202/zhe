@@ -58,7 +58,7 @@
 
     <!--so--搜索-->
     <div class="so">
-        <form method="post" action="">
+        <form method="get" action="/index/search/searchApi" id="search_form">
             <label for="so-keywords" class="so-input-label">
                 <input type="text" name="keyword" id="so-keywords" class="so-input" placeholder="请输入要搜索的产品名称" />
             </label>
@@ -68,17 +68,28 @@
         </form>
     </div>
 
+    <script>
+        $("#so_submit").on('click',function(){
+            var key = $("#so-keywords").val();
+
+            if(key == ''){
+                showAlertAutoClose("请输入您要搜索的产品关键字...");
+                return false;
+            }
+        });
+    </script>
+
     <!--funct--功能版块-->
     <div class="fun">
-        <div class="fun-sect">
+        <!--<div class="fun-sect">
             <a href="collection.html">我的收藏</a>
-        </div>
+        </div>-->
         <div class="fun-sect">
             <a href="/index/invitation/invitation">邀请好友</a>
         </div>
-        <div class="fun-sect">
+        <!--<div class="fun-sect">
             <a href="test.html">每日签到</a>
-        </div>
+        </div>-->
         <div class="fun-sect">
             <a href="/index/friends/friends">我的好友</a>
         </div>

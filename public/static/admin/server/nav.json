@@ -66,6 +66,14 @@
         "url": "/order/orderList"
       },
       {
+        "t": "待处理列表",
+        "url": "/order/pendingList"
+      },
+      {
+        "t": "超时订单",
+        "url": "/order/obsoleteList"
+      },
+      {
         "t": "淘订单",
         "url": "/order/taoOrderList"
       }

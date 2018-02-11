@@ -99,4 +99,31 @@ class User extends Model
             ->count();
     }
 
+    /*
+     * @setUserMoney        设置用户帐号金额变更
+     * $id                  用户id
+     * $num                 变更数值，默认为1
+     * $type                变更的类型，
+     *      0 =》 增加，默认，影响字段
+     *          balance  账户余额
+     *          amount   账户总额
+     *      1 =》 减少，影响字段
+     *          balance  账户余额
+     *
+     *
+     * */
+    public function setUserMoney($id,$num=1,$type=0){
+        switch($type){
+            case 0:
+                return $this -> where('id',$id) -> inc('balance',$num) -> inc('amount',$num) -> update();
+                break;
+            case 1:
+                return $this -> where('id',$id)->setDec('balance',$num);
+                break;
+            default:
+                return false;
+                break;
+        }
+    }
+
 }

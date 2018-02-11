@@ -55,6 +55,22 @@ class TaoOrder extends Model
                     -> find();
     }
 
+    /*
+     * @getSearchTaoOrderByKeyword         关键词搜索淘宝客订单
+     * */
+    public function getSearchTaoOrderByKeyword($key){
+        return $this -> field('order_id,name,num,real_price,ratio_commission,commission,subsidy,est_effect,order_state,build_time,settle_time')
+            ->where('order_id|name','like','%'.$key.'%')
+            -> paginate(10,false,['path' => '/admin/main#/order/taoOrderList' ]);
+    }
+
+    /*
+     * @ getCountOrder   统计搜索淘宝客订单数量
+     * */
+    public function getCountSearchTaoOrder($key){
+        return $this -> where('order_id|name','like','%'.$key.'%') -> count('order_id');
+    }
+
 
 
 
