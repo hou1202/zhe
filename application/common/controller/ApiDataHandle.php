@@ -61,9 +61,7 @@ class ApiDataHandle
         }else{
             foreach($resp->results->tbk_coupon as $value){
                 //对coupon_info优惠券金额字段进行处理
-                $arrayPrice = array();
-                preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
-                $value->coupon_info = $arrayPrice[0][1];
+                $value->coupon_info = SetBaseData::setCouponInfo($value->coupon_info);
                 //加入券后金额字段coupon_price，并对字段进行处理
                 $value->coupon_price = $value->zk_final_price-$value->coupon_info;
                 if($value->coupon_price < 0){
@@ -100,9 +98,14 @@ class ApiDataHandle
         }else{
             foreach($resp->results->tbk_coupon as $value){
                 //对coupon_info优惠券金额字段进行处理
-                $arrayPrice = array();
-                preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
-                $value->coupon_info = $arrayPrice[0][1];
+                //$arrayPrice = array();
+                //preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
+                if(isset($value->coupon_info)){
+                    $value->coupon_info = SetBaseData::setCouponInfo($value->coupon_info);
+                }else{
+                    $value->coupon_info = 0;
+                }
+
                 //加入券后金额字段coupon_price，并对字段进行处理
                 $value->coupon_price = $value->zk_final_price-$value->coupon_info;
                 if($value->coupon_price < 0){
@@ -138,17 +141,15 @@ class ApiDataHandle
         if(empty($resp->results)){
             $List = NULL;
         }else{
-            foreach($resp->results->uatm_tbk_item as $value){
+            foreach($resp->results->uatm_tbk_item as $key=>$value){
                 //判断产品状态，如果产品状态为0，则清除掉此条数据
                 if($value->status == 0){
-                    unset($value);
+                    unset($resp->results->uatm_tbk_item[$key]);
                 }else{
                     //判断产品是否有优惠券信息或优惠券信息是否有效，并进行数据处理
                     if(isset($value->coupon_info) && $value->coupon_info != '无'){
                         //对coupon_info优惠券金额字段进行处理
-                        $arrayPrice = array();
-                        preg_match_all('/\d+/',$value->coupon_info,$arrayPrice);
-                        $value->coupon_info = $arrayPrice[0][1];
+                        $value->coupon_info = SetBaseData::setCouponInfo($value->coupon_info);
                     }else{
                         $value->coupon_info = 0;
                         $value->coupon_click_url = $value->click_url;

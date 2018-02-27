@@ -7,12 +7,41 @@
     <!--footer-STATER-->
     <div class="footer">
         <ul>
-            <li class="select active"><a href="/"><img src="/static/index/images/home-active.png"/><p>首页</p></a></li>
-            <li class="select"><a href="/index/convert/selection"><img src="/static/index/images/convert.png"/><p>兑换</p></a></li>
-            <li class="select"><a href="/index/goods/couponSquare"><img src="/static/index/images/classify.png"/><p>广场</p></a></li>
-            <li class="select"><a href="/index/personal/personal"><img src="/static/index/images/personal.png"/><p>个人</p></a></li>
+            <li class="select" id="nav-index"><a href="/"><img src="/static/index/images/home.png" id="index-src"/><p>首页</p></a></li>
+            <li class="select" id="nav-convert"><a href="/index/convert/selection"><img src="/static/index/images/convert.png" id="convert-src"/><p>精选</p></a></li>
+            <li class="select" id="nav-goods"><a href="/index/goods/couponSquare"><img src="/static/index/images/classify.png" id="goods-src"/><p>广场</p></a></li>
+            <li class="select" id="nav-personal"><a href="/index/personal/personal"><img src="/static/index/images/personal.png" id="personal-src"/><p>个人</p></a></li>
         </ul>
     </div>
+
+    <!--底部导航状态-->
+    <script>
+        $(function() {
+            var nav_url = window.location.pathname;
+            var nav_arr = nav_url.split("/");
+            var nav_str = nav_arr['2'];
+            var nav_index = ["index","search"];
+            var nav_convert = ["convert"];
+            var nav_goods = ["goods"];
+            var nav_personal = ["personal","invitation","order","friends","carry","info","notice"];
+            if($.inArray(nav_str,nav_index) != -1){
+                $('#nav-index').addClass('active');
+                $('#index-src').attr("src","/static/index/images/home-active.png");
+            }else if($.inArray(nav_str,nav_convert) != -1){
+                $('#nav-convert').addClass('active');
+                $('#convert-src').attr("src","/static/index/images/convert_active.png");
+            }else if($.inArray(nav_str,nav_goods) != -1){
+                $('#nav-goods').addClass('active');
+                $('#goods-src').attr("src","/static/index/images/classify-active.png");
+            }else if($.inArray(nav_str,nav_personal) != -1){
+                $('#nav-personal').addClass('active');
+                $('#personal-src').attr("src","/static/index/images/personal_active.png");
+            }else{
+                $('#nav-index').addClass('active');
+                $('#index-src').attr("src","/static/index/images/home-active.png");
+            }
+        });
+    </script>
 
     <!--<script>
             $(".select").on("click",function(){

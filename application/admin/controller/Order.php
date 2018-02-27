@@ -119,7 +119,7 @@ class Order extends CommController
             $insert['commission'] = $getOne['commission'];
             $insert['build_time'] = $getOne['build_time'];
             $insert['order_state'] = $getOne['order_state'];
-            $insert['bonus'] = SetBaseData::setGoodsBonus($getOne['commission'],true,ThinkConfig::get('bonus_ratio'));
+            $insert['bonus'] = SetBaseData::setGoodsBonus($getOne['commission'],true,null,ThinkConfig::get('bonus_ratio'));
             $insert['invitation_bonus'] = SetBaseData::setOrderRebate($insert['bonus']);
             //var_dump($insert['invitation_bonus']);die;
 

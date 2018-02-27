@@ -55,6 +55,7 @@ class Convert extends Controller {
                 echo json_encode($returnRes,JSON_UNESCAPED_UNICODE);
             }else{
                 $goodsList = ApiDataHandle::getFavoritesGoodsById($data['id']);
+                //var_dump($goodsList);die;
                 return $this -> fetch('convert/selection-goods',['List'=>$goodsList]);
             }
         }else{
