@@ -34,7 +34,10 @@ class Login extends CommController
                     $invitation = $_GET['invitation'];
                 }
             }
-            return $this -> fetch ('login/attestation',['invitation' => $invitation]);
+            if(Cookie::has('invitation')){
+                $invitation = Cookie::get('invitation');
+            }
+            return $this -> fetch('login/attestation',['invitation' => $invitation]);
         }
     }
 
@@ -146,5 +149,15 @@ class Login extends CommController
             $key .= $pattern{mt_rand(0,33)};    //生成php随机数
         }
         return $key;
+    }
+
+    public function share(){
+        if($this -> request -> get()){
+            if(isset($_GET['invitation']) && !empty($_GET['invitation'])){
+                $invitation = $_GET['invitation'];
+                Cookie::set('invitation',$invitation);
+            }
+        }
+        return $this->fetch('share/share');
     }
 }

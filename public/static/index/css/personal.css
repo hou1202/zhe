@@ -195,7 +195,6 @@
 .invite .invite_id {
     height:25rem;
     text-align:center;
-    border-bottom:1px solid #dcdcdc;
     padding:3.75rem 0;
     position: relative;
 }
@@ -228,6 +227,21 @@
     padding:0.15rem 0.3rem;
     border:1px solid #960202;
     border-radius:5px;
+}
+.invite .invite_share {
+    height:5rem;
+    padding:1rem 2rem;
+    border-top:1px solid #dcdcdc;
+    border-bottom:1px solid #dcdcdc;
+}
+.invite .invite_share .share_text {
+    height:3rem;
+    line-height:3rem;
+    width:100%;
+    border:1px solid #da5514;
+    border-radius:5px;
+    resize: none;
+    padding:0 0.5rem;
 }
 .invite .invite_rule {
     width:100%;

@@ -1,0 +1,55 @@
+body {
+    background:#960202;
+    font-size:62.5%;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.share {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:url(/static/index/images/share-back.png) no-repeat;
+    background-size:100% 100%;
+    position:relative;
+}
+.share .share_logo{
+    width:100%;
+    height:5rem;
+    text-align:center;
+    margin-top:8rem;
+}
+.share .share_logo img{
+    width:5rem;
+}
+.share .share_text{
+    width:100%;
+    text-align:center;
+    margin-top:2rem;
+}
+.share .share_text img{
+    width:100%;
+}
+.share .share_button{
+    width:100%;
+    height:5rem;
+    line-height:5rem;
+    text-align:center;
+    margin-top:3rem;
+}
+.share .share_button .a_button {
+    width:30%;
+    float:left;
+    padding:0.5rem 1rem;
+}
+.share .share_button .button_left {
+    margin:0 5% 0 15%;
+}
+.share .share_button .button_right {
+    margin:0 15% 0 5%;
+}
+.share .share_button .a_button a {
+    display:block;
+}
+.share .share_button .a_button img{
+    width:100%;
+}

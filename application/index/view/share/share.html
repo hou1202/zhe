@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>折金券,恭喜你有喜了！</title>
+    <meta name="keywords" content="购物有喜三重奏，优惠券、惊喜礼、邀请礼，让你购物惊喜享不停。。。" />
+    <meta name="description" content="购物有喜三重奏，优惠券、惊喜礼、邀请礼，让你购物惊喜享不停。。。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--
+    --apple-mobile-web-app-capable
+    --safari私有meta标签
+    --允许全屏模式浏览，隐藏浏览器导航栏
+    -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--
+    --apple-mobile-web-app-status-bar-style
+    --iphone的私有标签
+    --指定的iphone中safari顶端的状态条的样式
+    --默认值为default（白色），可以定为black（黑色）和black-translucent（灰色半透明）
+    -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="icon" type="image/x-icon"  href="/static/index/images/favicon.ico">
+
+
+    <link rel="stylesheet" href="/static/index/css/bootstrap.min.css"  />
+    <link rel="stylesheet" href="/static/index/css/share.css"  />
+
+    <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="/static/index/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="share" id="share">
+        <div class="share_logo">
+            <img src="/static/index/images/logo-share.png">
+        </div>
+        <div class="share_text">
+            <img src="/static/index/images/share-text.png">
+        </div>
+        <div class="share_button">
+            <div class="a_button button_left">
+                <a href="/" ><img src="/static/index/images/look.png"></a>
+            </div>
+            <div class="a_button button_right">
+                <a href="/index/login/attestation"><img src="/static/index/images/reg.png"></a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function(){
+            var widthEle = $(window).height();
+            $("#share").css("height",widthEle);
+        });
+    </script>
+
+</body>
+</html>

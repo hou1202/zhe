@@ -7,9 +7,12 @@
     <!--collect--邀请好友-->
     <div class="invite">
         <div class="invite_id">
-            <img src="/static/index/images/invite_bg.png" alt="">
-            <p class="invite_num"><span >{$invitation.invite}</span></p>
-            <p class="invite_sub"><a href=""><span >马上邀请</span></a></p>
+                <img src="/static/index/images/invite_bg.png" alt="">
+                <p class="invite_num"><span >{$invitation.invite}</span></p>
+                <p class="invite_sub"><a onClick="copyButton()"><span >马上邀请</span></a></p>
+        </div>
+        <div class="invite_share">
+            <textarea readonly="" id="clip_text" class="share_text">web.zhe.com/index/login/share?invitation={$invitation.invite}</textarea>
         </div>
         <div class="invite_rule">
             <h2>邀请规则</h2>
@@ -21,6 +24,31 @@
             </div>
         </div>
     </div>
+
+    <!--一键复制邀请地址-->
+    <script type="text/javascript">
+        function copyButton() {
+            var NumClip=document.getElementById("clip_text");
+            var NValue=NumClip.value;
+            var valueLength = NValue.length;
+            selectText(NumClip, 0, valueLength);
+            document.execCommand("Copy","false",null); // 执行浏览器复制命令
+            showAlertAutoClose("已功功复制邀请地址，快去分享给好友吧！");
+        }
+        // input自带的select()方法在苹果端无法进行选择，所以需要自己去写一个类似的方法
+        function selectText(obj, startIndex, stopIndex) {
+            if (obj.setSelectionRange) {
+                obj.setSelectionRange(startIndex, stopIndex);
+            } else if (obj.createTextRange) {
+                var range = obj.createTextRange();
+                range.collapse(true);
+                range.moveStart('character', startIndex);
+                range.moveEnd('character', stopIndex - startIndex);
+                range.select();
+            }
+            obj.focus();
+        }
+    </script>
 
 
 

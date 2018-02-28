@@ -21,8 +21,9 @@ class Test extends CommController {
      * * */
     public function index()
     {
-        $goodsList = ApiDataHandle::test();
-        var_dump($goodsList);die;
+        //$goodsList = ApiDataHandle::test();
+        //var_dump($goodsList);die;
+        return $this->fetch('index/test');
 
     }
 
