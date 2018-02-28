@@ -242,6 +242,7 @@
     border-radius:5px;
     resize: none;
     padding:0 0.5rem;
+    font-size:1.2rem;
 }
 .invite .invite_rule {
     width:100%;
