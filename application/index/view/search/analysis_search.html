@@ -75,6 +75,7 @@
                             <p class="item_url">{$l->item_url}</p>
                             <p class="rate">{$l->commission_rate}</p>
                             <p class="category">{$l->category}</p>
+                            <p class="vol">{$l->volume}</p>
                         </div>
                     </div>
 
@@ -153,7 +154,6 @@
     <!--进入产品详情-->
     <script>
         $(".click_get").on('click',function(){
-            alert('1111');
             var g_title = $(this).find(".title").text();
             var img_url = $(this).find(".img_url").attr("src");
             var before_price = $(this).find(".before_price").text();
