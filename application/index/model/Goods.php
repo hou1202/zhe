@@ -24,6 +24,21 @@ class Goods extends Model
         return $type[$value];
     }
 
+    protected function getCouponMoneyAttr($value){
+        $arrayPrice = array();
+        preg_match_all('/\d+/',$value,$arrayPrice);
+        if(count($arrayPrice[0]) > 1){
+            if($arrayPrice[0][1] == '00'){
+                return $arrayPrice[0][0];
+            }else{
+                return $arrayPrice[0][1];
+            }
+        }else{
+            return $arrayPrice[0][0];
+        }
+
+    }
+
     /*
      * @getIndexPerfectCoupon() 首页精选好券20个
      * */

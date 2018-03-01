@@ -151,6 +151,7 @@ class Login extends CommController
         return $key;
     }
 
+    /*分享邀请页面*/
     public function share(){
         if($this -> request -> get()){
             if(isset($_GET['invitation']) && !empty($_GET['invitation'])){

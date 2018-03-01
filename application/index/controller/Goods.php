@@ -120,7 +120,12 @@ class Goods extends Controller {
             }
         }else{
             $goodsList = $goods -> $goodsModel();
-            return $this -> fetch('goods/area-goods',['List' => $goodsList]);
+            if($goodsList){
+                return $this -> fetch('goods/area-goods',['List' => $goodsList]);
+            }else{
+                $this -> redirect('/index/goods/couponSquare');
+            }
+            //return $this -> fetch('goods/area-goods',['List' => $goodsList]);
         }
     }
 
