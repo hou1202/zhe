@@ -337,7 +337,7 @@ class TopClient
 		{
 			$logger = new TopLogger;
             if (!defined("TOP_SDK_WORK_DIR")) {
-                define("TOP_SDK_WORK_DIR", "/runtime/tmp/");
+                define("TOP_SDK_WORK_DIR", "runtime/tmp/");
             }
 			$logger->conf["log_file"] = rtrim(TOP_SDK_WORK_DIR, '\\/') . '/' . "logs/top_biz_err_" . $this->appkey . "_" . date("Y-m-d") . ".log";
 			$logger->log(array(
