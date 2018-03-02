@@ -90,22 +90,12 @@
     ]
   },
   {
-    "t": "新闻管理",
+    "t": "信息管理",
     "url": "",
     "child": [
       {
-        "t": "新闻列表",
-        "url": "/news/newsList"
-      }
-    ]
-  },
-  {
-    "t": "需求管理",
-    "url": "",
-    "child": [
-      {
-        "t": "需求列表",
-        "url": "/need/needList"
+        "t": "信息列表",
+        "url": "/message/messageList"
       }
     ]
   }
