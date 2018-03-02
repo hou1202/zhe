@@ -9,23 +9,13 @@
 namespace app\index\controller;
 
 
+use app\common\controller\ApiDataHandle;
 use think\Controller;
 use app\index\model\Goods as GoodModel;
 use app\common\controller\ReturnJson;
 use app\common\controller\ReturnGoodsList;
-use app\api\controller\TopClient;
-use app\api\controller\request\TbkTpwdCreateRequest;
-use think\config as ThinkConfig;
 
 class Goods extends Controller {
-
-    public function goodsBlock(){
-        return $this -> fetch('goods/block-goods');
-    }
-
-    public function goodsStrip(){
-        return $this -> fetch('goods/strip-goods');
-    }
 
     /*
     * @goodsDetails()  产品详情
@@ -35,13 +25,23 @@ class Goods extends Controller {
         if(isset($_GET['id']) && !empty($_GET['id'])){
             $id = $this -> request -> get('id');
             $goods = new GoodModel();
+            //获取产品信息
             $getOne = $goods -> getGoodsDetailsById($id);
+            if(!$getOne){
+                return ReturnJson::ReturnA("下手慢了，该优惠券已经被瓜分完毕，赶紧看看其他的吧...");
+            }
+            //检测优惠券
+            $couponEffect = $this -> checkGoodsEffect($getOne->goods_id,$getOne->coupon_id,$getOne->check_effect);
+            if(!$couponEffect){
+                return ReturnJson::ReturnA("下手慢了，该优惠券已经被瓜分完毕，赶紧看看其他的吧...");
+            }
+            //获取推荐产品
             $Recommend = $goods ->getRecommendGoodsById($id);
             return $getOne ?  $this -> fetch('goods/details',['getOne' => $getOne,'Recommend' => $Recommend]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
         }elseif($this->request->isPost()){
+            //生成淘口令
             $data = $this -> request -> post();
-            //var_dump($data);
-            $returnRes = $this->getTaoCommand($data['text'],$data['url'],$data['logo']);
+            $returnRes = ApiDataHandle::getTaoCommand($data['url'],$data['logo'],$data['text']);
             echo json_encode($returnRes,JSON_UNESCAPED_UNICODE);
         }else{
             return ReturnJson::ReturnA("未获取到相应的产品信息...");
@@ -49,18 +49,35 @@ class Goods extends Controller {
 
     }
 
-    protected function getTaoCommand($text,$url,$logo){
-        //taobao.tbk.tpwd.create (淘宝客淘口令)
-        $c = new TopClient;
-        $c->appkey = ThinkConfig::get('T_AppKey');
-        $c->secretKey = ThinkConfig::get('T_AppSecret');
-        $req = new TbkTpwdCreateRequest;
-        $req->setText($text);
-        $req->setUrl($url);
-        $req->setLogo($logo);
-        $resp = $c->execute($req);
-        return $resp->data->model;
+    /* @checkGoodsEffect         检测优惠券信息是否有效，并生成记录或删除该优惠券
+     * $goods_id                 产品ID
+     * $coupon_id                优惠券ID
+     * $coupon_check             检测记录
+     * return                    返回检测结果，有效true,无效false，并删除该优惠券
+     *  */
+    protected function checkGoodsEffect($goods_id,$coupon_id,$coupon_check){
+        if(empty($coupon_check) || date('Y-m-d',$coupon_check) != date('Y-m-d',time())){
+            //为空 或 检测时间记录非今天
+            //接口检测优惠券信息
+            $couponEffect =  ApiDataHandle::getCouponInfoById($goods_id,$coupon_id);
+            $goods = new GoodModel();
+            if(isset($couponEffect ->data)){
+                //有效优惠券，生成检测记录
+                $goods -> checkGoodsById($goods_id);
+                return true;
+            }else{
+                //无效优惠券，删除产品记录
+                $goods -> checkDelGoodsById($goods_id);
+                return false;
+            }
+        }else{
+            //检测时间记录为今天
+            return true;
+        }
+
+
     }
+
 
     /*
      * @getAreaType 首页快捷专区进入类型判断
@@ -125,58 +142,7 @@ class Goods extends Controller {
             }else{
                 $this -> redirect('/index/goods/couponSquare');
             }
-            //return $this -> fetch('goods/area-goods',['List' => $goodsList]);
         }
-    }
-
-    /*
-     * @ todayCouponGoodsList() 今日优惠券列表
-     * * */
-    public function todayCouponGoodsList($goods){
-        //$goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByTime();
-        //return $this -> fetch('goods/block-goods',['List' => $goodsList]);
-
-    }
-
-    /*
-    * @ tmallCouponGoodsList() 天猫专属优惠券列表
-    * * */
-    public function tmallCouponGoodsList(){
-        $goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByTmall();
-        return $this -> fetch('goods/block-goods',['List' => $goodsList]);
-
-    }
-
-    /*
-    * @ moneyCouponGoodsList() 大额优惠券列表
-    * * */
-    public function moneyCouponGoodsList(){
-        $goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByCouponMoney();
-        return $this -> fetch('goods/block-goods',['List' => $goodsList]);
-
-    }
-
-    /*
-    * @ nineCouponGoodsList() 9.9优惠券列表
-    * * */
-    public function nineCouponGoodsList(){
-        $goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByNine();
-        return $this -> fetch('goods/block-goods',['List' => $goodsList]);
-
-    }
-
-    /*
-    * @ ratioCouponGoodsList() 高奖金优惠券列表
-    * * */
-    public function ratioCouponGoodsList(){
-        $goods = new GoodModel();
-        $goodsList = $goods -> getGoodsListByRatio();
-        return $this -> fetch('goods/block-goods',['List' => $goodsList]);
-
     }
 
 
@@ -229,12 +195,9 @@ class Goods extends Controller {
                 }
 
             }else{
-                //var_dump($data);
                 $goodsList = $goods -> getCouponNav($data['nav']);
                 return $this -> fetch('goods/nav-goods',['List' => $goodsList]);
             }
-
-            //return $goodsList ?  $this -> fetch('goods/nav-goods',['List' => $goodsList]) : ReturnJson::ReturnA("未获取到相应的产品信息...");
 
         }else{
             $this -> redirect('/index/goods/couponSquare');
@@ -244,32 +207,4 @@ class Goods extends Controller {
 
 
 
-
-
-    /*
-     * @ goodsList() 产品列表
-     * $type 产品列表形式
-     *      默认为条状产品列表
-     *      $type为空则为条状产品列表
-     *      1=》 条状产品列表
-     *      2=》 块状产品列表
-     * * */
-    public function goodsList(){
-        if(isset($_GET['type']) && !empty($_GET['type'])){
-            $type = $this -> request -> get('type');
-            if($type == 1){
-
-                return $this -> fetch('goods/strip-goods');
-            }elseif($type == 2){
-
-                return $this -> fetch('goods/block-goods');
-            }else{
-
-                return $this -> fetch('goods/strip-goods');
-            }
-        }else{
-            return $this -> fetch('goods/strip-goods');
-        }
-
-    }
 }

@@ -18,6 +18,7 @@ use app\api\controller\request\WirelessShareTpwdQueryRequest;
 
 class ApiDataHandle
 {
+
     /*@getTaoCommand    生成淘口令
     *访问接口taobao.tbk.tpwd.create
      * $url     生成淘口令链接
@@ -205,19 +206,23 @@ class ApiDataHandle
         return $resp;
     }
 
-
-
-
-
-    static function test(){
+    /*@getCouponInfoById        获取优惠券基本信息，通过产品ID和优惠券ID
+     * $g_id                    产品ID
+     * $c_id                    优惠券ID
+     * return                   优惠券信息
+     * */
+    static function getCouponInfoById($g_id,$c_id){
         $c = new TopClient;
         $c->appkey = ThinkConfig::get('T_AppKey');
         $c->secretKey = ThinkConfig::get('T_AppSecret');
         $req = new TbkCouponGetRequest;
-        $req->setItemId("535981610055");
+        $req->setItemId($g_id);
+        $req->setActivityId($c_id);
         $resp = $c->execute($req);
         return $resp;
     }
+
+
 
 
 }

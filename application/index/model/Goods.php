@@ -24,6 +24,7 @@ class Goods extends Model
         return $type[$value];
     }
 
+    //优惠券金额处理
     protected function getCouponMoneyAttr($value){
         $arrayPrice = array();
         preg_match_all('/\d+/',$value,$arrayPrice);
@@ -95,7 +96,7 @@ class Goods extends Model
     *  $id     产品goods_id
     * */
     public function getGoodsDetailsById($id){
-        return $this -> field('id,goods_id,name,banner,detail_url,price,type,tao_url,coupon_money,sales,commission,coupon_url,coupon_extend')
+        return $this -> field('id,goods_id,name,banner,detail_url,price,type,tao_url,coupon_id,coupon_money,sales,commission,coupon_url,coupon_extend,check_effect')
                     ->where('goods_id',$id)
                     ->find();
     }
@@ -194,6 +195,22 @@ class Goods extends Model
             -> order("$order $sort")
             -> limit("$start,$end")
             -> select();
+    }
+
+    /*
+     *@ checkDelGoodsById  前端检测删除指定商品
+     * @id      商品GOODS_ID
+     * */
+    public function checkDelGoodsById($id){
+        return $this -> where('goods_id',$id) -> delete();
+    }
+
+    /*
+     *@ checkGoodsById  前端检测指定商品记录
+     * @id      商品GOODS_ID
+     * */
+    public function checkGoodsById($id){
+        return $this -> where('goods_id',$id) -> setField('check_effect',time());
     }
 
     /*测试*/
