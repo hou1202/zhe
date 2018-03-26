@@ -109,6 +109,8 @@ class User extends Model
      *          amount   账户总额
      *      1 =》 减少，影响字段
      *          balance  账户余额
+     *      2 =》 增加，影响字段
+     *          blance   账户余额
      *
      *
      * */
@@ -119,6 +121,9 @@ class User extends Model
                 break;
             case 1:
                 return $this -> where('id',$id)->setDec('balance',$num);
+                break;
+            case 2:
+                return $this -> where('id',$id) -> inc('balance',$num) -> update();
                 break;
             default:
                 return false;

@@ -1,0 +1,160 @@
+
+<div class="content_wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <aside>
+                    <header>
+                        <i class="fa fa-fw fa-file"></i>修改提现内容
+                        <a href="#/carry/carryList"><i class="fa fa-fw fa-arrow-left" style="float:right;margin:10px 30px 0 0"></i></a>
+                    </header>
+                    <section>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal" role="form" method="post" action="/admin/carry/carryUpdate" data-sendingText="正在为您积极努力的去提交信息。。。" data-validate="validate">
+                                        <input type="hidden" name="id" value="{$getOne.id}">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提现用户</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提现用户" value="{$getOne.uid}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">手机号码</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="手机号码" value="{$getOne.phone}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提现金额</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提现金额" value="{$getOne.money}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提现账户</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提现账户"  value="{$getOne.alipay}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">提现时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="提现时间"  value="{$getOne.create_time}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">处理时间</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="处理时间"  value="{$getOne.update_time}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        {if condition="$getOne.state == '驳回申请'"}
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现状态</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" placeholder="提现金额" value="{$getOne.state}" readonly>
+                                                </div>
+                                                <p class="col-sm-4 help-block"></p>
+                                            </div>
+                                            <hr/>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">发放状态</label>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control" placeholder="提现金额" value="{$getOne.grant}" readonly>
+                                                </div>
+                                                <p class="col-sm-4 help-block"></p>
+                                            </div>
+                                            <hr/>
+
+                                        {else /}
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">提现状态</label>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control" name="state" readonly="">
+                                                        <option value="0" {$getOne.state=="待审核"?="selected"}>待审核</option>
+                                                        <option value="1" {$getOne.state=="审核通过"?="selected"}>审核通过</option>
+                                                        <option value="2" {$getOne.state=="驳回申请"?="selected"}>驳回申请</option>
+                                                    </select>
+                                                </div>
+                                                <p class="col-sm-4 help-block"></p>
+                                            </div>
+                                            <hr/>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">发放状态</label>
+                                                <div class="col-sm-6">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio" name="grant" value="0" {$getOne.grant=="未发放"?="checked"}/> 未发放
+                                                        </label>
+                                                        <label>
+                                                            <input type="radio" name="grant" value="1" {$getOne.grant=="已发放"?="checked"} /> 已发放
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <p class="col-sm-4 help-block"></p>
+                                            </div>
+                                            <hr/>
+                                        {/if}
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">备注内容</label>
+                                            <div class="col-sm-6">
+                                                <textarea class="form-control" name="remark">{$getOne.remark}</textarea>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
+                                            <div class=" col-sm-12">
+                                                <button type="button" class="btn btn-primary J_ajaxSubmitBtn">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    /*数据验证JS脚本*/
+    function callback1(returnData, $from) {
+        console.log($from);
+    }
+    function validate($from) {
+
+        return true;
+    }
+</script>
+

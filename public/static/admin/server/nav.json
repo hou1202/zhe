@@ -98,6 +98,16 @@
         "url": "/message/messageList"
       }
     ]
+  },
+  {
+    "t": "提现管理",
+    "url": "",
+    "child": [
+      {
+        "t": "提现列表",
+        "url": "/carry/carryList"
+      }
+    ]
   }
 
 
