@@ -239,6 +239,11 @@ return [
         'list_rows' => 15,
     ],
 
+    //微信配置
+    'app_id' => 'wx4f12e20059703cc2',
+    'app_secret' => '710640b7ce6c0db89426b5078e6ca86d',
+
+
     //短信配置
     'sms_account' => 'AA00344',
     'sms_password' => 'AA0034452',

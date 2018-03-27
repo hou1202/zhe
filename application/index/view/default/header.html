@@ -8,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="sharecontent" data-msg-img="/static/index/images/red-logo.png" data-msg-title="折金券-海量优惠券" data-msg-content="淘宝、天猫海量优惠券让你购物更省心！还有邀请好礼、购物好，惊喜享不停！！！" data-msg-callBack="" data-line-img="/static/index/images/red-logo.png" data-line-title="折金券-海量优惠券" data-line-callBack=""/>
+
     <!--SHARE分享-->
-    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
     <!--
     --apple-mobile-web-app-capable
     --safari私有meta标签
@@ -70,6 +72,63 @@
                 return false;
             }
         });
+    </script>
+
+    <script>
+
+        var appIdVal = 'wx4f12e20059703cc2';
+        var timestampVal = '';
+        var nonceStrVal = '';
+        var signatureVal = '';
+        wx.config({
+           debug:false,
+            appid:appIdVal,
+            timestamp:timestampVal,
+            nonceStr:nonceStrVal,
+            signature:signatureVal,
+            jsApiList:[
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ]
+        });
+
+
+        wx.ready(function(){
+            var wechatsharetitle = "折金好券";
+            var linkurl = 'http://www.haochebiao.com';
+            var imgurl = 'http://www.haochebiao.com/static/index/images/red-logo.png';
+            wx.onMenuShareTimeline({
+                title:wechatsharetitle,
+                link:linkurl,
+                imgUrl:imgurl,
+                success:function(res){
+                    console.log('share success');
+                },
+                cancel:function (res) {
+                    console.log('share cancel');
+                },
+                fail:function (res) {
+                    console.log('share fail');
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title:wechatsharetitle,
+                desc:'淘宝、天猫海量优惠券让你购物更省心！还有邀请好礼、购物好，惊喜享不停！！！！！！',
+                link:linkurl,
+                imgUrl:imgurl,
+                type:'link',
+                dataUrl:'',
+                success:function(){
+                    console.log('share success');
+                },
+                cancel:function () {
+                    console.log('share cancel');
+                }
+            });
+            wx.error(function (res) {
+                console.log(res.errMsg);
+            })
+        })
     </script>
 
 
