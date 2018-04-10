@@ -4,3 +4,4 @@ composer.lock
 public/runtime
 application/database.php
 public/upload
+public/uploads
