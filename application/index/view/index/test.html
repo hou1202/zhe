@@ -7,7 +7,6 @@
     <title>HTML5网页如何调用浏览器APP的微信分享功能</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="css/test.css" />
     <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <style type="text/css">
@@ -21,74 +20,38 @@
 </head>
 
 <body>
-<span class="shareBtn" id="toshare">点击分享到</span>
+
+
+<form action="" enctype="multipart/form-data" method="post" style="" id="uploadForm">
+    <input type="file" name="excel" id="file_excel" value="" onchange="select_file_excel()" style="opacity: 0"/>
+    <a class="btn red" onclick="file_excel()"><i class="fa fa-fax"></i>导入数据</a>
+</form>
 
 <script>
-    $.ajax({
-        url:'/common/jssdk/jssdk/getSignPackage',
-        type:'post',
-        dataType:'json',
-        data:"{'url':''"+url+"}",
-        success:function (data) {
-            if(data.meta.errCd==''){
-                var appIdVal = 'data.data.appId';
-                var timestampVal = 'data.data.timestamp';
-                var nonceStrVal = 'data.data.nonceStr';
-                var signatureVal = 'data.data.signature';
-                wx.config({
-                    debug:false,
-                    appId:appIdVal,
-                    timestamp:timestampVal,
-                    nonceStr:nonceStrVal,
-                    signature:signatureVal,
-                    jsApiList:[
-                        'onMenuShareTimeline',
-                        'onMenuShareAppMessage'
-                    ]
-                });
-            }
-        },
-        error:function () {
-            console.log(2);
-        }
-    });
+    function file_excel(){
+        $("#file_excel").click();
+    }
 
-    wx.ready(function(){
-        var wechatsharetitle = "折金好券";
-        var linkurl = 'http://www.haochebiao.com';
-        var imgurl = 'http://www.haochebiao.com/static/index/images/red-logo.png';
-        wx.onMenuShareTimeline({
-            title:wechatsharetitle,
-            link:linkurl,
-            imgUrl:imgurl,
-            success:function(res){
-                console.log('share success');
-            },
-            cancel:function (res) {
-                console.log('share cancel');
-            },
-            fail:function (res) {
-                console.log('share fail');
+    //选择文件
+    function select_file_excel() {
+
+        $.ajax({
+            url: '/index/test/inserExcel',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#uploadForm')[0]),
+            dataType:'json',
+            processData: false,
+            contentType: false,
+            success:function(data){
+                //清空内容
+                $("#file_excel").val('');
+
+                //返回提示信息
+                console.log(data.msg);
             }
         });
-        wx.onMenuShareAppMessage({
-            title:wechatsharetitle,
-            desc:'淘宝、天猫海量优惠券让你购物更省心！还有邀请好礼、购物好，惊喜享不停！！！！！！',
-            link:linkurl,
-            imgUrl:imgurl,
-            type:'link',
-            dataUrl:'',
-            success:function(){
-                console.log('share success');
-            },
-            cancel:function () {
-                console.log('share cancel');
-            }
-        });
-        wx.error(function (res) {
-            console.log(res.errMsg);
-        })
-    })
+    }
 </script>
 
 

@@ -71,6 +71,16 @@ class TaoOrder extends Model
         return $this -> where('order_id|name','like','%'.$key.'%') -> count('order_id');
     }
 
+    //insertTaoOrder    导入数据，插入新订单信息
+    public function insertTaoOrder($data){
+        return $this -> insert($data);
+    }
+
+    //updateTaoOrder    导入数据，更新已有订单信息
+    public function updateTaoOrder($id,$data){
+        return $this -> where('order_id',$id) -> update($data);
+    }
+
 
 
 

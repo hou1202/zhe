@@ -80,6 +80,16 @@
     ]
   },
   {
+    "t": "提现管理",
+    "url": "",
+    "child": [
+      {
+        "t": "提现列表",
+        "url": "/carry/carryList"
+      }
+    ]
+  },
+  {
     "t": "通知管理",
     "url": "",
     "child": [
@@ -100,12 +110,12 @@
     ]
   },
   {
-    "t": "提现管理",
+    "t": "反馈管理",
     "url": "",
     "child": [
       {
-        "t": "提现列表",
-        "url": "/carry/carryList"
+        "t": "反馈列表",
+        "url": "/talking/talkList"
       }
     ]
   }

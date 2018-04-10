@@ -26,6 +26,14 @@
                                             <a href="#/goods/goodsSearch" style="display: none" id="searchA"></a>
                                         </form>
 
+                                       <!-- <form enctype="multipart/form-data" id="uploadForm" class="form-inline" style="float:left;;margin-left:30px">
+                                            <a class="btn btn-default " >选择产品数据</a>
+                                            <div class="form-group">
+                                                <input type="file" name="excel" id="file_excel" value=""  class="form-control" />
+                                            </div>
+                                            <input type="button" onclick="select_file_excel()" class="btn btn-primary " value="提交文件" >
+                                        </form>-->
+
 
                                     </div>
                                     <div class="table-responsive">
@@ -88,5 +96,28 @@
     function submitSearch(){
         $('#searchA').attr('href', '#/goods/goodsSearch?keyword='+$('input[name=keyword]').val());
         document.getElementById("searchA").click();
+    }
+</script>
+
+<script>
+    function select_file_excel() {
+        //console.log(new FormData($('#uploadForm')[0]));
+        $.ajax({
+            url: '/admin/goods/uploadGoodExcel',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#uploadForm')[0]),
+            dataType:'json',
+            processData: false,
+            contentType: false,
+            success:function(data){
+                //清空内容
+                $("#file_excel").val('');
+
+                //返回提示信息
+                alert(data.msg);
+                window.location.reload();
+            }
+        });
     }
 </script>

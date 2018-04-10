@@ -1,0 +1,88 @@
+    <!--header--引入-->
+    {include file="default/header_back" /}
+    <!--header--END-->
+
+    <link rel="stylesheet" href="/static/index/css/personal.css" xmlns="http://www.w3.org/1999/html"/>
+
+    <!--talking--反馈-->
+    <div class="talking">
+        <div class="t_submit">
+            <p><i class="glyphicon glyphicon-road"></i> 您的每一点建议，都是我们前进的动力 <i class="glyphicon glyphicon-road"></i></p>
+            <form method="post" action="" id="talkingForm">
+                <label for="talkingContent" class="talking_input">
+                    <textarea  name="content" id="talkingContent" ></textarea>
+                </label>
+                <label for="talkingSubmit" class="talking_input">
+                    <input type="button" value="开始吐槽" id="talkingSubmit" />
+                </label>
+            </form>
+        </div>
+
+        {foreach name="TList" item="T"}
+            <div class="t_list">
+                <div class="t_time">
+                    {:date('Y-m-d',$T.create_time)}
+                </div>
+                <div class="t_say t_comm">
+                    <div class="say_left comm_left">
+                        吐槽
+                    </div>
+                    <div class="say_right comm_right">
+                        {$T.content}
+                    </div>
+                </div>
+
+                {if condition="!empty($T.reply)"}
+                    <div class="t_reply t_comm">
+                        <div class="reply_left comm_left">
+                            回复
+                        </div>
+                        <div class="reply_right comm_right">
+                            {$T.reply}
+                        </div>
+                    </div>
+                {/if}
+            </div>
+        {/foreach}
+
+    </div>
+
+
+    <!--friends--点击展开-->
+    <script type="text/javascript">
+        var message = $(".friends .friends_message");
+        var bonus = $(".friends .friends_bonus");
+        message.click(function () {
+            bonus.hide();
+            $(this).next().show();
+
+        });
+    </script>
+    <script>
+        $("#talkingSubmit").on("click",function(){
+            var content = $("#talkingContent").val();
+            console.log(content);
+            if($.trim(content) == ''){
+                showAlertAutoClose("请填入您要吐槽的内容...");
+                return false;
+            }
+            $.ajax({
+                url:"/index/talking/talking",
+                type:"POST",
+                dataType: "json",
+                data:$('#talkingForm').serialize(),
+                success:function(data){
+                    jsonAlertAutoClose(data)
+                },
+                error:function () {
+                    showAlertAutoClose("网络错误，请重试...");
+                }
+
+            });
+        });
+    </script>
+
+
+    <!--footer--引入-->
+    {include file="default/footer" /}
+    <!--footer--END-->

@@ -1,9 +1,9 @@
 <?php
-namespace app\common\controller;
+namespace app\index\controller\jssdsk;
 use think\Config as ThinkConfig;
 
 
-class JSSDK {
+class JSSDSK {
   private $appId;
   private $appSecret;
 

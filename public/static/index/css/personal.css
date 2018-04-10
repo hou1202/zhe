@@ -824,6 +824,77 @@
     background:#fff;
 }
 
+/*--talking--反馈*/
+.talking{
+    width:100%;
+    padding:4rem 2rem 8rem 2rem;
+}
+.talking .t_submit {
+    margin-bottom:2rem;
+}
+.talking .t_submit p{
+    font-size:1.5rem;
+    text-align:center;
+    color:#da5514;
+}
+.talking .t_submit .talking_input{
+    width:100%;
+    text-align:center;
+}
+.talking .t_submit .talking_input textarea{
+    width:100%;
+    border-radius:5px;
+    background:#fff;
+    height:15rem;
+    resize: none;
+    font-size:1.5rem;
+    padding:0.5rem;
+}
+.talking .t_submit .talking_input input{
+    width:70%;
+    height:3.5rem;
+    background:#960202;
+    border:1px solid #960202;
+    color:#fff;
+    font-size:1.6rem;
+    border-radius:5px;
+}
+
+.talking .t_list{
+    border-bottom:1px solid #960202;
+}
+.talking .t_list .t_time{
+    padding:1rem 0 0.5rem 1rem;
+    height:3rem;
+    font-size:1.5rem;
+    color:#da5514;
+
+}
+.talking .t_list .t_comm{
+    width:100%;
+    overflow:hidden;
+
+    padding:1rem 0;
+}
+.talking .t_list .t_say{
+    border-bottom:1px solid #eeeeee;
+}
+.talking .t_list .t_comm .comm_left{
+    width:15%;
+    float:left;
+    font-size:1.4rem;
+    color:#da5514;
+}
+.talking .t_list .t_comm .say_left{
+    color:#960202;
+}
+.talking .t_list .t_comm .comm_right{
+    width:85%;
+    font-size:1.2rem;
+    float:left;
+}
+
+
 
 
 
