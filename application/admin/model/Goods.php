@@ -14,6 +14,21 @@ class Goods extends Model
 {
     public static $tableName = 'think_goods';
 
+    //优惠券金额处理
+    protected function getCouponMoneyAttr($value){
+        $arrayPrice = array();
+        preg_match_all('/\d+/',$value,$arrayPrice);
+        if(count($arrayPrice[0]) > 1){
+            if($arrayPrice[0][1] == '00'){
+                return $arrayPrice[0][0];
+            }else{
+                return $arrayPrice[0][1];
+            }
+        }else{
+            return $arrayPrice[0][0];
+        }
+
+    }
 
     /*
      * @getGoodsForList 商品列表显示

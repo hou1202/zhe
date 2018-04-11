@@ -124,9 +124,9 @@ class Goods extends CommController
         $exclePath = $info->getSaveName();
         //上传文件的地址
         $filename = ROOT_PATH . 'public' . DS . 'upload' . DS . 'TaoBao'. DS . $exclePath;
-        var_dump($filename);
+        /*var_dump($filename);
         unlink($filename);
-        die;
+        die;*/
 
         //判断截取文件
         $extension = strtolower( pathinfo($filename, PATHINFO_EXTENSION) );
