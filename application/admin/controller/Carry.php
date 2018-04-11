@@ -43,8 +43,6 @@ class Carry extends Controller
                     $user = new User();
                     $user -> setUserMoney($given['uid'],$given['money'],2);
                     //创建通知信息
-                    //$notice = new Notice();
-                    //$notice -> CarryNoticeInfo($data['uid'], $data['money']);
                     Notice::NoticeCarryReject($given['uid'],$given['create_time'],$given['money'],$given['remark']);
                 }
                 if($data['state'] == 1){
@@ -54,8 +52,6 @@ class Carry extends Controller
             }else{
                 return ReturnJson::ReturnJ('数据更新失败，请重新操作...','false');
             }
-             //return $carry -> updateCarry($data['id'],$data) ?  : ReturnJson::ReturnJ('数据更新失败，请重新操作...','false');
-
 
         }
 
