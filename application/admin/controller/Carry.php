@@ -45,10 +45,10 @@ class Carry extends Controller
                     //创建通知信息
                     //$notice = new Notice();
                     //$notice -> CarryNoticeInfo($data['uid'], $data['money']);
-                    Notice::NoticeCarrySuc($given['uid'],$given['create_time'],$given['money'],$given['alipay']);
+                    Notice::NoticeCarryReject($given['uid'],$given['create_time'],$given['money'],$given['remark']);
                 }
                 if($data['state'] == 1){
-                    Notice::NoticeCarryReject($given['uid'],$given['create_time'],$given['money'],$given['remark']);
+                    Notice::NoticeCarrySuc($given['uid'],$given['create_time'],$given['money'],$given['alipay']);
                 }
                 return ReturnJson::ReturnJ('数据更新成功...','success','/carry/carryList');
             }else{

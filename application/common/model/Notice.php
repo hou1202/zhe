@@ -44,6 +44,7 @@ class Notice extends Model
         $data['title'] = '淘币兑换申请驳回通知';
         $data['content'] = '您已于 '.$date.' 发起淘币兑换申请，兑换数量：'.$money.' 淘币。未通过平台审核，申请信息已经驳回，兑换淘币已返还至您的账户。驳回原因:'.$remark.'。您可确认信息后再次提交！感谢您对折金券平台的信任！';
         $data['uid'] = $id;
+        $data['create_time'] = time();
         return Db::table(static::$tableName) -> insert($data);
         //return $this -> save($data);
     }
@@ -53,6 +54,7 @@ class Notice extends Model
         $data['title'] = '淘币兑换申请通过通知';
         $data['content'] = '您已于 '.$date.' 发起淘币兑换申请，兑换数量：'.$money.' 淘币。已通过平台平台审核，并发放至你的申请账户：'.$alipay.'，请查阅！感谢您对折金券平台的信任！';
         $data['uid'] = $id;
+        $data['create_time'] = time();
         return Db::table(static::$tableName) -> insert($data);
         //return $this -> save($data);
     }
