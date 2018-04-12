@@ -11,6 +11,8 @@ use app\common\controller\CommController;
 use app\common\controller\ReturnJson;
 use app\admin\model\Goods as GoodsModel;
 
+use think\Db;
+use think\db\Query;
 use think\Loader;
 use PHPExcel;
 use PHPExcel_IOFactory;
@@ -98,6 +100,24 @@ class Goods extends CommController
         }else{
             return ReturnJson::ReturnA('非法数据操作!');
         }
+
+    }
+
+    public function delRepeatGoods(){
+        //$goods = new GoodsModel();
+        //$List = $goods->selectOnlyGoods();
+        //$data = Db::query("select id,goods_id,name from think_goods where id in (select id from think_goods group by goods_id having count(goods_id) > 1)");
+        $result = Db::query("delete from think_goods where goods_id in (select goods_id from think_goods group by goods_id having count(goods_id) > 1)");
+
+
+        if($result){
+            return $this->jsonSuccess('重复数据已经清除...');
+        }else{
+            return $this->jsonSuccess('数据清除失败了...');
+        }
+
+
+
 
     }
 
