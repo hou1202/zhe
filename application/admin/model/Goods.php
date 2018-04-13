@@ -111,23 +111,7 @@ class Goods extends Model
     }
 
     public function selectOnlyGoods(){
-        /*return $this -> distinct('goods_id')
-            ->select();*/
 
-        /*select * from think_goods where id in (
-            select id from think_goods group by goods_id having count(goods_id) > 1
-            );*/
-        return $this -> field('id') -> group('goods_id') -> having('count(goods_id) > 1') -> select();
-
-        /*return $this -> field('id,goods_id,name,banner,class,price,ratio,commission,type,coupon_money,coupon_start,coupon_end,coupon_url')
-                        ->where('id','in',$inQuery)
-                        ->select();*/
-
-//        return $this->field('id,goods_id,name,banner,class,price,ratio,commission,type,coupon_money,coupon_start,coupon_end,coupon_url')
-//            ->where('goods_id','IN',function(){
-//                $this->distinct('goods_id')->select();
-//            })
-//            ->select();
     }
 
 }

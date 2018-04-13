@@ -104,21 +104,49 @@ class Goods extends CommController
     }
 
     public function delRepeatGoods(){
-        //$goods = new GoodsModel();
-        //$List = $goods->selectOnlyGoods();
-        //$data = Db::query("select id,goods_id,name from think_goods where id in (select id from think_goods group by goods_id having count(goods_id) > 1)");
-        $result = Db::query("delete from think_goods where goods_id in (select goods_id from think_goods group by goods_id having count(goods_id) > 1)");
 
+         //方法一：
+        $repeatGoods = Db::query("SELECT goods_id FROM think_goods GROUP BY goods_id HAVING count(goods_id) > 1");
+        //判断是否有重复数据
+        if(!$repeatGoods){
+            return $this->jsonSuccess('暂未发现重复数据...');
+        }
 
-        if($result){
+        $repeatGoodsArr = null;
+        foreach($repeatGoods as $v){
+            $repeatGoodsArr .= "'".$v['goods_id']."',";
+        }
+        $repeatGoodsArr = substr($repeatGoodsArr, 0, -1);
+        $maxGoods = Db::query("SELECT max(id) FROM think_goods GROUP BY goods_id HAVING COUNT(goods_id )>1");
+        $maxGoodsArr = null;
+        foreach($maxGoods as $v){
+            //$maxGoodsArr[] = $v['max(id)'];
+            $maxGoodsArr .= "'".$v['max(id)']."',";
+        }
+        $maxGoodsArr = substr($maxGoodsArr, 0, -1);
+
+        $selectRepeat = Db::query("SELECT id FROM think_goods 
+                                      WHERE 
+                                          goods_id IN (".$repeatGoodsArr.") 
+                                      AND 
+                                          id NOT IN (".$maxGoodsArr.")
+                                    ");
+
+        if($selectRepeat){
             return $this->jsonSuccess('重复数据已经清除...');
         }else{
             return $this->jsonSuccess('数据清除失败了...');
         }
 
-
-
-
+       /*
+       //方法二
+        创建临时表，操作不是很好
+        Db::query("create table tmp select * from think_goods group by goods_id");
+        Db::query("drop table think_goods");
+        Db::query("alter table tmp RENAME TO think_goods");
+        //Db::query("alter table think_goods add primary key id");
+        //Db::query("alter table think_goods add index indexGoods (goods_id)");
+       */
     }
 
     /*
