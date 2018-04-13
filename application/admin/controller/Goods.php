@@ -103,11 +103,15 @@ class Goods extends CommController
 
     }
 
+    /*
+     * @  delRepeatGoods    清理重复优惠券
+     * */
     public function delRepeatGoods(){
 
          //方法一：
         $repeatGoods = Db::query("SELECT goods_id FROM think_goods GROUP BY goods_id HAVING count(goods_id) > 1");
         //判断是否有重复数据
+        //var_dump($repeatGoods);die;
         if(!$repeatGoods){
             return $this->jsonSuccess('暂未发现重复数据...');
         }
@@ -125,7 +129,7 @@ class Goods extends CommController
         }
         $maxGoodsArr = substr($maxGoodsArr, 0, -1);
 
-        $selectRepeat = Db::query("SELECT id FROM think_goods 
+        $selectRepeat = Db::execute("DELETE FROM think_goods 
                                       WHERE 
                                           goods_id IN (".$repeatGoodsArr.") 
                                       AND 
