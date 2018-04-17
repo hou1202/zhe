@@ -9,11 +9,11 @@
 namespace app\index\controller;
 use app\admin\controller\ReturnJson;
 use app\index\model\Goods;
-use think\Controller;
+use app\common\controller\CommController;
 use app\common\controller\ReturnGoodsList;
 use think\Db;
 
-class Index extends Controller
+class Index extends CommController
 {
     public function index(){
         $goods = new Goods();
@@ -30,6 +30,24 @@ class Index extends Controller
            $List = $goods ->getIndexListCoupon();
            return $this -> fetch('index/index',['Perfect'=>$Perfect,'Hot'=>$Hot,'List'=>$List,'Nav'=>$nav,'Banner'=>$banner]);
        }
+
+    }
+
+    public function visitRecordIp(){
+        if($this->request->isPost()){
+
+            $data=$this->request->post();
+            $request = $this->request->instance();
+            $data['ip'] = $request -> ip();
+            $data['create_time'] = time();
+            $visit = Db::name('visit')->insert($data);
+            if($visit){
+                return $this->jsonSuccess(true);
+            }else{
+                return $this->jsonFail(false);
+            }
+
+        }
 
     }
 

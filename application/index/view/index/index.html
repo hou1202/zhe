@@ -308,6 +308,74 @@
         });
     </script>
 
+    <!--访问统计-->
+    <script>
+        //判断当前登录验证COOKIE是否存在
+        if(getCookie('visitRecord')==""){
+            //不存在时
+            setCookie('visitRecord',true,'23:59:59');
+            var state = 1;
+            $.ajax({
+                url:"/index/index/visitRecordIp",
+                type:"POST",
+                data:state,
+                dataType: "json",
+                cache:false,
+                success:function(){
+                },
+                error:function () {
+                }
+            });
+        }
+
+        //获取COOKIE
+        function getCookie(c_name){
+            if (document.cookie.length>0)
+            {
+                c_start=document.cookie.indexOf(c_name + "=");
+                if (c_start!=-1)
+                {
+                    c_start=c_start + c_name.length+1;
+                    c_end=document.cookie.indexOf(";",c_start);
+                    if (c_end==-1) c_end=document.cookie.length;
+                    return decodeURIComponent(document.cookie.substring(c_start,c_end));
+                }
+            }
+            return ""
+        }
+
+        // 设置cookie在当天指定时间点过期并提示
+        function setCookie(name,value,Deadline){
+            // 获取当前日期对象
+            var curDate = new Date();
+            // 获取指定时间的时间戳
+            var endTime = convertTime(curDate,Deadline);
+
+            // 设置cookie过期时间
+            var exp = new Date();
+            exp.setTime(endTime);//过期时间
+            document.cookie = name + '=' + value + ';expires=' + exp.toGMTString();
+        }
+
+        // 获取指定时间的时间戳
+        function convertTime(nowDate,Deadline){
+            // 分割参数Deadline
+            var _dateArr = Deadline.split(':');
+            // 分别获取参数中对应的时、分、秒
+            var hours = parseInt(_dateArr[0]);
+            var minutes = parseInt(_dateArr[1]);
+            var seconds = parseInt(_dateArr[2]);
+            // 设置对应时分秒
+            nowDate.setHours(hours);
+            nowDate.setMinutes(minutes);
+            nowDate.setSeconds(seconds);
+            // 获取当前天中指定时分秒对应的毫秒数
+            var result =  Date.parse(nowDate);
+            return result;
+        }
+
+    </script>
+
 
     <!--footer--引入-->
     {include file="default/footer" /}

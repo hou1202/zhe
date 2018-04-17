@@ -118,6 +118,16 @@
         "url": "/talking/talkList"
       }
     ]
+  },
+  {
+    "t": "统计管理",
+    "url": "",
+    "child": [
+      {
+        "t": "访问用户",
+        "url": "/analyse/analyseList"
+      }
+    ]
   }
 
 

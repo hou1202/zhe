@@ -15,6 +15,7 @@ use think\Loader;
 use think\Db;
 use app\admin\model\TaoOrder;
 
+
 use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Cell;
@@ -32,6 +33,24 @@ class Test extends CommController {
         //$goodsList = ApiDataHandle::test();
         //var_dump($goodsList);die;
         return $this->fetch('index/test');
+
+    }
+
+    public function visitRecordIp(){
+        if($this->request->isPost()){
+
+            $data=$this->request->post();
+            $request = $this->request->instance();
+            $data['ip'] = $request -> ip();
+            $data['create_time'] = time();
+            $visit = Db::name('visit')->insert($data);
+            if($visit){
+                return $this->jsonSuccess(true);
+            }else{
+                return $this->jsonFail(false);
+            }
+
+        }
 
     }
 
