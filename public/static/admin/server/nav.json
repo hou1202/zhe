@@ -125,7 +125,7 @@
     "child": [
       {
         "t": "访问用户",
-        "url": "/analyse/analyseList"
+        "url": "/visit/analyseList"
       }
     ]
   }

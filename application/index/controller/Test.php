@@ -30,10 +30,14 @@ class Test extends CommController {
      * * */
     public function index()
     {
-        //$goodsList = ApiDataHandle::test();
-        //var_dump($goodsList);die;
+        $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
+        $endToday=mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;
+        $beginMonth=mktime(0,0,0,1,1,date('Y'));
+        var_dump(mktime(0,0,0,date('m'),date('d')-date('w')+1,date('Y')));
+        var_dump(date('w'));die;
+        var_dump($beginToday);
+        var_dump($endToday);die;
         return $this->fetch('index/test');
-
     }
 
     public function visitRecordIp(){
