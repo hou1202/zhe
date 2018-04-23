@@ -33,6 +33,10 @@ class Index extends CommController
 
     }
 
+    public function web(){
+        return $this->fetch('index/web');
+    }
+
     //生成用户访问记录信息
     public function visitRecordIp(){
         if($this->request->isPost()){
