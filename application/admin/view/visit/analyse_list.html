@@ -10,21 +10,21 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="btn-group" style="margin-bottom:20px;">
+                                    <div class="btn-group" style="margin-bottom:20px;width:100%;">
                                         <div class="col-sm-3">
-                                            <a class="btn btn-primary">今日访问用户量</a>
+                                            <a class="btn btn-primary">今日访问量</a>
                                             <a class="btn btn-default ">{$Count.today}</a>
                                         </div>
-                                        <div class="col-sm-3 form-inline">
-                                            <a class="btn btn-primary">本周访问用户量</a>
+                                        <div class="col-sm-3">
+                                            <a class="btn btn-primary">本周访问量</a>
                                             <a class="btn btn-default ">{$Count.week}</a>
                                         </div>
-                                        <div class="col-sm-3 form-inline">
-                                            <a class="btn btn-primary">本月访问用户量</a>
+                                        <div class="col-sm-3">
+                                            <a class="btn btn-primary">本月访问量</a>
                                             <a class="btn btn-default ">{$Count.month}</a>
                                         </div>
-                                        <div class="col-sm-3 form-inline">
-                                            <a class="btn btn-primary">年度访问用户量</a>
+                                        <div class="col-sm-3">
+                                            <a class="btn btn-primary">年度访问量</a>
                                             <a class="btn btn-default ">{$Count.year}</a>
                                         </div>
 
@@ -38,6 +38,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>IP</th>
+                                                <th>IP归属地</th>
                                                 <th>访问时间</th>
                                                 <th width="140">操作</th>
                                             </tr>
@@ -47,6 +48,7 @@
                                             <tr>
                                                 <td>{$l.id}</td>
                                                 <td>{$l.ip}</td>
+                                                <td>{$l.address}</td>
                                                 <td>{$l.create_time}</td>
                                                 <td>
                                                     <a class="btn btn-primary btn-xs" href="#/visit/analyseCountForIp?ip={$l.ip}">IP审查</a>

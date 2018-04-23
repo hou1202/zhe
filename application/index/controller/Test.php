@@ -30,14 +30,40 @@ class Test extends CommController {
      * * */
     public function index()
     {
-        $beginToday=mktime(0,0,0,date('m'),date('d'),date('Y'));
-        $endToday=mktime(0,0,0,date('m'),date('d')+1,date('Y'))-1;
-        $beginMonth=mktime(0,0,0,1,1,date('Y'));
-        var_dump(mktime(0,0,0,date('m'),date('d')-date('w')+1,date('Y')));
-        var_dump(date('w'));die;
-        var_dump($beginToday);
-        var_dump($endToday);die;
-        return $this->fetch('index/test');
+        /*$queryIP = '101.227.131.219';
+        $url = 'http://ip.qq.com/cgi-bin/searchip?searchip1='.$queryIP;
+        $ch = curl_init($url);
+        curl_setopt($ch,CURLOPT_ENCODING ,'gb2312');
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ; // 获取数据返回
+        $result = curl_exec($ch);
+        $result = mb_convert_encoding($result, "utf-8", "gb2312"); // 编码转换，否则乱码
+        curl_close($ch);
+        preg_match("@<span>(.*)</span></p>@iU",$result,$ipArray);
+        var_dump($ipArray);die;
+        $loc = $ipArray[1];
+        //return $loc;
+        var_dump($loc);die;
+        return $this->fetch('index/test');*/
+        //$queryIP = '127.0.0.1';
+        $queryIP = '101.227.131.219';
+        $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$queryIP);
+
+        if(empty($res)){ return $address='未知'; }
+        $jsonMatches = array();
+        preg_match('#{.+?}#', $res, $jsonMatches);
+        if(!isset($jsonMatches[0])){ return $address='未知2'; }
+        $json = json_decode($jsonMatches[0], true);
+        if(isset($json['ret']) && $json['ret'] == 1){
+            $json['ip'] = $queryIP;
+            unset($json['ret']);
+        }else{
+            return false;
+        }
+        $address = $json['country'].$json['province'].$json['city']
+            .$json['district'].$json['isp'].$json['type'].$json['desc'];
+        return $address;
+
     }
 
     public function visitRecordIp(){

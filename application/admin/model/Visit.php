@@ -35,7 +35,7 @@ class Visit extends Model
     * @getAnalyseForList  访问数据列表
     * */
     public function getAnalyseForList(){
-        return $this -> field('id,ip,create_time')
+        return $this -> field('id,ip,address,create_time')
             ->order('id DESC')
             -> paginate(10,false,['path' => '/admin/main#/visit/analyseList' ]);
     }
@@ -67,7 +67,7 @@ class Visit extends Model
     * @getAnalyseByIp  获取指定IP访问数据
     * */
     public function getAnalyseByIp($ip){
-        return $this -> field('id,ip,create_time')
+        return $this -> field('id,ip,address,create_time')
             ->where('ip',$ip)
             ->order('id DESC')
             -> paginate(10,false,['path' => '/admin/main#/visit/analyseList' ]);

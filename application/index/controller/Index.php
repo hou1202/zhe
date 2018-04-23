@@ -44,6 +44,7 @@ class Index extends CommController
             $data=$this->request->post();
             $request = $this->request->instance();
             $data['ip'] = $request -> ip();
+            $data['address'] = $this -> peggingIp($request -> ip());
             $data['create_time'] = time();
             $visit = Db::name('visit')->insert($data);
             if($visit){
@@ -54,6 +55,24 @@ class Index extends CommController
 
         }
 
+    }
+
+    protected function peggingIp($ip){
+        $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$ip);
+        if(empty($res)){ return $address='未知'; }
+        $jsonMatches = array();
+        preg_match('#{.+?}#', $res, $jsonMatches);
+        if(!isset($jsonMatches[0])){ return $address='未知'; }
+        $json = json_decode($jsonMatches[0], true);
+        if(isset($json['ret']) && $json['ret'] == 1){
+            $json['ip'] = $ip;
+            unset($json['ret']);
+        }else{
+            return false;
+        }
+        $address = $json['country'].$json['province'].$json['city']
+            .$json['district'].$json['isp'].$json['type'].$json['desc'];
+        return $address;
     }
 
 
