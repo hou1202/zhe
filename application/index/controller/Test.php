@@ -46,9 +46,9 @@ class Test extends CommController {
         var_dump($loc);die;
         return $this->fetch('index/test');*/
         //$queryIP = '127.0.0.1';
-        $queryIP = '101.227.131.219';
+        $queryIP = '160.16.235.148';
         $res = @file_get_contents('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip='.$queryIP);
-
+        var_dump($res);die;
         if(empty($res)){ return $address='未知'; }
         $jsonMatches = array();
         preg_match('#{.+?}#', $res, $jsonMatches);
@@ -60,8 +60,7 @@ class Test extends CommController {
         }else{
             return false;
         }
-        $address = $json['country'].$json['province'].$json['city']
-            .$json['district'].$json['isp'].$json['type'].$json['desc'];
+        $address = $json['country'].'.'.$json['province'].'.'.$json['city'];
         return $address;
 
     }

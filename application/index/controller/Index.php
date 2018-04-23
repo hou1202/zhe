@@ -70,8 +70,7 @@ class Index extends CommController
         }else{
             return false;
         }
-        $address = $json['country'].$json['province'].$json['city']
-            .$json['district'].$json['isp'].$json['type'].$json['desc'];
+        $address = $json['country'].'.'.$json['province'].'.'.$json['city'];
         return $address;
     }
 
