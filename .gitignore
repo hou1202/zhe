@@ -5,3 +5,5 @@ public/runtime
 application/database.php
 public/upload
 public/uploads
+public/downloader
+
