@@ -285,11 +285,11 @@ ul,li {
     width:100%;
     padding:0.3rem;
     font-size:1.8rem;
-    text-indent:2.5rem;
+    /*text-indent:2.5rem;*/
     color: #5d5d5d;
 }
 .explain_message .explain_message_info img{
-    width:100%
+    /*width:100%*/
 }
 
 
