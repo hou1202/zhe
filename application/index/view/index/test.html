@@ -30,7 +30,7 @@
 </div>
 
 <script>
-    $(document).ready(function(){
+
         $.ajax({
             url:"/index/test/wxShare",
             type:"POST",
@@ -53,43 +53,46 @@
                     jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 
                 });
+
+                wx.ready(function () {
+                    wx.onMenuShareTimeline({
+                        title: '这个是一个测试信息内容1', // 分享标题
+                        link: window.location.href, // 分享链接
+                        imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
+                        success: function () {
+
+                        },
+                        cancel: function () {
+
+                        }
+                    });
+
+                    wx.onMenuShareAppMessage({
+                        title: '这个是一个测试信息内容2', // 分享标题
+                        desc: '这是一个搞的很多天的测试信息分享描述信息', // 分享描述
+                        link: window.location.href, // 分享链接
+                        imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
+                        type: '', // 分享类型,music、video或link，不填默认为link
+                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                        success: function (data) {
+                            // 用户确认分享后执行的回调函数
+                            console.log(data);
+                        },
+                        cancel: function () {
+                            // 用户取消分享后执行的回调函数
+                        }
+                    });
+
+                });
             },
             error:function () {
                 showAlertAutoClose("网络错误，请重试...");
             }
         });
 
-        wx.ready(function () {
-            wx.onMenuShareTimeline({
-                title: '这个是一个测试信息内容1', // 分享标题
-                link: window.location.href, // 分享链接
-                imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
-                success: function () {
 
-                },
-                cancel: function () {
 
-                }
-            });
 
-            wx.onMenuShareAppMessage({
-                title: '这个是一个测试信息内容2', // 分享标题
-                desc: '这是一个搞的很多天的测试信息分享描述信息', // 分享描述
-                link: window.location.href, // 分享链接
-                imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
-                type: '', // 分享类型,music、video或link，不填默认为link
-                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                success: function () {
-                    // 用户确认分享后执行的回调函数
-                },
-                cancel: function () {
-                    // 用户取消分享后执行的回调函数
-                }
-            });
-
-        });
-
-    });
 
 
 
