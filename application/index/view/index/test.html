@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <script type="text/javascript" src="/static/index/js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
     <style type="text/css">
         html,
         body {
@@ -29,51 +30,70 @@
 </div>
 
 <script>
-    wx.config({
+    $(document).ready(function(){
+        $.ajax({
+            url:"/index/test/wxShare",
+            type:"POST",
+            dataType: "json",
+            data:'',
+            success:function(data){
+                //console.log(data);
+                wx.config({
 
-        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 
-        appId: appid, // 必填，公众号的唯一标识
+                    appId: data.appId, // 必填，公众号的唯一标识
 
-        timestamp: timestamp, // 必填，生成签名的时间戳
+                    timestamp: data.timestamp, // 必填，生成签名的时间戳
 
-        nonceStr: nonceStr, // 必填，生成签名的随机串
+                    nonceStr: data.nonceStr, // 必填，生成签名的随机串
 
-        signature: signature,// 必填，签名，见附录1
+                    signature: data.signature,// 必填，签名，见附录1
 
-        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 
-    });
-
-    wx.ready(function () {
-        wx.onMenuShareTimeline({
-            title: '分享标题', // 分享标题
-            link: 'http://papastyle.cn', // 分享链接
-            imgUrl: 'http://papastyle.cn/images/logo.jpg', // 分享图标
-            success: function () {
-
+                });
             },
-            cancel: function () {
-
+            error:function () {
+                showAlertAutoClose("网络错误，请重试...");
             }
         });
 
-        wx.onMenuShareAppMessage({
-            title: '分享标题', // 分享标题
-            desc: ' ，我正在参加"活动"，请为我投票！', // 分享描述
-            link: 'http://papastyle.cn', // 分享链接
-            imgUrl: 'http://papastyle.cn/images/logo.jpg', // 分享图标
-            type: '', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () {
-    // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-    // 用户取消分享后执行的回调函数
-            }
+        wx.ready(function () {
+            wx.onMenuShareTimeline({
+                title: '这个是一个测试信息内容1', // 分享标题
+                link: window.location.href, // 分享链接
+                imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
+                success: function () {
+
+                },
+                cancel: function () {
+
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: '这个是一个测试信息内容2', // 分享标题
+                desc: '这是一个搞的很多天的测试信息分享描述信息', // 分享描述
+                link: window.location.href, // 分享链接
+                imgUrl: 'http://www.zhejinquan.com/static/index/images/red-logo.png', // 分享图标
+                type: '', // 分享类型,music、video或link，不填默认为link
+                dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+
         });
 
     });
+
+
+
+
 
 </script>
 
