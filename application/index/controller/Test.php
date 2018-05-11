@@ -31,7 +31,45 @@ class Test extends CommController {
      * * */
     public function index()
     {
+        /*$appId='wx4f12e20059703cc2';
+        $secert = '710640b7ce6c0db89426b5078e6ca86d';
+        $timestamp = time();
+        $nonceStr = '1r6g5s6gds3fg2fg';
+        $token = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='
+            .$appId.'&secret='.$secert.'';
+        //Session::delete('save_token');
+        //var_dump(Session::get('save_token'));//die;
+        if(Session::has('save_token') && !empty( Session::get('save_token'))){
+            $session = Session::get('save_token');
+            if(($session[1]+7200) < time()){
+                //access_token超时,重新获取，并SESSION保存
+                $access_token = file_get_contents($token);
+                Session::set('save_token',[$access_token['access_token'],time()]);
+                var_dump(1);
+            }
+        }else{
+            //Session不存在或为空，获取，并SESSION保存
+            $access_token = json_decode(file_get_contents($token),true);
+            var_dump(2);
+            Session::set('save_token',[$access_token['access_token'],time()]);
 
+            //var_dump(3);die;
+        }
+        $access = Session::get('save_token');
+        //获取jsapi_ticket
+        $ticket = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='
+            .$access[0].'&type=jsapi';
+        $jsapi_ticket = json_decode(file_get_contents($ticket),true);
+        //var_dump($jsapi_ticket);die;
+        $signature = $jsapi_ticket['ticket'];
+        //var_dump($jsapi_ticket);
+        //var_dump($signature);die;
+        $return_relust = [
+            'appId' => $appId, // 必填，公众号的唯一标识
+            'timestamp' => $timestamp, // 必填，生成签名的时间戳
+            'nonceStr' => $nonceStr, // 必填，生成签名的随机串
+            'signature' => $signature,// 必填，签
+        ];*/
 
        return $this->fetch('index/test');
 
@@ -67,6 +105,7 @@ class Test extends CommController {
         $ticket = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='
             .$access[0].'&type=jsapi';
         $jsapi_ticket = json_decode(file_get_contents($ticket),true);
+
         $signature = $jsapi_ticket['ticket'];
         //var_dump($jsapi_ticket);
         //var_dump($signature);die;

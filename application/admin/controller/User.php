@@ -136,6 +136,24 @@ class User extends CommController
     }
 
     /*
+    * @ userSort    按排序信息查看用户
+    * */
+    public function userSort(){
+        //获取、展示修改信息
+        if(isset($_GET['key']) && !empty($_GET['key'])){
+            $data = $this -> request -> get();
+            $user = new UserModel();
+            $userCount = $user -> getCountUser();
+            $userList = $user -> getUserForList($data['key']);
+            return $userList -> items() ? view('user_list',['List' => $userList , 'Count' => $userCount]) : ReturnJson::ReturnA('未查询到相关数据信息...');
+        }else{
+            ReturnJson::ReturnA("无效的操作...");
+        }
+
+    }
+
+
+    /*
      * @randInvite 生成随机邀请码
      * @length 生成邀请码的位数
      */

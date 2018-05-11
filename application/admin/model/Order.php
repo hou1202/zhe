@@ -47,7 +47,7 @@ class Order extends Model
     * */
     public function getOrderList(){
         return $this -> alias('o')
-            -> field('u.user_name,p.user_name as p_user_name,o.id,o.order_id,o.bonus,o.invitation_bonus,o.order_state,o.commission,o.state,o.create_time')
+            -> field('u.user_name,p.user_name as p_user_name,o.id,o.user_id,o.pid,o.order_id,o.bonus,o.invitation_bonus,o.order_state,o.commission,o.state,o.create_time')
             ->join('think_user u','o.user_id = u.id','left')
             ->join('think_user p','o.pid = p.id','left')
             ->where('o.is_del',0)

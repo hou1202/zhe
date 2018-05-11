@@ -109,6 +109,15 @@
                                         <hr/>
 
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">邀请返利率</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" placeholder="正常邀请返利率（0.1）" value="{$getOne.p_ratio}" readonly>
+                                            </div>
+                                            <p class="col-sm-4 help-block"></p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
                                             <label class="col-sm-2 control-label">帐户积分</label>
                                             <div class="col-sm-6">
                                                 <input type="number" class="form-control" readonly value="{$getOne.integral}" name="integral">
@@ -145,14 +154,14 @@
                                         <hr/>
 
 
-                                        <div class="form-group">
+                                        <!--<div class="form-group">
                                             <div class=" col-sm-12">
                                                 <a  href="#/user/userUpdate?id={$getOne.id}">
                                                     <button type="button" class="btn btn-primary">修改</button>
                                                 </a>
 
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </form>
                                 </div>
                             </div>

@@ -37,7 +37,7 @@ class SetBaseData
         return sprintf('%.2f', $bonus);
     }
 
-    /*@setOrderRebate    设置用户返利金
+    /*@setOrderRebate    设置用户邀请返利金
     *$bonus             用户商品订单奖金
     *$ratio             商品返利比率,默认为配置比例
     *return             返回商品奖金

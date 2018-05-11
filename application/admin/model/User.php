@@ -21,6 +21,13 @@ class User extends Model
         return md5($value);
     }
 
+    protected function getPRatioAttr($value){
+        if($value == 0){
+            $value = null;
+        }
+        return $value;
+    }
+
     //取值状态显示
     protected function getStateAttr($value){
         $state = [0 => '冻结',1 => '正常'];
@@ -41,11 +48,11 @@ class User extends Model
     /*
      * @getUserForList 用户列表显示用户
      * */
-    public function getUserForList(){
+    public function getUserForList($key='id',$des='DESC'){
         return $this -> alias('l')
-            -> field('r.user_name as p_id,l.id,l.user_name,l.portrait,l.phone,l.invite,l.balance,l.integral,l.state,l.create_time')
+            -> field('r.user_name as p_id,l.id,l.user_name,l.portrait,l.p_ratio,l.phone,l.invite,l.balance,l.integral,l.state,l.create_time')
             ->join('think_user r','l.p_id = r.id','left')
-            -> order('l.id DESC')
+            -> order('l.'.$key.' '.$des.'')
             ->group('l.id')
             -> paginate(10,false,['path' => '/admin/main#/user/userList' ]);
     }
@@ -129,6 +136,18 @@ class User extends Model
                 return false;
                 break;
         }
+    }
+
+
+    /*
+     * @getUserInvitationRatio        获取用户邀请资金比率
+     * $id                  用户id
+     *
+     * */
+    public function getUserInvitationRatio($id){
+        return $this -> field("id,p_ratio")
+                    -> where('id',$id)
+                    -> find();
     }
 
 }

@@ -33,9 +33,9 @@
                                                 <th>手机号</th>
                                                 <th>邀请码</th>
                                                 <th>邀请人</th>
-                                                <th>余额</th>
-                                                <th>积分</th>
-                                                <th width="90">状态</th>
+                                                <th>余额 <a href="#/user/userSort?key=balance"><i class="fa fa-indent"></i></a></th>
+                                                <th>返利率 <a href="#/user/userSort?key=p_ratio"><i class="fa fa-indent"></i></a></th>
+                                                <th>状态</th>
                                                 <th width="100">创建时间</th>
                                                 <th width="140">操作</th>
                                             </tr>
@@ -50,7 +50,7 @@
                                                 <td>{$l.invite|}</td>
                                                 <td>{$l.p_id}</td>
                                                 <td>{$l.balance}</td>
-                                                <td>{$l.integral}</td>
+                                                <td>{$l.p_ratio}</td>
                                                 <td>{$l.state|}</td>
                                                 <td>{$l.create_time}</td>
                                                 <td>

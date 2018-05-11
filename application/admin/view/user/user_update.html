@@ -89,6 +89,15 @@
                                         <hr/>
 
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label">邀请返利率</label>
+                                            <div class="col-sm-6">
+                                                <input type="number" class="form-control" placeholder="正常邀请返利率（0.1）" value="{$getOne.p_ratio}" name="p_ratio">
+                                            </div>
+                                            <p class="col-sm-4 help-block">*邀请返利率最大值不得超过0.6</p>
+                                        </div>
+                                        <hr/>
+
+                                        <div class="form-group">
                                             <label class="col-sm-2 control-label">帐户积分</label>
                                             <div class="col-sm-6">
                                                 <input type="number" class="form-control" placeholder="帐户积分" value="{$getOne.integral}" name="integral">
@@ -185,6 +194,7 @@
         var password = $from.find('input[name="password"]');
         var portrait = $from.find('input[name="portrait"]');
         var alipay = $from.find('input[name="alipay"]');
+        var p_ratio = $from.find('input[name="p_ratio"]');
         var real_name = $from.find('input[name="real_name"]');
         if ($.trim(user_name.val()) == '') {
             return '用户名称不能为空';
@@ -203,6 +213,10 @@
 
         if ($.trim(portrait.val()) == '') {
             return '头像不能为空';
+        }
+
+        if ($.trim(p_ratio.val()) >0.6) {
+            return '邀请返利率最大值不得超过0.6';
         }
 
         if ($.trim(real_name.val()).length > 20) {

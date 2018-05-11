@@ -104,16 +104,18 @@ class Order extends CommController
         if($this -> request -> isPost()){
             $data = $this -> request -> post();
             //var_dump($data);die;
-            if(!$data['orderId']){
+            if(!$data['orderId'] || !$data['userId']){
                 return $this ->jsonFail('非法的数据信息...');
             }
+
             //审核订单
             $tao =  new TaoOrder();
             $getOne = $tao -> getTaoOrderForCensorById($data['orderId']);
             if(!$getOne){
                 return $this ->jsonFail('暂未找到相关的订单数据信息...');
             }
-            //var_dump($getOne);die;
+            $user = new User();
+            $ratio = $user -> getUserInvitationRatio($data['userId']);
             $insert = array();
             $insert['goods_id'] = $getOne['goods_id'];
             $insert['name'] = $getOne['name'];
@@ -125,9 +127,11 @@ class Order extends CommController
             $insert['build_time'] = $getOne['build_time'];
             $insert['order_state'] = $getOne['order_state'];
             $insert['bonus'] = SetBaseData::setGoodsBonus($getOne['commission'],true,null,ThinkConfig::get('bonus_ratio'));
-            $insert['invitation_bonus'] = SetBaseData::setOrderRebate($insert['bonus']);
-            //var_dump($insert['invitation_bonus']);die;
-
+            if(empty($ratio['p_ratio'])){
+                $insert['invitation_bonus'] = SetBaseData::setOrderRebate($getOne['commission']);
+            }else{
+                $insert['invitation_bonus'] = SetBaseData::setOrderRebate($getOne['commission'],$ratio['p_ratio']);
+            }
             //审核更新
             $order = new OrderModel();
             $censor = $order -> updateOrderForCensorByOrderId($data['orderId'],$insert);
@@ -137,6 +141,8 @@ class Order extends CommController
             }else{
                 return $this ->jsonFail('订单审查更新失败，请重新操作...');
             }
+        }else{
+            return $this ->jsonFail('无效的提交操作...');
         }
     }
 

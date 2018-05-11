@@ -42,6 +42,7 @@
                                                 {foreach name='List' item='l'}
                                                 <tr>
                                                     <td>{$l.id}</td>
+                                                    <td class="user_id" style="display:none;">{$l.pid}</td>
                                                     <td class="order_id">{$l.order_id}</td>
                                                     <td>{$l.user_name}</td>
                                                     <td>{$l.bonus|}</td>
@@ -91,13 +92,14 @@
 <script>
     $(".censor").on('click',function(){
         var order_id = $(this).parent().siblings(".order_id").text();
+        var user_id = $(this).parent().siblings(".user_id").text();
         //console.log(order_id);
         $.ajax({
             url:"/admin/order/taoOrderCensor",
             type:"POST",
             dataType: "json",
-            //data:'phone:phone,password:password,invitation:invitation,code:code',
-            data:{orderId:order_id},
+            //data:'phone:phone,password:password,invitation:invitation,code:code',,userId:user_id
+            data:{orderId:order_id,userId:user_id},
             success:function(data){
                 alert(data.msg);
                 window.location.reload();
