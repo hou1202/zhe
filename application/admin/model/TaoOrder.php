@@ -27,6 +27,7 @@ class TaoOrder extends Model
     * */
     public function getTaoOrderList(){
         return $this-> field('order_id,name,num,real_price,ratio_commission,commission,subsidy,est_effect,order_state,build_time,settle_time')
+            ->order('settle_time DESC')
             -> paginate(10,false,['path' => '/admin/main#/order/taoOrderList' ]);
     }
 
