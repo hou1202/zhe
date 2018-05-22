@@ -246,7 +246,7 @@ return [
 
     //短信配置
     'sms_account' => 'AA00344',
-    'sms_password' => 'AA0034452',
+    'sms_password' => 'AA0034422',
 
     //淘宝KEY
         //KEY
