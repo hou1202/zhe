@@ -36,7 +36,7 @@
                         <a><span>{$l->title|mb_substr=0,25,'utf-8'}</span></a>
                         <a><p class="strip-goods-after">券后价：￥{$l->coupon_price}</p></a>
                         <a><p class="strip-goods-before">原价：￥{$l->zk_final_price}</p></a>
-                        <a><p>销量：{$l->volume}</p></a>
+                        <a><p>店铺：{$l->shop_title|mb_substr=0,10,'utf-8'}</p></a>
                     </div>
                     <div class="strip-vou">
                         <a style="color:#fff">
@@ -57,6 +57,8 @@
                         <p class="g_id">{$l->num_iid}</p>
                         <p class="rate">{$l->commission_rate}</p>
                         <p class="category">{$l->category}</p>
+                        <p class="shop">{$l->shop_title}</p>
+                        <>
                     </div>
                 </div>
             {/foreach}
@@ -142,6 +144,7 @@
             var rate = $(this).find(".rate").text();
             var user_type = $(this).find(".user_type").text();
             var category = $(this).find(".category").text();
+            var shop = $(this).find(".shop").text();
 
             window.location.href ="/index/search/commandSearchDetail?goods_id="+g_id+"" +
                 "&name="+g_title+"" +
@@ -154,6 +157,7 @@
                 "&type="+user_type+"" +
                 "&coupon_money="+coupon+"" +
                 "&coupon_url="+coupon_url+""+
+                "&shop="+shop+""+
                 "&category="+category+"";
         });
     </script>

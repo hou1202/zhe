@@ -127,6 +127,7 @@ class Search extends CommController
         if($this->request->isGet()){
 
             $data = $this -> request -> get();
+            //var_dump($data);die;
             //加入产品奖金数据
             $data['bonus'] = SetBaseData::setGoodsBonus($data['price'],false,$data['ratio']);
             //生成淘口令

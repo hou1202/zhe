@@ -136,6 +136,7 @@ class ReturnGoodsList
      * */
     static function searchGoodsListByResult($resource){
         $count=count($resource);
+        //var_dump($resource);die;
         $html = '';
         if(!empty($count)){
             foreach($resource as $value){
@@ -150,7 +151,7 @@ class ReturnGoodsList
                 $html .= '<a><span>'.mb_substr($value->title,0,25,"utf-8").'</span></a>';
                 $html .= '<a><p class="strip-goods-after">券后价：￥'.$value->coupon_price.'</p></a>';
                 $html .= '<a><p class="strip-goods-before">原价：￥'.$value->zk_final_price.'</p></a>';
-                $html .= '<a><p>销量：'.$value->volume.'</p></a>';
+                $html .= '<a><p>店铺：'.mb_substr($value->shop_title,0,10,"utf-8").'</p></a>';
                 $html .= '</div>';
                 $html .= '<div class="strip-vou">';
                 $html .= '<p><span>券</span></p>';
@@ -168,6 +169,7 @@ class ReturnGoodsList
                 $html .= '<p class="item_url">'.$value->item_url.'</p>';
                 $html .= '<p class="g_id">'.$value->num_iid.'</p>';
                 $html .= '<p class="rate">'.$value->commission_rate.'</p>';
+                $html .= '<p class="shop">'.$value->shop_title.'</p>';
                 $html .= '<p class="category">'.$value->category.'</p>';
                 $html .= '</div>';
                 $html .= '</div>';

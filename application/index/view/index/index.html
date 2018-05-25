@@ -78,12 +78,12 @@
 
     <!--exchange--兑换-->
     <div class="exchange">
-        <form method="post" action="/index/search/commandSearchApi" id="exchange_form">
+        <form method="get" action="/index/search/searchApi" id="exchange_form">
             <label for="exchange_text" class="exchange-text">
-                <textarea name="command" id="exchange_text" placeholder="请将“淘口令”复制到这里，精确找到你想要的商品"></textarea>
+                <textarea name="keyword" id="exchange_text" placeholder="请将“淘宝”或“天猫”产品标题复制到这里，快速找到你想要的商品"></textarea>
             </label>
             <label for="exchange_submit" class="exchange-submit">
-                <input type="submit" value="兑" id="exchange_submit" />
+                <input type="submit" value="搜" id="exchange_submit" />
             </label>
         </form>
     </div>
